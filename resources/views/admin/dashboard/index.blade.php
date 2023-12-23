@@ -4,6 +4,14 @@
     Dashboard
 @endsection
 
+@section('styles')
+    {{--  --}}
+@endsection
+
+@section('scripts')
+    {{--  --}}
+@endsection
+
 @section('main')
     <div class="row">
         <div class="col-lg-12 col-xl-4">

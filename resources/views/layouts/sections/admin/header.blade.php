@@ -1,10 +1,10 @@
 <header class="header header-nav-menu header-nav-links">
     <div class="logo-container">
         <a href="https://www.okler.net/previews/porto-admin/" class="logo">
-            <img src="{{ asset('assets/admin/logo-modern.png') }}" class="logo-image" width="90" height="24"
+            <img src="{{ asset('assets/admin/img/logo.png') }}" class="logo-image" width="90" height="24"
                 alt="Porto Admin" />
-            <img src="{{ asset('assets/admin/logo-default.png') }}" class="logo-image-mobile" width="90"
-                height="41" alt="Porto Admin" />
+            <img src="{{ asset('assets/admin/img/logo.png') }}" class="logo-image-mobile" width="90" height="41"
+                alt="Porto Admin" />
         </a>
         <button class="btn header-btn-collapse-nav d-lg-none" data-bs-toggle="collapse" data-bs-target=".header-nav">
             <i class="fas fa-bars"></i>
@@ -733,16 +733,14 @@
         <span class="separator"></span>
         <a class="dropdown-language nav-link" href="#" role="button" id="dropdownLanguage"
             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <img src="{{ asset('assets/admin/blank.gir') }}" class="flag flag-us" alt="English" /> EN
+            <img src="{{ asset('assets/admin/img/blank.gif') }}" class="flag flag-gb" alt="English" /> EN
             <i class="fas fa-chevron-down"></i>
         </a>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownLanguage">
-            <a class="dropdown-item" href="#"><img src="{{ asset('assets/admin/blank.gir') }}"
-                    class="flag flag-us" alt="English" /> English</a>
-            <a class="dropdown-item" href="#"><img src="{{ asset('assets/admin/blank.gir') }}"
-                    class="flag flag-es" alt="English" /> Español</a>
-            <a class="dropdown-item" href="#"><img src="{{ asset('assets/admin/blank.gir') }}"
-                    class="flag flag-fr" alt="English" /> Française</a>
+            <a class="dropdown-item" href="#"><img src="{{ asset('assets/admin/img/blank.gif') }}"
+                    class="flag flag-gb" alt="English" /> English</a>
+            <a class="dropdown-item" href="#"><img src="{{ asset('assets/admin/img/blank.gif') }}"
+                    class="flag flag-id" alt="Indonesia" /> Indonesia</a>
         </div>
         <span class="separator"></span>
         <ul class="notifications">

@@ -24,6 +24,8 @@
     <link rel="stylesheet" href="{{ asset('assets/admin/css/custom.css') }}">
     <script src="{{ asset('assets/admin/vendor/modernizr/modernizr.js') }}"></script>
     <script src="{{ asset('assets/admin/master/style-switcher/style.switcher.localstorage.js') }}"></script>
+
+    @yield('styles')
 </head>
 
 <body>
@@ -65,6 +67,8 @@
     <script src="{{ asset('assets/admin/js/examples/examples.header.menu.js') }}"></script>
     <script src="{{ asset('assets/admin/js/examples/examples.ecommerce.dashboard.js') }}"></script>
     <script src="{{ asset('assets/admin/js/examples/examples.ecommerce.datatables.list.js') }}"></script>
+
+    @yield('scripts')
 </body>
 
 </html>
