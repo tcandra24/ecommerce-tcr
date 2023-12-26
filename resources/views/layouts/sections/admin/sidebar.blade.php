@@ -16,28 +16,28 @@
                         </a>
                     </li>
                     <li class="nav-group-label">Master</li>
-                    <li class="nav-parent">
+                    <li class="nav-parent {{ request()->segment(2) == 'categories' ? 'nav-expanded nav-active' : '' }}">
                         <a class="nav-link" href="#">
                             <i class="bx bx-category" aria-hidden="true"></i>
-                            <span>Kategori</span>
+                            <span>Categories</span>
                         </a>
                         <ul class="nav nav-children">
                             <li class="nav-active">
-                                <a class="nav-link" href="#">
-                                    - Daftar
+                                <a class="nav-link" href="/admin/categories">
+                                    - List
                                 </a>
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-parent">
+                    <li class="nav-parent {{ request()->segment(2) == 'brands' ? 'nav-expanded nav-active' : '' }}">
                         <a class="nav-link" href="#">
                             <i class="bx bx-purchase-tag" aria-hidden="true"></i>
-                            <span>Merk</span>
+                            <span>Brand</span>
                         </a>
                         <ul class="nav nav-children">
                             <li class="nav-active">
-                                <a class="nav-link" href="#">
-                                    - Daftar
+                                <a class="nav-link" href="/admin/brands">
+                                    - List
                                 </a>
                             </li>
                         </ul>
@@ -45,17 +45,17 @@
                     <li class="nav-parent">
                         <a class="nav-link" href="#">
                             <i class="bx bx-package" aria-hidden="true"></i>
-                            <span>Produk</span>
+                            <span>Product</span>
                         </a>
                         <ul class="nav nav-children">
                             <li class="nav-active">
                                 <a class="nav-link" href="#">
-                                    - Daftar
+                                    - List
                                 </a>
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-group-label">Transaksi</li>
+                    <li class="nav-group-label">Transaction</li>
                     <li class="nav-parent">
                         <a class="nav-link" href="#">
                             <i class="bx bx-store-alt" aria-hidden="true"></i>
@@ -64,16 +64,16 @@
                         <ul class="nav nav-children">
                             <li>
                                 <a class="nav-link" href="index-2.html">
-                                    - Daftar
+                                    - List
                                 </a>
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-group-label">Laporan</li>
+                    <li class="nav-group-label">Report</li>
                     <li>
                         <a class="nav-link" href="#">
                             <i class="bx bx-file-blank" aria-hidden="true"></i>
-                            <span>Penjualan</span>
+                            <span>Sale</span>
                         </a>
                     </li>
                 </ul>

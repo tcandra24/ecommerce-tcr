@@ -7,6 +7,7 @@
     <meta name="keywords" content="Ecommerce TCR" />
     <meta name="description" content="Ecommerce TCR">
     <meta name="author" content="Fuboru">
+    <meta name="token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,300,400,600,700,800,900" rel="stylesheet"
         type="text/css">
@@ -58,15 +59,11 @@
 
     <script src="{{ asset('assets/admin/vendor/raphael/raphael.js') }}"></script>
     <script src="{{ asset('assets/admin/vendor/morris/morris.js') }}"></script>
-    <script src="{{ asset('assets/admin/vendor/datatables/media/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('assets/admin/vendor/datatables/media/js/dataTables.bootstrap5.min.js') }}"></script>
 
     <script src="{{ asset('assets/admin/js/theme.js') }}"></script>
     <script src="{{ asset('assets/admin/js/custom.js') }}"></script>
     <script src="{{ asset('assets/admin/js/theme.init.js') }}"></script>
     <script src="{{ asset('assets/admin/js/examples/examples.header.menu.js') }}"></script>
-    <script src="{{ asset('assets/admin/js/examples/examples.ecommerce.dashboard.js') }}"></script>
-    <script src="{{ asset('assets/admin/js/examples/examples.ecommerce.datatables.list.js') }}"></script>
 
     @yield('scripts')
 </body>

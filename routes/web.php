@@ -16,7 +16,11 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('admin')->group(function() {
     Route::get('/', [ App\Http\Controllers\Admin\DashboardController::class, 'index' , ['as' => 'admin'] ]);
 
-    Route::resources('/categories', App\Http\Controllers\Admin\CategoryController::class);
+    Route::resource('/categories', App\Http\Controllers\Admin\CategoryController::class);
+    Route::resource('/brands', App\Http\Controllers\Admin\BrandsController::class);
+
+    Route::post('/upload/image', [App\Http\Controllers\Admin\DropzoneController::class, 'upload', ['as' => 'admin']]);
+    Route::delete('/delete/image', [App\Http\Controllers\Admin\DropzoneController::class, 'remove', ['as' => 'admin']]);
 });
 
 Route::get('/', [ App\Http\Controllers\Ecommerce\HomeController::class, 'index' ]);
