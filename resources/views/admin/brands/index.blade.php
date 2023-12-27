@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    Categories
+    Brands
 @endsection
 
 @section('styles')
@@ -28,7 +28,7 @@
                 closeOnConfirm: !1
             }).then((result) => {
                 if (result.isConfirmed) {
-                    $('#form-delete-categories-' + id).submit()
+                    $('#form-delete-brands-' + id).submit()
                 }
             })
 
@@ -62,7 +62,7 @@
                             <div class="row align-items-center mb-3">
                                 <div class="col-12 col-lg-auto mb-3 mb-lg-0">
                                     <a class="btn btn-primary btn-md font-weight-semibold btn-py-2 px-4"
-                                        href="/admin/categories/create">+ Add Category</a>
+                                        href="/admin/brands/create">+ Add Brand</a>
                                 </div>
                                 <div class="col-8 col-lg-auto ms-auto ml-auto mb-3 mb-lg-0">
                                     <div class="d-flex align-items-lg-center flex-column flex-lg-row">
@@ -100,25 +100,25 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($categories as $category)
+                                @foreach ($brands as $brand)
                                     <tr>
                                         <td>
                                             {{ $loop->iteration }}
                                         </td>
                                         <td>
-                                            <a href="#"><strong>{{ $category->name }}</strong></a>
+                                            <a href="#"><strong>{{ $brand->name }}</strong></a>
                                         </td>
-                                        <td>{{ $category->slug }}</td>
+                                        <td>{{ $brand->slug }}</td>
                                         <td class="actions">
-                                            <a href="/admin/categories/{{ $category->id }}/edit">
+                                            <a href="/admin/brands/{{ $brand->id }}/edit">
                                                 <i class="fas fa-pencil-alt"></i>
                                             </a>
-                                            <a href="javascript:void(0)" class="delete-row" data-id="{{ $category->id }}"
-                                                data-name="{{ $category->name }}">
+                                            <a href="javascript:void(0)" class="delete-row" data-id="{{ $brand->id }}"
+                                                data-name="{{ $brand->name }}">
                                                 <i class="far fa-trash-alt"></i>
                                             </a>
-                                            <form id="form-delete-categories-{{ $category->id }}" method="POST"
-                                                action=" {{ url('/admin/categories/' . $category->id) }}">
+                                            <form id="form-delete-brands-{{ $brand->id }}" method="POST"
+                                                action=" {{ url('/admin/brands/' . $brand->id) }}">
                                                 @csrf
                                                 @method('DELETE')
                                             </form>

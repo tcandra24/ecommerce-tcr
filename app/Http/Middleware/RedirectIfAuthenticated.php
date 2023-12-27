@@ -21,9 +21,16 @@ class RedirectIfAuthenticated
     {
         $guards = empty($guards) ? [null] : $guards;
 
+        $home = '';
+        if($request->segment(1) === 'admin'){
+            $home = RouteServiceProvider::HOME_ADMIN;
+        } else {
+            $home = RouteServiceProvider::HOME_ECOMMERCE;
+        }
+
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                return redirect(RouteServiceProvider::HOME);
+                return redirect($home);
             }
         }
 

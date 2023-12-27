@@ -27,8 +27,8 @@ class Brand extends Model
      *
      * @return Attribute
      */
-    public function SetImageAttribute($value)
-    {
-        $this->attributes['image'] = asset('/storage/brands/' . $value);
-    }
+    // public function SetImageAttribute($value)
+    // {
+    //     $this->attributes['image'] = asset('/storage/brands/' . $value);
+    // }
 }

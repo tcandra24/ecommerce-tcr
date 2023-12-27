@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    Edit Category
+    Edit Brand
 @endsection
 
 @section('styles')
@@ -84,12 +84,12 @@
                                     "#dropzone-form-image"
                                 ),
                                 mockFile = {
-                                    name: "{{ $category->image }}",
+                                    name: "{{ $brand->image }}",
                                     size: "{{ $size }}"
                                 };
                             dropzoneObj.displayExistingFile(
                                 mockFile,
-                                "{{ asset('/storage/images/categories/' . $category->image) }}"
+                                "{{ asset('/storage/images/brands/' . $brand->image) }}"
                             );
 
                         },
@@ -201,7 +201,7 @@
                             $submitButton.data("loading-text")
                         );
                         $.ajax({
-                                url: "/admin/categories/{{ $category->id }}",
+                                url: "/admin/brands/{{ $brand->id }}",
                                 headers: {
                                     'X-CSRF-TOKEN': $('meta[name="token"]').attr('content')
                                 },
@@ -276,7 +276,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-hidden="true" aria-label="Close"></button>
         </div>
     @endif
-    <form class="ecommerce-form action-buttons-fixed" action="/admin/categories/{{ $category->id }}" method="POST">
+    <form class="ecommerce-form action-buttons-fixed" action="/admin/brands/{{ $brand->id }}" method="POST">
         <div class="row mt-2">
             <div class="col">
                 <section class="card card-modern card-big-info">
@@ -284,8 +284,8 @@
                         <div class="row">
                             <div class="col-lg-2-5 col-xl-1-5">
                                 <i class="card-big-info-icon bx bx-camera"></i>
-                                <h2 class="card-big-info-title">Category Image</h2>
-                                <p class="card-big-info-desc">Upload your category image</p>
+                                <h2 class="card-big-info-title">Brand Image</h2>
+                                <p class="card-big-info-desc">Upload your brand image</p>
                             </div>
                             <div class="col-lg-3-5 col-xl-4-5">
                                 <div class="form-group row align-items-center">
@@ -311,14 +311,14 @@
                         <div class="row">
                             <div class="col-lg-2-5 col-xl-1-5">
                                 <i class="card-big-info-icon bx bx-slider"></i>
-                                <h2 class="card-big-info-title">Category Details</h2>
+                                <h2 class="card-big-info-title">Brand Details</h2>
                             </div>
                             <div class="col-lg-3-5 col-xl-4-5">
                                 <div class="form-group row align-items-center mb-3">
-                                    <label class="col-lg-5 col-xl-3 control-label text-lg-end mb-0">Category Name</label>
+                                    <label class="col-lg-5 col-xl-3 control-label text-lg-end mb-0">Brand Name</label>
                                     <div class="col-lg-7 col-xl-6">
                                         <input type="text" class="form-control form-control-modern" name="name"
-                                            value="{{ $category->name }}" required />
+                                            value="{{ $brand->name }}" required />
                                     </div>
                                 </div>
                             </div>
@@ -332,11 +332,11 @@
                 <button type="submit"
                     class="submit-button btn btn-primary btn-px-4 py-3 d-flex align-items-center font-weight-semibold line-height-1"
                     data-loading-text="Loading...">
-                    <i class="bx bx-save text-4 me-2"></i> Save Category
+                    <i class="bx bx-save text-4 me-2"></i> Save Brand
                 </button>
             </div>
             <div class="col-12 col-md-auto px-md-0 mt-3 mt-md-0">
-                <a href="/admin/categories"
+                <a href="/admin/brands"
                     class="cancel-button btn btn-light btn-px-4 py-3 border font-weight-semibold text-color-dark text-3">Cancel</a>
             </div>
         </div>

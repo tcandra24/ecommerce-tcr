@@ -10,7 +10,7 @@
             <nav id="menu" class="nav-main" role="navigation">
                 <ul class="nav nav-main">
                     <li>
-                        <a class="nav-link" href="layouts-default.html">
+                        <a class="nav-link" href="/admin">
                             <i class="bx bx-home-alt" aria-hidden="true"></i>
                             <span>Dashboard</span>
                         </a>
@@ -74,6 +74,25 @@
                         <a class="nav-link" href="#">
                             <i class="bx bx-file-blank" aria-hidden="true"></i>
                             <span>Sale</span>
+                        </a>
+                    </li>
+                    <li class="nav-group-label">Setting</li>
+                    <li>
+                        <a class="nav-link" href="#">
+                            <i class="bx bx-user" aria-hidden="true"></i>
+                            <span>Users</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="#">
+                            <i class="bx bx-lock" aria-hidden="true"></i>
+                            <span>Permission</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="#">
+                            <i class="bx bx-door-open" aria-hidden="true"></i>
+                            <span>Role</span>
                         </a>
                     </li>
                 </ul>

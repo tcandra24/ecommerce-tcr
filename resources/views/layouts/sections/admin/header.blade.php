@@ -1,21 +1,101 @@
 <header class="header header-nav-menu header-nav-links">
     <div class="logo-container">
-        <a href="https://www.okler.net/previews/porto-admin/" class="logo">
+        <a href="#" class="logo">
             <img src="{{ asset('assets/admin/img/logo.png') }}" class="logo-image" width="90" height="24"
-                alt="Porto Admin" />
-            <img src="{{ asset('assets/admin/img/logo.png') }}" class="logo-image-mobile" width="90" height="41"
-                alt="Porto Admin" />
+                alt="TCR Ecommerce" />
+            <img src="{{ asset('assets/admin/img/logo.png') }}" class="logo-mobile logo-image-mobile" width="150"
+                height="41" alt="TCR Ecommerce" />
         </a>
         <button class="btn header-btn-collapse-nav d-lg-none" data-bs-toggle="collapse" data-bs-target=".header-nav">
             <i class="fas fa-bars"></i>
         </button>
+        <div class="header-nav collapse">
+            <div class="header-nav-main header-nav-main-effect-1 header-nav-main-sub-effect-1 header-nav-main-square">
+                <nav>
+                    <ul class="nav nav-pills" id="mainNav">
+                        <li class="">
+                            <a class="nav-link" href="/admin">
+                                Dashboard
+                            </a>
+                        </li>
+                        <li class="dropdown">
+                            <a class="nav-link dropdown-toggle" href="#">
+                                Master
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a class="nav-link" href="/admin/categories">
+                                        Categories
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="nav-link" href="/admin/brands">
+                                        Brands
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="nav-link" href="#">
+                                        Products
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a class="nav-link dropdown-toggle" href="#">
+                                Transaction
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a class="nav-link" href="#">
+                                        Invoice
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a class="nav-link dropdown-toggle" href="#">
+                                Report
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a class="nav-link" href="#">
+                                        Sale
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a class="nav-link dropdown-toggle" href="#">
+                                Setting
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a class="nav-link" href="#">
+                                        Users
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="nav-link" href="#">
+                                        Permissions
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="nav-link" href="#">
+                                        Roles
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
     </div>
     <!-- start: search & user box -->
     <div class="header-right">
         <a class="btn search-toggle d-none d-md-inline-block d-xl-none" data-toggle-class="active"
             data-target=".search"><i class="bx bx-search"></i></a>
-        <form action="https://www.okler.net/previews/porto-admin/4.1.0/pages-search-results.html"
-            class="search search-style-1 nav-form d-none d-xl-inline-block">
+        <form action="#" class="search search-style-1 nav-form d-none d-xl-inline-block">
             <div class="input-group">
                 <input type="text" class="form-control" name="q" id="q" placeholder="Search...">
                 <button class="btn btn-default" type="submit"><i class="bx bx-search"></i></button>
@@ -53,8 +133,8 @@
                                     <span class="message float-end text-dark">60%</span>
                                 </p>
                                 <div class="progress progress-xs light">
-                                    <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0"
-                                        aria-valuemax="100" style="width: 60%;"></div>
+                                    <div class="progress-bar" role="progressbar" aria-valuenow="60"
+                                        aria-valuemin="0" aria-valuemax="100" style="width: 60%;"></div>
                                 </div>
                             </li>
                             <li>
@@ -63,8 +143,8 @@
                                     <span class="message float-end text-dark">98%</span>
                                 </p>
                                 <div class="progress progress-xs light">
-                                    <div class="progress-bar" role="progressbar" aria-valuenow="98" aria-valuemin="0"
-                                        aria-valuemax="100" style="width: 98%;"></div>
+                                    <div class="progress-bar" role="progressbar" aria-valuenow="98"
+                                        aria-valuemin="0" aria-valuemax="100" style="width: 98%;"></div>
                                 </div>
                             </li>
                             <li>
@@ -73,8 +153,8 @@
                                     <span class="message float-end text-dark">33%</span>
                                 </p>
                                 <div class="progress progress-xs light mb-1">
-                                    <div class="progress-bar" role="progressbar" aria-valuenow="33" aria-valuemin="0"
-                                        aria-valuemax="100" style="width: 33%;"></div>
+                                    <div class="progress-bar" role="progressbar" aria-valuenow="33"
+                                        aria-valuemin="0" aria-valuemax="100" style="width: 33%;"></div>
                                 </div>
                             </li>
                         </ul>
@@ -196,10 +276,11 @@
         <span class="separator"></span>
         <div id="userbox" class="userbox">
             <a href="#" data-bs-toggle="dropdown">
-                <span class="profile-picture profile-picture-as-text">JD</span>
-                <div class="profile-info profile-info-no-role" data-lock-name="John Doe"
-                    data-lock-email="johndoe@okler.com">
-                    <span class="name">Hi, <strong class="font-weight-semibold">John Doe</strong></span>
+                <span class="profile-picture profile-picture-as-text">{{ Auth::user()->initialName }}</span>
+                <div class="profile-info profile-info-no-role" data-lock-name="{{ Auth::user()->name }}"
+                    data-lock-email="{{ Auth::user()->email }}">
+                    <span class="name">Hi, <strong
+                            class="font-weight-semibold">{{ Auth::user()->name }}</strong></span>
                 </div>
                 <i class="fas fa-chevron-down text-color-dark"></i>
             </a>
@@ -210,12 +291,19 @@
                             My Profile</a>
                     </li>
                     <li>
-                        <a role="menuitem" tabindex="-1" href="#" data-lock-screen="true"><i
-                                class="bx bx-lock-open-alt"></i> Lock Screen</a>
+                        <a role="menuitem" tabindex="-1" href="#" data-lock-screen="true">
+                            <i class="bx bx-lock-open-alt"></i> Lock Screen
+                        </a>
                     </li>
                     <li>
-                        <a role="menuitem" tabindex="-1" href="pages-signin.html"><i class="bx bx-log-out"></i>
-                            Logout</a>
+                        <a role="menuitem" tabindex="-1" id="btn-logout" href="javascript:void(0)">
+                            <i class="bx bx-log-out"></i>
+                            Logout
+                        </a>
+
+                        <form method="POST" id="form-logout" action="/admin/logout">
+                            @csrf
+                        </form>
                     </li>
                 </ul>
             </div>

@@ -21,11 +21,10 @@
                         <div class="card-body p-0">
                             <div class="widget-user-info">
                                 <div class="widget-user-info-header">
-                                    <h2 class="font-weight-bold text-color-dark text-5">Hello, John Doe
+                                    <h2 class="font-weight-bold text-color-dark text-5">Hello, {{ Auth::user()->name }}
                                     </h2>
-                                    <p class="mb-0">Administrator</p>
                                     <div class="widget-user-acrostic bg-primary">
-                                        <span class="font-weight-bold">JD</span>
+                                        <span class="font-weight-bold">{{ Auth::user()->initialName }}</span>
                                     </div>
                                 </div>
                                 <div class="widget-user-info-body">

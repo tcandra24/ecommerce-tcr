@@ -59,7 +59,7 @@ class CategoryController extends Controller
 
             return response()->json([
                 'success' => true,
-                'message' => 'Categories saved successfully'
+                'message' => 'Category saved successfully'
             ]);
         } catch (\Exception $e) {
             return response()->json([
@@ -150,6 +150,17 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            $category = Category::where('id', $id)->first();
+            $category->delete();
+
+            if(Storage::disk('local')->exists('public/images/categories/'. basename($category->image))){
+                Storage::disk('local')->delete('public/images/categories/'. basename($category->image));
+            }
+
+            return redirect()->to('/admin/categories')->with('success', 'Categories deleted successfully');
+        } catch (\Exception $e) {
+            return redirect()->to('/admin/categories')->with('error', $e->getMessage());
+        }
     }
 }
