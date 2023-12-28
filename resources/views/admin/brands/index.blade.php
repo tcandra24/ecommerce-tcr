@@ -60,10 +60,12 @@
                     <div class="datatables-header-footer-wrapper mt-2">
                         <div class="datatable-header">
                             <div class="row align-items-center mb-3">
-                                <div class="col-12 col-lg-auto mb-3 mb-lg-0">
-                                    <a class="btn btn-primary btn-md font-weight-semibold btn-py-2 px-4"
-                                        href="/admin/brands/create">+ Add Brand</a>
-                                </div>
+                                @can('master.brands.create')
+                                    <div class="col-12 col-lg-auto mb-3 mb-lg-0">
+                                        <a class="btn btn-primary btn-md font-weight-semibold btn-py-2 px-4"
+                                            href="/admin/brands/create">+ Add Brand</a>
+                                    </div>
+                                @endcan
                                 <div class="col-8 col-lg-auto ms-auto ml-auto mb-3 mb-lg-0">
                                     <div class="d-flex align-items-lg-center flex-column flex-lg-row">
                                         <label class="ws-nowrap me-3 mb-0">Show:</label>
@@ -80,7 +82,7 @@
                                     <div class="search search-style-1 search-style-1-lg mx-lg-auto">
                                         <div class="input-group">
                                             <input type="text" class="search-term form-control" name="search-term"
-                                                id="search-term" placeholder="Search Category">
+                                                id="search-term" placeholder="Search Brand">
                                             <button class="btn btn-default" type="submit">
                                                 <i class="bx bx-search"></i>
                                             </button>
@@ -110,18 +112,22 @@
                                         </td>
                                         <td>{{ $brand->slug }}</td>
                                         <td class="actions">
-                                            <a href="/admin/brands/{{ $brand->id }}/edit">
-                                                <i class="fas fa-pencil-alt"></i>
-                                            </a>
-                                            <a href="javascript:void(0)" class="delete-row" data-id="{{ $brand->id }}"
-                                                data-name="{{ $brand->name }}">
-                                                <i class="far fa-trash-alt"></i>
-                                            </a>
-                                            <form id="form-delete-brands-{{ $brand->id }}" method="POST"
-                                                action=" {{ url('/admin/brands/' . $brand->id) }}">
-                                                @csrf
-                                                @method('DELETE')
-                                            </form>
+                                            @can('master.brands.edit')
+                                                <a href="/admin/brands/{{ $brand->id }}/edit">
+                                                    <i class="fas fa-pencil-alt"></i>
+                                                </a>
+                                            @endcan
+                                            @can('master.brands.delete')
+                                                <a href="javascript:void(0)" class="delete-row" data-id="{{ $brand->id }}"
+                                                    data-name="{{ $brand->name }}">
+                                                    <i class="far fa-trash-alt"></i>
+                                                </a>
+                                                <form id="form-delete-brands-{{ $brand->id }}" method="POST"
+                                                    action=" {{ url('/admin/brands/' . $brand->id) }}">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                </form>
+                                            @endcan
                                         </td>
                                     </tr>
                                 @endforeach

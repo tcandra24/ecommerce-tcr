@@ -13,79 +13,109 @@
             <div class="header-nav-main header-nav-main-effect-1 header-nav-main-sub-effect-1 header-nav-main-square">
                 <nav>
                     <ul class="nav nav-pills" id="mainNav">
-                        <li class="">
-                            <a class="nav-link" href="/admin">
-                                Dashboard
-                            </a>
-                        </li>
-                        <li class="dropdown">
-                            <a class="nav-link dropdown-toggle" href="#">
-                                Master
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a class="nav-link" href="/admin/categories">
-                                        Categories
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="nav-link" href="/admin/brands">
-                                        Brands
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="nav-link" href="#">
-                                        Products
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a class="nav-link dropdown-toggle" href="#">
-                                Transaction
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a class="nav-link" href="#">
-                                        Invoice
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a class="nav-link dropdown-toggle" href="#">
-                                Report
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a class="nav-link" href="#">
-                                        Sale
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a class="nav-link dropdown-toggle" href="#">
-                                Setting
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a class="nav-link" href="#">
-                                        Users
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="nav-link" href="#">
-                                        Permissions
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="nav-link" href="#">
-                                        Roles
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
+                        @can('dashboard.index')
+                            <li class="">
+                                <a class="nav-link" href="/admin">
+                                    Dashboard
+                                </a>
+                            </li>
+                        @endcan
+                        @if (auth()->user()->can('master.categories.index') ||
+                                auth()->user()->can('master.brands.index') ||
+                                auth()->user()->can('master.products.index'))
+                            <li class="dropdown">
+                                <a class="nav-link dropdown-toggle" href="#">
+                                    Master
+                                </a>
+                                <ul class="dropdown-menu">
+                                    @can('master.categories.index')
+                                        <li>
+                                            <a class="nav-link" href="/admin/categories">
+                                                Categories
+                                            </a>
+                                        </li>
+                                    @endcan
+                                    @can('master.brands.index')
+                                        <li>
+                                            <a class="nav-link" href="/admin/brands">
+                                                Brands
+                                            </a>
+                                        </li>
+                                    @endcan
+                                    @can('master.products.index')
+                                        <li>
+                                            <a class="nav-link" href="#">
+                                                Products
+                                            </a>
+                                        </li>
+                                    @endcan
+                                </ul>
+                            </li>
+                        @endif
+                        @if (auth()->user()->can('transactions.invoices.index'))
+                            <li class="dropdown">
+                                <a class="nav-link dropdown-toggle" href="#">
+                                    Transaction
+                                </a>
+                                <ul class="dropdown-menu">
+                                    @can('transactions.invoices.index')
+                                        <li>
+                                            <a class="nav-link" href="#">
+                                                Invoice
+                                            </a>
+                                        </li>
+                                    @endcan
+                                </ul>
+                            </li>
+                        @endif
+                        @if (auth()->user()->can('report.sales.index'))
+                            <li class="dropdown">
+                                <a class="nav-link dropdown-toggle" href="#">
+                                    Report
+                                </a>
+                                <ul class="dropdown-menu">
+                                    @can('report.sales.index')
+                                        <li>
+                                            <a class="nav-link" href="#">
+                                                Sale
+                                            </a>
+                                        </li>
+                                    @endcan
+                                </ul>
+                            </li>
+                        @endif
+                        @if (auth()->user()->can('setting.users.index') ||
+                                auth()->user()->can('setting.permissions.index') ||
+                                auth()->user()->can('setting.roles.index'))
+                            <li class="dropdown">
+                                <a class="nav-link dropdown-toggle" href="#">
+                                    Setting
+                                </a>
+                                <ul class="dropdown-menu">
+                                    @can('setting.users.index')
+                                        <li>
+                                            <a class="nav-link" href="/admin/users">
+                                                Users
+                                            </a>
+                                        </li>
+                                    @endcan
+                                    @can('setting.permissions.index')
+                                        <li>
+                                            <a class="nav-link" href="/admin/permissions">
+                                                Permissions
+                                            </a>
+                                        </li>
+                                    @endcan
+                                    @can('setting.roles.index')
+                                        <li>
+                                            <a class="nav-link" href="/admin/roles">
+                                                Roles
+                                            </a>
+                                        </li>
+                                    @endcan
+                                </ul>
+                            </li>
+                        @endif
                     </ul>
                 </nav>
             </div>

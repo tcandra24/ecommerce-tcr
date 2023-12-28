@@ -51,7 +51,6 @@
     <script src="{{ asset('assets/admin/master/style-switcher/style.switcher.js') }}"></script>
     <script src="{{ asset('assets/admin/vendor/popper/umd/popper.min.js') }}"></script>
     <script src="{{ asset('assets/admin/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('assets/admin/vendor/bootstrap-datepicker/js/bootstrap-datepicker.js') }}"></script>
     <script src="{{ asset('assets/admin/vendor/common/common.js') }}"></script>
     <script src="{{ asset('assets/admin/vendor/nanoscroller/nanoscroller.js') }}"></script>
     <script src="{{ asset('assets/admin/vendor/magnific-popup/jquery.magnific-popup.js') }}"></script>
@@ -60,12 +59,13 @@
     <script src="{{ asset('assets/admin/vendor/raphael/raphael.js') }}"></script>
     <script src="{{ asset('assets/admin/vendor/morris/morris.js') }}"></script>
 
+    @yield('scripts')
+
     <script src="{{ asset('assets/admin/js/theme.js') }}"></script>
     <script src="{{ asset('assets/admin/js/custom.js') }}"></script>
     <script src="{{ asset('assets/admin/js/theme.init.js') }}"></script>
     <script src="{{ asset('assets/admin/js/examples/examples.header.menu.js') }}"></script>
 
-    @yield('scripts')
 </body>
 
 </html>

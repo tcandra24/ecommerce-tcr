@@ -25,8 +25,17 @@ Route::prefix('admin')->group(function() {
     Route::group(['middleware' => ['auth']], function () {
         Route::get('/dashboard', [ App\Http\Controllers\Admin\DashboardController::class, 'index' , ['as' => 'admin'] ]);
 
-        Route::resource('/categories', App\Http\Controllers\Admin\CategoryController::class);
-        Route::resource('/brands', App\Http\Controllers\Admin\BrandsController::class);
+        Route::resource('/categories', App\Http\Controllers\Admin\CategoryController::class)
+        ->middleware('permission:master.categories.index|master.categories.create|master.categories.edit|master.categories.delete');
+        Route::resource('/brands', App\Http\Controllers\Admin\BrandsController::class)
+        ->middleware('permission:master.brands.index|master.brands.create|master.brands.edit|master.brands.delete');
+        Route::resource('/users', App\Http\Controllers\Admin\UserController::class)
+        ->middleware('permission:setting.users.index|setting.users.create|setting.users.edit|setting.users.delete');
+        Route::resource('/roles', App\Http\Controllers\Admin\RoleController::class, [ 'except' => [ 'show' ] ])
+        ->middleware('permission:setting.roles.index|setting.roles.create|setting.roles.edit');
+
+        Route::get('/permissions', [ App\Http\Controllers\Admin\PermissionController::class, 'index', ['as' => 'admin'] ])
+        ->middleware('permission:setting.permissions.index');
 
         Route::post('/upload/image', [App\Http\Controllers\Admin\DropzoneController::class, 'upload', ['as' => 'admin']]);
         Route::delete('/delete/image', [App\Http\Controllers\Admin\DropzoneController::class, 'remove', ['as' => 'admin']]);
@@ -34,3 +43,5 @@ Route::prefix('admin')->group(function() {
         Route::post('/logout', [App\Http\Controllers\Admin\AuthController::class, 'logout']);
     });
 });
+
+Route::get('/', [ App\Http\Controllers\Ecommerce\HomeController::class, 'index' ]);

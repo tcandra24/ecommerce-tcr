@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    Categories
+    Users
 @endsection
 
 @section('styles')
@@ -28,7 +28,7 @@
                 closeOnConfirm: !1
             }).then((result) => {
                 if (result.isConfirmed) {
-                    $('#form-delete-categories-' + id).submit()
+                    $('#form-delete-users-' + id).submit()
                 }
             })
 
@@ -60,10 +60,10 @@
                     <div class="datatables-header-footer-wrapper mt-2">
                         <div class="datatable-header">
                             <div class="row align-items-center mb-3">
-                                @can('master.categories.create')
+                                @can('setting.users.create')
                                     <div class="col-12 col-lg-auto mb-3 mb-lg-0">
                                         <a class="btn btn-primary btn-md font-weight-semibold btn-py-2 px-4"
-                                            href="/admin/categories/create">+ Add Category</a>
+                                            href="/admin/users/create">+ Add User</a>
                                     </div>
                                 @endcan
                                 <div class="col-8 col-lg-auto ms-auto ml-auto mb-3 mb-lg-0">
@@ -82,7 +82,7 @@
                                     <div class="search search-style-1 search-style-1-lg mx-lg-auto">
                                         <div class="input-group">
                                             <input type="text" class="search-term form-control" name="search-term"
-                                                id="search-term" placeholder="Search Category">
+                                                id="search-term" placeholder="Search User">
                                             <button class="btn btn-default" type="submit">
                                                 <i class="bx bx-search"></i>
                                             </button>
@@ -96,34 +96,44 @@
                             <thead>
                                 <tr>
                                     <th width="8%">No</th>
-                                    <th width="28%">Name</th>
-                                    <th width="23%">Slug</th>
-                                    <th width="38%">Actions</th>
+                                    <th width="20%">Name</th>
+                                    <th width="17%">Email</th>
+                                    <th width="24%">Roles</th>
+                                    <th width="24%">Created At</th>
+                                    <th width="7%">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($categories as $category)
+                                @foreach ($users as $user)
                                     <tr>
                                         <td>
                                             {{ $loop->iteration }}
                                         </td>
                                         <td>
-                                            <a href="#"><strong>{{ $category->name }}</strong></a>
+                                            <a href="#"><strong>{{ $user->name }}</strong></a>
                                         </td>
-                                        <td>{{ $category->slug }}</td>
+                                        <td>{{ $user->email }}</td>
+                                        <td>
+                                            @foreach ($user->roles as $role)
+                                                <span class="badge bg-secondary rounded-3 fw-semibold">
+                                                    {{ ucwords(str_replace('_', ' ', $role->name)) }}
+                                                </span>
+                                            @endforeach
+                                        </td>
+                                        <td>{{ $user->created_at }}</td>
                                         <td class="actions">
-                                            @can('master.categories.edit')
-                                                <a href="/admin/categories/{{ $category->id }}/edit">
+                                            @can('setting.users.edit')
+                                                <a href="/admin/users/{{ $user->id }}/edit">
                                                     <i class="fas fa-pencil-alt"></i>
                                                 </a>
                                             @endcan
-                                            @can('master.categories.delete')
-                                                <a href="javascript:void(0)" class="delete-row" data-id="{{ $category->id }}"
-                                                    data-name="{{ $category->name }}">
+                                            @can('setting.users.delete')
+                                                <a href="javascript:void(0)" class="delete-row" data-id="{{ $user->id }}"
+                                                    data-name="{{ $user->name }}">
                                                     <i class="far fa-trash-alt"></i>
                                                 </a>
-                                                <form id="form-delete-categories-{{ $category->id }}" method="POST"
-                                                    action=" {{ url('/admin/categories/' . $category->id) }}">
+                                                <form id="form-delete-users-{{ $user->id }}" method="POST"
+                                                    action=" {{ url('/admin/users/' . $user->id) }}">
                                                     @csrf
                                                     @method('DELETE')
                                                 </form>
