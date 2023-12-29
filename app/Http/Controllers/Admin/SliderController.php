@@ -3,13 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
-use App\Models\Category;
+use App\Models\Slider;
 use Illuminate\Support\Facades\Storage;
 
-class CategoryController extends Controller
+class SliderController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,8 +17,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
-        return view('admin.categories.index', [ 'categories' => $categories ]);
+        $sliders = Slider::all();
+        return view('admin.sliders.index', [ 'sliders' => $sliders ]);
     }
 
     /**
@@ -29,7 +28,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.categories.create');
+        return view('admin.sliders.create');
     }
 
     /**
@@ -47,19 +46,19 @@ class CategoryController extends Controller
         try {
             $filename = $request->images[0]['tmpImageName'];
             $srcFolder = 'public/images/tmp/';
-            $dstFolder = 'public/images/categories/';
+            $dstFolder = 'public/images/sliders/';
 
             Storage::disk('local')->move($srcFolder . $filename, $dstFolder . $filename);
 
-            Category::create([
+            Slider::create([
                 'name' => $request->name,
-                'slug' => Str::slug($request->name),
+                'link' => $request->link ?? '',
                 'image' => $filename
             ]);
 
             return response()->json([
                 'success' => true,
-                'message' => 'Category saved successfully'
+                'message' => 'Slider saved successfully'
             ]);
         } catch (\Exception $e) {
             return response()->json([
@@ -86,10 +85,10 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Category $category)
+    public function edit(Slider $slider)
     {
-        $size = Storage::disk('local')->size('public/images/categories/'. basename($category->image));
-        return view('admin.categories.edit', ['category' => $category, 'size' => $size]);
+        $size = Storage::disk('local')->size('public/images/sliders/'. basename($slider->image));
+        return view('admin.sliders.edit', ['slider' => $slider, 'size' => $size]);
     }
 
     /**
@@ -99,7 +98,7 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request, Slider $slider)
     {
         $request->validate([
             'name' => 'required'
@@ -109,30 +108,29 @@ class CategoryController extends Controller
             if (isset($request->images[0]['tmpImageName'])){
                 $filename = $request->images[0]['tmpImageName'];
                 $srcFolder = 'public/images/tmp/';
-                $dstFolder = 'public/images/categories/';
+                $dstFolder = 'public/images/sliders/';
 
-                if(Storage::disk('local')->exists('public/images/categories/'. basename($category->image))){
-                    Storage::disk('local')->delete('public/images/categories/'. basename($category->image));
+                if(Storage::disk('local')->exists('public/images/sliders/'. basename($slider->image))){
+                    Storage::disk('local')->delete('public/images/sliders/'. basename($slider->image));
                 }
 
                 Storage::disk('local')->move($srcFolder . $filename, $dstFolder . $filename);
 
-                $category->update([
+                $slider->update([
                     'name' => $request->name,
-                    'slug' => Str::slug($request->name),
+                    'link' => $request->link ?? '',
                     'image' => $filename
                 ]);
             } else {
-                $category->update([
+                $slider->update([
                     'name' => $request->name,
-                    'slug' => Str::slug($request->name)
+                    'link' => $request->link ?? '',
                 ]);
             }
 
-
             return response()->json([
                 'success' => true,
-                'message' => 'Category saved successfully'
+                'message' => 'Slider saved successfully'
             ]);
         } catch (\Exception $e) {
             return response()->json([
@@ -151,16 +149,16 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         try {
-            $category = Category::where('id', $id)->first();
-            $category->delete();
+            $slider = Slider::where('id', $id)->first();
+            $slider->delete();
 
-            if(Storage::disk('local')->exists('public/images/categories/'. basename($category->image))){
-                Storage::disk('local')->delete('public/images/categories/'. basename($category->image));
+            if(Storage::disk('local')->exists('public/images/sliders/'. basename($slider->image))){
+                Storage::disk('local')->delete('public/images/sliders/'. basename($slider->image));
             }
 
-            return redirect()->to('/admin/categories')->with('success', 'Category deleted successfully');
+            return redirect()->to('/admin/sliders')->with('success', 'Slider deleted successfully');
         } catch (\Exception $e) {
-            return redirect()->to('/admin/categories')->with('error', $e->getMessage());
+            return redirect()->to('/admin/sliders')->with('error', $e->getMessage());
         }
     }
 }

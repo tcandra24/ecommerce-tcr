@@ -27,8 +27,18 @@ class Brand extends Model
      *
      * @return Attribute
      */
-    // public function SetImageAttribute($value)
-    // {
-    //     $this->attributes['image'] = asset('/storage/brands/' . $value);
-    // }
+    public function getImageAttribute($value)
+    {
+        return asset('/storage/images/brands/' . $value);
+    }
+
+    public function setNameAttribute($value)
+    {
+        $this->attributes['name'] = strtolower($value);
+    }
+
+    public function getNameAttribute($value)
+    {
+        return ucwords($value);
+    }
 }

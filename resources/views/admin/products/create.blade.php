@@ -1,21 +1,24 @@
 @extends('layouts.admin')
 
 @section('title')
-    Create Brand
+    Create Products
 @endsection
 
 @section('styles')
     <link rel="stylesheet" href="{{ asset('assets/admin/vendor/dropzone/basic.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/admin/vendor/dropzone/dropzone.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/admin/vendor/bootstrap-markdown/css/bootstrap-markdown.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/admin/vendor/pnotify/pnotify.custom.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/admin/vendor/select2/css/select2.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/admin/vendor/select2-bootstrap-theme/select2-bootstrap.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/admin/vendor/summernote/summernote-bs4.css') }}" />
 @endsection
 
 @section('scripts')
+    <script src="{{ asset('assets/admin/vendor/select2/js/select2.js') }}"></script>
     <script src="{{ asset('assets/admin/vendor/jquery-validation/jquery.validate.js') }}"></script>
     <script src="{{ asset('assets/admin/vendor/dropzone/dropzone.js') }}"></script>
     <script src="{{ asset('assets/admin/vendor/pnotify/pnotify.custom.js') }}"></script>
-
+    <script src="{{ asset('assets/admin/vendor/summernote/summernote-bs4.js') }}"></script>
     <script>
         (function($) {
             "use strict";
@@ -27,13 +30,7 @@
                             'X-CSRF-TOKEN': $('meta[name="token"]').attr('content')
                         },
                         addRemoveLinks: true,
-                        maxFiles: 1,
                         init: function() {
-                            this.on('addedfile', function(file) {
-                                if (this.files.length > 1) {
-                                    this.removeFile(this.files[0]);
-                                }
-                            });
                             this.on('success', function(file, response) {
                                 const {
                                     image
@@ -183,7 +180,7 @@
                             $submitButton.data("loading-text")
                         );
                         $.ajax({
-                                url: "/admin/brands",
+                                url: "/admin/categories",
                                 headers: {
                                     'X-CSRF-TOKEN': $('meta[name="token"]').attr('content')
                                 },
@@ -252,22 +249,16 @@
 @endsection
 
 @section('main')
-    @if (Session::has('error'))
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <strong>Error !</strong> {{ Session::get('error') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-hidden="true" aria-label="Close"></button>
-        </div>
-    @endif
-    <form class="ecommerce-form action-buttons-fixed" action="/admin/brands" method="POST">
-        <div class="row mt-2">
+    <form class="ecommerce-form action-buttons-fixed" action="#" method="post">
+        <div class="row">
             <div class="col">
                 <section class="card card-modern card-big-info">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-lg-2-5 col-xl-1-5">
                                 <i class="card-big-info-icon bx bx-camera"></i>
-                                <h2 class="card-big-info-title">Brand Image</h2>
-                                <p class="card-big-info-desc">Upload your brand image</p>
+                                <h2 class="card-big-info-title">Product Image</h2>
+                                <p class="card-big-info-desc">Upload your Product image. You can add multiple images</p>
                             </div>
                             <div class="col-lg-3-5 col-xl-4-5">
                                 <div class="form-group row align-items-center">
@@ -275,9 +266,42 @@
                                         <div id="dropzone-form-image" class="dropzone-modern dz-square">
                                             <span class="dropzone-upload-message text-center">
                                                 <i class="bx bxs-cloud-upload"></i>
-                                                <b class="text-color-primary">Drag/Upload</b> your image here.
+                                                <b class="text-color-primary">Drag/Upload</b> your images here.
                                             </span>
                                         </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col">
+                <section class="card card-modern card-big-info">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-2-5 col-xl-1-5">
+                                <i class="card-big-info-icon bx bx-box"></i>
+                                <h2 class="card-big-info-title">General Info</h2>
+                                <p class="card-big-info-desc">Add here the product description with all details and
+                                    necessary information.</p>
+                            </div>
+                            <div class="col-lg-3-5 col-xl-4-5">
+                                <div class="form-group row align-items-center pb-3">
+                                    <label class="col-lg-5 col-xl-3 control-label text-lg-end mb-0">Name</label>
+                                    <div class="col-lg-7 col-xl-6">
+                                        <input type="text" class="form-control form-control-modern" name="productName"
+                                            value="" required />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label
+                                        class="col-lg-5 col-xl-3 control-label text-lg-end pt-2 mt-1 mb-0">Description</label>
+                                    <div class="col-lg-9 col-xl-8">
+                                        <div class="summernote" data-plugin-summernote
+                                            data-plugin-options='{ "height": 360 }'></div>
                                     </div>
                                 </div>
                             </div>
@@ -290,17 +314,100 @@
             <div class="col">
                 <section class="card card-modern card-big-info">
                     <div class="card-body">
-                        <div class="row">
+                        <div class="tabs-modern row" style="min-height: 490px;">
                             <div class="col-lg-2-5 col-xl-1-5">
-                                <i class="card-big-info-icon bx bx-slider"></i>
-                                <h2 class="card-big-info-title">Brand Details</h2>
+                                <div class="nav flex-column tabs" id="tab" role="tablist" aria-orientation="vertical">
+                                    <a class="nav-link active" id="price-tab" data-bs-toggle="pill" data-bs-target="#price"
+                                        role="tab" aria-controls="price" aria-selected="true">Price</a>
+                                    <a class="nav-link" id="inventory-tab" data-bs-toggle="pill" data-bs-target="#inventory"
+                                        role="tab" aria-controls="inventory" aria-selected="false">Inventory</a>
+                                    <a class="nav-link" id="variant-tab" data-bs-toggle="pill" data-bs-target="#variants"
+                                        role="tab" aria-controls="variants">Variant</a>
+                                    <a class="nav-link" id="shipping-tab" data-bs-toggle="pill" data-bs-target="#shipping"
+                                        role="tab" aria-controls="shipping" aria-selected="false">Shipping</a>
+                                </div>
                             </div>
                             <div class="col-lg-3-5 col-xl-4-5">
-                                <div class="form-group row align-items-center mb-3">
-                                    <label class="col-lg-5 col-xl-3 control-label text-lg-end mb-0">Name</label>
-                                    <div class="col-lg-7 col-xl-6">
-                                        <input type="text" class="form-control form-control-modern" name="name"
-                                            value="" required />
+                                <div class="tab-content" id="tabContent">
+                                    <div class="tab-pane fade show active" id="price" role="tabpanel"
+                                        aria-labelledby="price-tab">
+                                        <div class="form-group row align-items-center pb-3">
+                                            <label class="col-lg-5 col-xl-3 control-label text-lg-end mb-0">Price
+                                                (Rp)</label>
+                                            <div class="col-lg-7 col-xl-6">
+                                                <input type="text" class="form-control form-control-modern"
+                                                    name="price" value="" required />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="inventory" role="tabpanel"
+                                        aria-labelledby="inventory-tab">
+                                        <div class="form-group row align-items-center pb-3">
+                                            <label class="col-lg-5 col-xl-3 control-label text-lg-end mb-0">SKU</label>
+                                            <div class="col-lg-7 col-xl-6">
+                                                <input type="text" class="form-control form-control-modern"
+                                                    name="sku" value="" required />
+                                            </div>
+                                        </div>
+                                        <div class="form-group row align-items-center pb-3">
+                                            <label class="col-lg-5 col-xl-3 control-label text-lg-end mb-0">Stock
+                                                Status</label>
+                                            <div class="col-lg-7 col-xl-6">
+                                                <select class="form-control form-control-modern" name="stockStatus">
+                                                    <option value="in-stock" selected>In Stock</option>
+                                                    <option value="out-of-stock">Out of Stock</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="variants" role="tabpanel"
+                                        aria-labelledby="variants-tab">
+                                        <div class="ecommerce-attributes-wrapper">
+                                            <div
+                                                class="form-group row justify-content-center ecommerce-attribute-row pb-3">
+                                                <div class="col-xl-3">
+                                                    <label class="control-label">Category</label>
+                                                </div>
+                                                <div class="col-xl-6">
+                                                    <select data-plugin-selectTwo name="category"
+                                                        class="form-control populate" id="category"
+                                                        aria-describedby="category" required>
+                                                        @foreach ($categories as $category)
+                                                            <option value="{{ $category->id }}">
+                                                                {{ $category->name }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row justify-content-center ecommerce-attribute-row">
+                                                <div class="col-xl-3">
+                                                    <label class="control-label">Brand</label>
+                                                </div>
+                                                <div class="col-xl-6">
+                                                    <select data-plugin-selectTwo name="brand"
+                                                        class="form-control populate" id="brand"
+                                                        aria-describedby="brand" required>
+                                                        @foreach ($brands as $brand)
+                                                            <option value="{{ $brand->id }}">
+                                                                {{ $brand->name }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="shipping" role="tabpanel"
+                                        aria-labelledby="shipping-tab">
+                                        <div class="form-group row align-items-center pb-3">
+                                            <label class="col-lg-5 col-xl-3 control-label text-lg-end mb-0">Weight
+                                                (gr)</label>
+                                            <div class="col-lg-7 col-xl-6">
+                                                <input type="text" class="form-control form-control-modern"
+                                                    name="weight" value="" />
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -314,11 +421,11 @@
                 <button type="submit"
                     class="submit-button btn btn-primary btn-px-4 py-3 d-flex align-items-center font-weight-semibold line-height-1"
                     data-loading-text="Loading...">
-                    <i class="bx bx-save text-4 me-2"></i> Save Brand
+                    <i class="bx bx-save text-4 me-2"></i> Save Product
                 </button>
             </div>
             <div class="col-12 col-md-auto px-md-0 mt-3 mt-md-0">
-                <a href="/admin/brands"
+                <a href="/admin/products"
                     class="cancel-button btn btn-light btn-px-4 py-3 border font-weight-semibold text-color-dark text-3">Cancel</a>
             </div>
         </div>

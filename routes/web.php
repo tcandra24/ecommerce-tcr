@@ -27,10 +27,19 @@ Route::prefix('admin')->group(function() {
 
         Route::resource('/categories', App\Http\Controllers\Admin\CategoryController::class)
         ->middleware('permission:master.categories.index|master.categories.create|master.categories.edit|master.categories.delete');
+
         Route::resource('/brands', App\Http\Controllers\Admin\BrandsController::class)
         ->middleware('permission:master.brands.index|master.brands.create|master.brands.edit|master.brands.delete');
+
+        Route::resource('/products', App\Http\Controllers\Admin\ProductController::class)
+        ->middleware('permission:master.products.index|master.products.create|master.products.edit|master.products.delete');
+
+        Route::resource('/sliders', App\Http\Controllers\Admin\SliderController::class)
+        ->middleware('permission:master.sliders.index|master.sliders.create|master.sliders.edit|master.sliders.delete');
+
         Route::resource('/users', App\Http\Controllers\Admin\UserController::class)
         ->middleware('permission:setting.users.index|setting.users.create|setting.users.edit|setting.users.delete');
+
         Route::resource('/roles', App\Http\Controllers\Admin\RoleController::class, [ 'except' => [ 'show' ] ])
         ->middleware('permission:setting.roles.index|setting.roles.create|setting.roles.edit');
 

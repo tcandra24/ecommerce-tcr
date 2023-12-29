@@ -158,7 +158,7 @@ class BrandsController extends Controller
                 Storage::disk('local')->delete('public/images/brands/'. basename($brand->image));
             }
 
-            return redirect()->to('/admin/brands')->with('success', 'Categories deleted successfully');
+            return redirect()->to('/admin/brands')->with('success', 'Brand deleted successfully');
         } catch (\Exception $e) {
             return redirect()->to('/admin/brands')->with('error', $e->getMessage());
         }

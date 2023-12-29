@@ -28,8 +28,18 @@ class Category extends Model
      *
      * @return Attribute
      */
-    // public function getImageAttribute($value)
-    // {
-    //     return asset('/storage/images/categories/' . $value);
-    // }
+    public function getImageAttribute($value)
+    {
+        return asset('/storage/images/categories/' . $value);
+    }
+
+    public function setNameAttribute($value)
+    {
+        $this->attributes['name'] = strtolower($value);
+    }
+
+    public function getNameAttribute($value)
+    {
+        return ucwords($value);
+    }
 }

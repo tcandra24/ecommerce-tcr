@@ -84,12 +84,12 @@
                                     "#dropzone-form-image"
                                 ),
                                 mockFile = {
-                                    name: "{{ $category->image }}",
+                                    name: "{{ $category->name }}",
                                     size: "{{ $size }}"
                                 };
                             dropzoneObj.displayExistingFile(
                                 mockFile,
-                                "{{ asset('/storage/images/categories/' . $category->image) }}"
+                                "{{ $category->image }}"
                             );
 
                         },
@@ -315,7 +315,7 @@
                             </div>
                             <div class="col-lg-3-5 col-xl-4-5">
                                 <div class="form-group row align-items-center mb-3">
-                                    <label class="col-lg-5 col-xl-3 control-label text-lg-end mb-0">Category Name</label>
+                                    <label class="col-lg-5 col-xl-3 control-label text-lg-end mb-0">Name</label>
                                     <div class="col-lg-7 col-xl-6">
                                         <input type="text" class="form-control form-control-modern" name="name"
                                             value="{{ $category->name }}" required />

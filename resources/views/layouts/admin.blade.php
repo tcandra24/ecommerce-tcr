@@ -15,11 +15,9 @@
     <link rel="stylesheet" href="{{ asset('assets/admin/vendor/animate/animate.compat.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/admin/vendor/font-awesome/css/all.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/admin/vendor/boxicons/css/boxicons.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/admin/vendor/magnific-popup/magnific-popup.css') }}" />
     <link rel="stylesheet"
         href="{{ asset('assets/admin/vendor/bootstrap-datepicker/css/bootstrap-datepicker3.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/admin/vendor/morris/morris.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/admin/vendor/datatables/media/css/dataTables.bootstrap5.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/admin/css/theme.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/admin/css/layouts/modern.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/admin/css/custom.css') }}">
@@ -53,7 +51,6 @@
     <script src="{{ asset('assets/admin/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('assets/admin/vendor/common/common.js') }}"></script>
     <script src="{{ asset('assets/admin/vendor/nanoscroller/nanoscroller.js') }}"></script>
-    <script src="{{ asset('assets/admin/vendor/magnific-popup/jquery.magnific-popup.js') }}"></script>
     <script src="{{ asset('assets/admin/vendor/jquery-placeholder/jquery.placeholder.js') }}"></script>
 
     <script src="{{ asset('assets/admin/vendor/raphael/raphael.js') }}"></script>

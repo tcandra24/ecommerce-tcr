@@ -22,7 +22,8 @@
                         @endcan
                         @if (auth()->user()->can('master.categories.index') ||
                                 auth()->user()->can('master.brands.index') ||
-                                auth()->user()->can('master.products.index'))
+                                auth()->user()->can('master.products.index') ||
+                                auth()->user()->can('master.sliders.index'))
                             <li class="dropdown">
                                 <a class="nav-link dropdown-toggle" href="#">
                                     Master
@@ -44,8 +45,15 @@
                                     @endcan
                                     @can('master.products.index')
                                         <li>
-                                            <a class="nav-link" href="#">
+                                            <a class="nav-link" href="/admin/products">
                                                 Products
+                                            </a>
+                                        </li>
+                                    @endcan
+                                    @can('master.sliders.index')
+                                        <li>
+                                            <a class="nav-link" href="/admin/sliders">
+                                                Sliders
                                             </a>
                                         </li>
                                     @endcan

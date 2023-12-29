@@ -6,6 +6,7 @@
 
 @section('styles')
     <link rel="stylesheet" href="{{ asset('assets/admin/vendor/datatables/media/css/dataTables.bootstrap5.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/admin/vendor/magnific-popup/magnific-popup.css') }}" />
 @endsection
 
 @section('scripts')
@@ -13,6 +14,7 @@
     <script src="{{ asset('assets/admin/vendor/datatables/media/js/dataTables.bootstrap5.min.js') }}"></script>
     <script src="{{ asset('assets/admin/js/examples/examples.ecommerce.datatables.list.js') }}"></script>
     <script src="{{ asset('assets/admin/vendor/sweetalert2/sweetalert2.min.js') }}"></script>
+    <script src="{{ asset('assets/admin/vendor/magnific-popup/jquery.magnific-popup.js') }}"></script>
     <script>
         $('.delete-row').on('click', function() {
             const id = $(this).attr('data-id')
@@ -33,6 +35,21 @@
             })
 
         })
+
+        $('.image-popup-no-margins').magnificPopup({
+            type: 'image',
+            closeOnContentClick: true,
+            closeBtnInside: false,
+            fixedContentPos: true,
+            mainClass: 'mfp-no-margins mfp-with-zoom',
+            image: {
+                verticalFit: true
+            },
+            zoom: {
+                enabled: true,
+                duration: 300
+            }
+        });
     </script>
 @endsection
 
@@ -41,7 +58,8 @@
         @if (Session::has('error'))
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
                 <strong>Error !</strong> {{ Session::get('error') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-hidden="true" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-hidden="true"
+                    aria-label="Close"></button>
             </div>
         @endif
 
@@ -96,6 +114,7 @@
                             <thead>
                                 <tr>
                                     <th width="8%">No</th>
+                                    <th width="20%">Image</th>
                                     <th width="28%">Name</th>
                                     <th width="23%">Slug</th>
                                     <th width="38%">Actions</th>
@@ -108,7 +127,12 @@
                                             {{ $loop->iteration }}
                                         </td>
                                         <td>
-                                            <a href="#"><strong>{{ $brand->name }}</strong></a>
+                                            <a class="image-popup-no-margins" href="{{ $brand->image }}">
+                                                <img class="img-fluid rounded" src="{{ $brand->image }}" width="120" />
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <strong>{{ $brand->name }}</strong>
                                         </td>
                                         <td>{{ $brand->slug }}</td>
                                         <td class="actions">

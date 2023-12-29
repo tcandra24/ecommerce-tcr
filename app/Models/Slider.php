@@ -15,11 +15,21 @@ class Slider extends Model
      * @var array
      */
     protected $fillable = [
-        'image', 'link'
+        'name', 'image', 'link'
     ];
 
     public function getImageAttribute($value)
     {
-        return asset('/storage/sliders/' . $value);
+        return asset('/storage/images/sliders/' . $value);
+    }
+
+    public function setNameAttribute($value)
+    {
+        $this->attributes['name'] = strtolower($value);
+    }
+
+    public function getNameAttribute($value)
+    {
+        return ucwords($value);
     }
 }
