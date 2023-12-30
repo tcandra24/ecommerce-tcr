@@ -130,6 +130,10 @@
                     submitHandler: function(form) {
                         var formData = $form.serializeArray(),
                             formFieldsData = {};
+                        formData.push({
+                            name: 'description',
+                            value: $('#summernote').summernote('code')
+                        })
                         $(formData).each(function(index, obj) {
                             if (
                                 obj.name != "attName" &&
@@ -180,7 +184,7 @@
                             $submitButton.data("loading-text")
                         );
                         $.ajax({
-                                url: "/admin/categories",
+                                url: "/admin/products",
                                 headers: {
                                     'X-CSRF-TOKEN': $('meta[name="token"]').attr('content')
                                 },
@@ -292,7 +296,7 @@
                                 <div class="form-group row align-items-center pb-3">
                                     <label class="col-lg-5 col-xl-3 control-label text-lg-end mb-0">Name</label>
                                     <div class="col-lg-7 col-xl-6">
-                                        <input type="text" class="form-control form-control-modern" name="productName"
+                                        <input type="text" class="form-control form-control-modern" name="title"
                                             value="" required />
                                     </div>
                                 </div>
@@ -300,7 +304,7 @@
                                     <label
                                         class="col-lg-5 col-xl-3 control-label text-lg-end pt-2 mt-1 mb-0">Description</label>
                                     <div class="col-lg-9 col-xl-8">
-                                        <div class="summernote" data-plugin-summernote
+                                        <div class="summernote" id="summernote" data-plugin-summernote
                                             data-plugin-options='{ "height": 360 }'></div>
                                     </div>
                                 </div>
@@ -350,12 +354,19 @@
                                             </div>
                                         </div>
                                         <div class="form-group row align-items-center pb-3">
-                                            <label class="col-lg-5 col-xl-3 control-label text-lg-end mb-0">Stock
-                                                Status</label>
+                                            <label class="col-lg-5 col-xl-3 control-label text-lg-end mb-0">Stock</label>
                                             <div class="col-lg-7 col-xl-6">
-                                                <select class="form-control form-control-modern" name="stockStatus">
-                                                    <option value="in-stock" selected>In Stock</option>
-                                                    <option value="out-of-stock">Out of Stock</option>
+                                                <input type="number" class="form-control form-control-modern"
+                                                    name="stock" value="" required />
+                                            </div>
+                                        </div>
+                                        <div class="form-group row align-items-center pb-3">
+                                            <label class="col-lg-5 col-xl-3 control-label text-lg-end mb-0">Status</label>
+                                            <div class="col-lg-7 col-xl-6">
+                                                <select class="form-control form-control-modern" name="status">
+                                                    <option value="">Choose Status</option>
+                                                    <option value="1" selected>Active</option>
+                                                    <option value="0">Not Active</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -372,6 +383,7 @@
                                                     <select data-plugin-selectTwo name="category"
                                                         class="form-control populate" id="category"
                                                         aria-describedby="category" required>
+                                                        <option value="">Choose Category</option>
                                                         @foreach ($categories as $category)
                                                             <option value="{{ $category->id }}">
                                                                 {{ $category->name }}
@@ -388,6 +400,7 @@
                                                     <select data-plugin-selectTwo name="brand"
                                                         class="form-control populate" id="brand"
                                                         aria-describedby="brand" required>
+                                                        <option value="">Choose Brand</option>
                                                         @foreach ($brands as $brand)
                                                             <option value="{{ $brand->id }}">
                                                                 {{ $brand->name }}

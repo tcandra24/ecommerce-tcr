@@ -2,12 +2,17 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Str;
 use App\Models\Brand;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
 use App\Models\Product;
+use App\Models\ProductImage;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -18,7 +23,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
+        $products = Product::with('category', 'brand', 'images')->get();
         $categories = Category::all();
         $brands = Brand::withCount('products')->get();
 
@@ -53,7 +58,61 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required',
+            'brand' => 'required',
+            'category' => 'required',
+            'description' => 'required',
+            'images' => 'required',
+            'price' => 'required',
+            'sku' => 'required',
+            'status' => 'required',
+            'weight' => 'required',
+            'stock' => 'required',
+        ]);
+
+        try {
+
+            DB::transaction(function () use ($request) {
+                $product = Product::create([
+                    'title' => $request->title,
+                    'slug' => Str::slug($request->title),
+                    'brand_id' => $request->brand,
+                    'category_id' => $request->category,
+                    'description' => $request->description,
+                    'images' => $request->images,
+                    'price' => $request->price,
+                    'sku' => $request->sku,
+                    'is_active' => $request->status,
+                    'weight' => $request->weight,
+                    'user_id' => Auth::user()->id,
+                    'stock' => $request->stock,
+                ]);
+
+                foreach($request->images as $image) {
+                    $filename = $image['tmpImageName'];
+                    $srcFolder = 'public/images/tmp/';
+                    $dstFolder = 'public/images/products/';
+
+                    ProductImage::create([
+                        'product_id' => $product->id,
+                        'name' => $filename
+                    ]);
+
+                    Storage::disk('local')->move($srcFolder . $filename, $dstFolder . $filename);
+                }
+            });
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Product saved successfully'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage()
+            ]);
+        }
     }
 
     /**

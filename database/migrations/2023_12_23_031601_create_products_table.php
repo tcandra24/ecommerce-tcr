@@ -21,10 +21,10 @@ class CreateProductsTable extends Migration
             $table->unsignedBigInteger('brand_id');
             $table->unsignedBigInteger('user_id');
             $table->text('description');
+            $table->boolean('is_active');
             $table->integer('weight');
             $table->bigInteger('price');
             $table->integer('stock');
-            $table->integer('discount');
             $table->timestamps();
 
             $table->foreign('category_id')->references('id')->on('categories');

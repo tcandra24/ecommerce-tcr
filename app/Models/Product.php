@@ -9,7 +9,16 @@ class Product extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'image', 'title', 'slug', 'category_id', 'user_id', 'description', 'weight', 'price', 'stock', 'discount'
+        'title',
+        'slug',
+        'category_id',
+        'brand_id',
+        'user_id',
+        'description',
+        'is_active',
+        'weight',
+        'price',
+        'stock',
     ];
 
     /**
@@ -37,8 +46,23 @@ class Product extends Model
         return $this->hasMany(Review::class);
     }
 
-    public function getImageAttribute($value)
+    /**
+     * products images
+     *
+     * @return void
+     */
+    public function images()
     {
-        return asset('/storage/products/' . $value);
+        return $this->hasMany(ProductImage::class);
+    }
+
+    public function setTitleAttribute($value)
+    {
+        $this->attributes['title'] = strtolower($value);
+    }
+
+    public function getTitleAttribute($value)
+    {
+        return ucwords($value);
     }
 }
