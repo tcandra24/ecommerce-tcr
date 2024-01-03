@@ -186,7 +186,7 @@
                                 var imagesArr = [];
                                 for (var i = 0; i < dropzoneObj.files.length; i++) {
                                     imagesArr.push({
-                                        dataURL: dropzoneObj.files[i].dataURL,
+                                        // dataURL: dropzoneObj.files[i].dataURL,
                                         upload: dropzoneObj.files[i].upload,
                                         tmpImageName: dropzoneObj.files[i].tmp_image,
                                     });

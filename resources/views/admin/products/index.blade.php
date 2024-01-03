@@ -135,85 +135,67 @@
             </div>
         </div>
         <div class="col-lg-3-5 col-xl-4-5">
-            <div class="row row-gutter-sm">
-                @foreach ($products as $product)
-                    <div class="col-sm-6 col-xl-3 mb-4">
-                        <div class="card card-modern card-modern-alt-padding">
-                            <div class="card-body bg-light">
-                                <div class="image-frame mb-2">
-                                    <div class="image-frame-wrapper">
-                                        <div class="image-frame-badges-wrapper" style="z-index: 99;">
-                                            @if ($product->is_active)
-                                                <span class="badge badge-ecommerce badge-success">Active</span>
-                                            @else
-                                                <span class="badge badge-ecommerce badge-danger">Not Active</span>
-                                            @endif
-                                        </div>
-                                        <a href="#">
-                                            <div class="owl-carousel owl-theme" data-plugin-carousel
-                                                data-plugin-options='{ "dots": false, "nav": true, "items": 1 }'>
-                                                @foreach ($product->images as $image)
-                                                    <div class="item">
-                                                        <img class="img-thumbnail" src="{{ $image->name }}"
-                                                            alt="{{ $image->name }}">
-                                                    </div>
-                                                @endforeach
+            @if (count($products) > 0)
+                <div class="row row-gutter-sm">
+                    @foreach ($products as $product)
+                        <div class="col-sm-6 col-xl-3 mb-4">
+                            <div class="card card-modern card-modern-alt-padding">
+                                <div class="card-body bg-light">
+                                    <div class="image-frame mb-2">
+                                        <div class="image-frame-wrapper">
+                                            <div class="image-frame-badges-wrapper" style="z-index: 99;">
+                                                @if ($product->is_active)
+                                                    <span class="badge badge-ecommerce badge-success">Active</span>
+                                                @else
+                                                    <span class="badge badge-ecommerce badge-danger">Not Active</span>
+                                                @endif
                                             </div>
-                                        </a>
+                                            <a href="#">
+                                                <div class="owl-carousel owl-theme" data-plugin-carousel
+                                                    data-plugin-options='{ "dots": false, "nav": true, "items": 1 }'>
+                                                    @foreach ($product->images as $image)
+                                                        <div class="item">
+                                                            <img class="img-thumbnail" src="{{ $image->name }}"
+                                                                alt="{{ $image->name }}">
+                                                        </div>
+                                                    @endforeach
+                                                </div>
+                                            </a>
+                                        </div>
                                     </div>
-                                </div>
-                                <small>
-                                    <a href="#"
-                                        class="ecommerce-sidebar-link text-color-grey text-color-hover-primary text-decoration-none">{{ $product->category->name }}</a>
-                                </small>
-                                <h4 class="text-4 line-height-2 mt-0 mb-2">
-                                    <a href="#"
-                                        class="ecommerce-sidebar-link text-color-dark text-color-hover-primary text-decoration-none">
-                                        {{ $product->title }}
-                                    </a>
-                                </h4>
-                                <div class="stars-wrapper">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </div>
-                                <div class="product-price">
-                                    <div class="sale-price">{{ $product->price }}</div>
+                                    <small>
+                                        <a href="#"
+                                            class="ecommerce-sidebar-link text-color-grey text-color-hover-primary text-decoration-none">{{ $product->category->name }}</a>
+                                    </small>
+                                    <h4 class="text-4 line-height-2 mt-0 mb-2">
+                                        <a href="/admin/products/{{ $product->id }}/edit"
+                                            class="ecommerce-sidebar-link text-color-dark text-color-hover-primary text-decoration-none">
+                                            {{ $product->title }}
+                                        </a>
+                                    </h4>
+                                    <div class="stars-wrapper">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <div class="product-price">
+                                        <div class="sale-price">Rp. {{ number_format($product->price, 2) }}</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                @endforeach
-            </div>
-            <div class="row row-gutter-sm justify-content-between">
-                <div class="col-lg-auto order-2 order-lg-1">
-                    <p class="text-center text-lg-left mb-0">Showing 1-8 of 60 results</p>
+                    @endforeach
                 </div>
-                <div class="col-lg-auto order-1 order-lg-2 mb-3 mb-lg-0">
-                    <nav aria-label="Page navigation example">
-                        <ul
-                            class="pagination pagination-modern pagination-modern-spacing justify-content-center justify-content-lg-start mb-0">
-                            <li class="page-item">
-                                <a class="page-link prev" href="#" aria-label="Previous">
-                                    <span><i class="fas fa-chevron-left" aria-label="Previous"></i></span>
-                                </a>
-                            </li>
-                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#" disabled="true">...</a></li>
-                            <li class="page-item"><a class="page-link" href="#">15</a></li>
-                            <li class="page-item">
-                                <a class="page-link next" href="#" aria-label="Next">
-                                    <span><i class="fas fa-chevron-right" aria-label="Next"></i></span>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
+                <div class="row row-gutter-sm justify-content-between">
+                    {{ $products->links() }}
                 </div>
-            </div>
+            @else
+                <div class="alert alert-info alert-dismissible fade show text-center" role="alert">
+                    <strong>Products </strong> is empty
+                </div>
+            @endif
         </div>
     </div>
 @endsection

@@ -70,8 +70,8 @@
                 <button class="mobile-menu-toggler text-dark mr-2" type="button">
                     <i class="fas fa-bars"></i>
                 </button>
-                <a href="demo42.html" class="logo">
-                    <img src="{{ asset('assets/ecommerce/images/demoes/demo42/shop42_logo.png') }}" class="w-100"
+                <a href="/" class="logo">
+                    <img src="{{ asset('assets/admin/img/logo.png') }}" class="w-100" style="filter: brightness(0.3);"
                         width="202" height="80" alt="Porto Logo">
                 </a>
             </div><!-- End .header-left -->
@@ -225,25 +225,19 @@
                 <ul class="menu w-100">
                     <li class="menu-item d-flex align-items-center">
                         <a href="#" class="d-inline-flex align-items-center sf-with-ul">
-                            <i class="custom-icon-toggle-menu d-inline-table"></i><span>All
-                                Departments</span></a>
+                            <i class="custom-icon-toggle-menu d-inline-table"></i>
+                            <span> All Departments</span>
+                        </a>
                         <div class="menu-depart">
-                            <a href="#"><i class="icon-category-motorcycles"></i>Auto Parts</a>
-
-                            <a href="#">
-                                <i class="icon-category-internal-accessories"></i>Interior Accessories
-                            </a>
-
-                            <a href="#"><i class="icon-category-mechanics"></i>Performance</a>
-
-                            <a href="#"><i class="icon-category-sound-video"></i>Sound & Video</a>
-
-                            <a href="#"><i class="icon-category-steering"></i>Steering Wheels</a>
-
+                            @foreach ($categories as $category)
+                                <a href="#">
+                                    {{ $category->name }}
+                                </a>
+                            @endforeach
                         </div>
                     </li>
                     <li class="active">
-                        <a href="demo42.html">Home</a>
+                        <a href="/">Home</a>
                     </li>
                     <li>
                         <a href="demo42-shop.html">Shop</a>

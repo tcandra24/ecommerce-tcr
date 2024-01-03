@@ -33,7 +33,6 @@
                     $('#form-delete-brands-' + id).submit()
                 }
             })
-
         })
 
         $('.image-popup-no-margins').magnificPopup({

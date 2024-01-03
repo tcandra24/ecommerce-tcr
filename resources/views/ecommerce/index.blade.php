@@ -15,7 +15,7 @@
                         xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 649 578">
                         <path fill="#FFF"
                             d="M-225.5,154.7l358.45,456.96c7.71,9.83,21.92,11.54,31.75,3.84l456.96-358.45c9.83-7.71,11.54-21.92,3.84-31.75
-                                            L267.05-231.66c-7.71-9.83-21.92-11.54-31.75-3.84l-456.96,358.45C-231.49,130.66-233.2,144.87-225.5,154.7z">
+                                                L267.05-231.66c-7.71-9.83-21.92-11.54-31.75-3.84l-456.96,358.45C-231.49,130.66-233.2,144.87-225.5,154.7z">
                         </path>
                         <path class="appear-animate appear-animate-svg" data-animation-name="customLineAnim"
                             data-animation-duration="5000" fill="none" stroke="#222529" stroke-width="1.5"
@@ -78,7 +78,7 @@
                         xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 649 578">
                         <path fill="#FFF"
                             d="M-225.5,154.7l358.45,456.96c7.71,9.83,21.92,11.54,31.75,3.84l456.96-358.45c9.83-7.71,11.54-21.92,3.84-31.75
-                                            L267.05-231.66c-7.71-9.83-21.92-11.54-31.75-3.84l-456.96,358.45C-231.49,130.66-233.2,144.87-225.5,154.7z">
+                                                L267.05-231.66c-7.71-9.83-21.92-11.54-31.75-3.84l-456.96,358.45C-231.49,130.66-233.2,144.87-225.5,154.7z">
                         </path>
                         <path class="appear-animate appear-animate-svg" data-animation-name="customLineAnim"
                             data-animation-duration="5000" fill="none" stroke="#222529" stroke-width="1.5"
@@ -1224,7 +1224,7 @@
             viewBox="0 0 649 578">
             <path fill="#f26100"
                 d="M-225.5,154.7l358.45,456.96c7.71,9.83,21.92,11.54,31.75,3.84l456.96-358.45c9.83-7.71,11.54-21.92,3.84-31.75
-                                L267.05-231.66c-7.71-9.83-21.92-11.54-31.75-3.84l-456.96,358.45C-231.49,130.66-233.2,144.87-225.5,154.7z">
+                                    L267.05-231.66c-7.71-9.83-21.92-11.54-31.75-3.84l-456.96,358.45C-231.49,130.66-233.2,144.87-225.5,154.7z">
             </path>
             <path class="appear-animate appear-animate-svg" data-animation-name="customLineAnim"
                 data-animation-delay="300" data-animation-duration="5000" fill="none" stroke="#FFF"
