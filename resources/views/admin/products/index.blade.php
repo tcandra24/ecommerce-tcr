@@ -150,7 +150,7 @@
                                                     <span class="badge badge-ecommerce badge-danger">Not Active</span>
                                                 @endif
                                             </div>
-                                            <a href="#">
+                                            <a href="/admin/products/{{ $product->id }}/edit">
                                                 <div class="owl-carousel owl-theme" data-plugin-carousel
                                                     data-plugin-options='{ "dots": false, "nav": true, "items": 1 }'>
                                                     @foreach ($product->images as $image)

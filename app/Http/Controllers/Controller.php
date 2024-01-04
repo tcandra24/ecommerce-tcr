@@ -16,8 +16,8 @@ class Controller extends BaseController
 
     public function __construct()
     {
-        $categories = Category::all();
-        View::share('categories', $categories);
+        $categoriesDropdown = Category::all();
+        View::share('categoriesDropdown', $categoriesDropdown);
     }
 
 }

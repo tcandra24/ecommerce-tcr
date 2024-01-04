@@ -4,8 +4,8 @@
             <div class="row">
                 <div class="col-lg-2 col-sm-6 pb-2 pb-sm-0 d-flex align-items-center">
                     <div class="widget m-b-3">
-                        <img src="{{ asset('assets/ecommerce/images/demoes/demo42/footer-logo.png') }}" alt="Logo"
-                            width="202" height="54" class="logo-footer">
+                        <img src="{{ asset('assets/admin/img/logo.png') }}" alt="Logo" width="202" height="54"
+                            class="logo-footer">
                     </div><!-- End .widget -->
                 </div><!-- End .col-lg-3 -->
 
@@ -60,20 +60,6 @@
                         </ul>
                     </div><!-- End .widget -->
                 </div><!-- End .col-lg-3 -->
-
-                <div class="col-lg-4 col-sm-6 pb-0">
-                    <div class="widget widget-newsletter mb-1 mb-sm-3">
-                        <h4 class="widget-title">Subscribe Newsletter</h4>
-
-                        <p class="mb-2">Get all the latest information on events, sales and offers.
-                            Sign up for newsletter:</p>
-                        <form action="#" class="d-flex mb-0 w-100">
-                            <input type="email" class="form-control mb-0" placeholder="Email address" required="">
-
-                            <input type="submit" class="btn shadow-none" value="OK">
-                        </form>
-                    </div><!-- End .widget -->
-                </div><!-- End .col-lg-3 -->
             </div><!-- End .row -->
         </div><!-- End .container -->
     </div><!-- End .footer-middle -->
@@ -81,7 +67,7 @@
     <div class="container">
         <div class="footer-bottom d-sm-flex align-items-center bg-dark">
             <div class="footer-left">
-                <span class="footer-copyright">Porto eCommerce. © 2021. All Rights Reserved</span>
+                <span class="footer-copyright">TCR Ecommerce. © {{ date('Y') }}. All Rights Reserved</span>
             </div>
 
             <div class="footer-right ml-auto mt-1 mt-sm-0">

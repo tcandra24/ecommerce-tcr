@@ -1,26 +1,7 @@
 <header class="header">
     <div class="header-top">
         <div class="container">
-            <div class="header-left d-none d-md-block">
-                <div class="info-box info-box-icon-left text-primary justify-content-start p-0">
-                    <i class="icon-shipping"></i>
-
-                    <div class="info-box-content">
-                        <h4>FREE Next Day Delivery For Orders $35+</h4>
-                    </div><!-- End .info-box-content -->
-                </div>
-            </div><!-- End .header-left -->
-
             <div class="header-right header-dropdowns ml-0 ml-md-auto w-md-100">
-                <div class="header-dropdown ">
-                    <a href="#">USD</a>
-                    <div class="header-menu">
-                        <ul>
-                            <li><a href="#">EUR</a></li>
-                            <li><a href="#">USD</a></li>
-                        </ul>
-                    </div><!-- End .header-menu -->
-                </div><!-- End .header-dropown -->
 
                 <div class="header-dropdown mr-auto mr-md-0">
                     <a href="#"><i class="flag-us flag"></i>ENG</a>
@@ -226,10 +207,10 @@
                     <li class="menu-item d-flex align-items-center">
                         <a href="#" class="d-inline-flex align-items-center sf-with-ul">
                             <i class="custom-icon-toggle-menu d-inline-table"></i>
-                            <span> All Departments</span>
+                            <span> All Category</span>
                         </a>
                         <div class="menu-depart">
-                            @foreach ($categories as $category)
+                            @foreach ($categoriesDropdown as $category)
                                 <a href="#">
                                     {{ $category->name }}
                                 </a>
@@ -371,9 +352,6 @@
                             <li><a href="forgot-password.html">Forgot Password</a></li>
                         </ul>
                     </li>
-                    <li><a href="https://1.envato.market/DdLk5" rel="noopener" target="_blank">Buy Porto!</a>
-                    </li>
-                    <li class="float-right"><a href="#" class="pr-0">Special Offers</a></li>
                 </ul>
             </nav>
         </div><!-- End .container -->

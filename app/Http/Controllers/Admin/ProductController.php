@@ -23,7 +23,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::with('category', 'brand', 'images')->paginate(10);
+        $products = Product::with('category', 'brand', 'images')->paginate(8);
         $categories = Category::all();
         $brands = Brand::withCount('products')->get();
 

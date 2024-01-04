@@ -100,7 +100,7 @@
                     initializeDropzone();
                 }
 
-                $('#summernote').summernote('code', '{{ $product->description }}')
+                $('#summernote').summernote('code', '{!! $product->description !!}')
             });
             $(window).on("ecommerce.sidebar.overlay.show", function() {
                 if ($("#dropzone-form-image").get(0)) {
