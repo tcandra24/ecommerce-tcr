@@ -54,3 +54,13 @@ Route::prefix('admin')->group(function() {
 });
 
 Route::get('/', [ App\Http\Controllers\Ecommerce\HomeController::class, 'index' ]);
+
+Route::prefix('products')->group(function() {
+    Route::get('/', [App\Http\Controllers\Ecommerce\ProductController::class, 'index']);
+    Route::get('/{slug}', [App\Http\Controllers\Ecommerce\ProductController::class, 'detail']);
+});
+
+Route::prefix('categories')->group(function() {
+    Route::get('/', [App\Http\Controllers\Ecommerce\CategoryController::class, 'index']);
+    Route::get('/{slug}', [App\Http\Controllers\Ecommerce\CategoryController::class, 'detail']);
+});

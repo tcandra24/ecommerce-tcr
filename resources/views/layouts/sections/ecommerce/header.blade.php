@@ -9,19 +9,16 @@
                         <ul>
                             <li><a href="#"><i class="flag-us flag mr-2"></i>ENG</a>
                             </li>
-                            <li><a href="#"><i class="flag-fr flag mr-2"></i>FRA</a></li>
+                            <li><a href="#"><i class="flag-id flag mr-2"></i>ID</a></li>
                         </ul>
-                    </div><!-- End .header-menu -->
-                </div><!-- End .header-dropown -->
+                    </div>
+                </div>
 
                 <span class="separator d-none d-xl-block"></span>
 
                 <ul class="top-links mega-menu d-none d-xl-flex mb-0 pr-2">
                     <li class="menu-item menu-item-type-post_type menu-item-object-page narrow">
                         <a href="#"><i class="icon-pin"></i>Our Stores</a>
-                    </li>
-                    <li class="menu-item menu-item-type-custom menu-item-object-custom narrow">
-                        <a href="#"><i class="icon-shipping-truck"></i>Track Your Order</a>
                     </li>
                     <li class="menu-item menu-item-type-post_type menu-item-object-page narrow">
                         <a href="#"><i class="icon-help-circle"></i>Help</a>
@@ -40,10 +37,10 @@
                         title="twitter"></a>
                     <a href="#" class="social-icon social-instagram icon-instagram mr-0" target="_blank"
                         title="instagram"></a>
-                </div><!-- End .social-icons -->
-            </div><!-- End .header-right -->
-        </div><!-- End .container -->
-    </div><!-- End .header-top -->
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="header-middle sticky-header" data-sticky-options="{'mobile': true}">
         <div class="container">
@@ -55,7 +52,7 @@
                     <img src="{{ asset('assets/admin/img/logo.png') }}" class="w-100" style="filter: brightness(0.3);"
                         width="202" height="80" alt="Porto Logo">
                 </a>
-            </div><!-- End .header-left -->
+            </div>
 
             <div class="header-right w-lg-max">
                 <div
@@ -67,9 +64,9 @@
                                 placeholder="Search..." required>
 
                             <button class="btn icon-magnifier p-0" title="search" type="submit"></button>
-                        </div><!-- End .header-search-wrapper -->
+                        </div>
                     </form>
-                </div><!-- End .header-search -->
+                </div>
 
                 <span class="separator d-none d-lg-block"></span>
 
@@ -80,7 +77,7 @@
                     <div class="sicon-header">
                         <h4 class="sicon-title ls-n-25">CALL US NOW</h4>
                         <p>+123 5678 890</p>
-                    </div> <!-- header -->
+                    </div>
                 </div>
 
                 <span class="separator d-none d-lg-block mr-4"></span>
@@ -111,7 +108,6 @@
 
                         <div class="dropdownmenu-wrapper custom-scrollbar">
                             <div class="dropdown-cart-header">Shopping Cart</div>
-                            <!-- End .dropdown-cart-header -->
 
                             <div class="dropdown-cart-products">
                                 <div class="product">
@@ -124,7 +120,7 @@
                                             <span class="cart-product-qty">1</span>
                                             × $99.00
                                         </span>
-                                    </div><!-- End .product-details -->
+                                    </div>
 
                                     <figure class="product-image-container">
                                         <a href="demo42-product.html" class="product-image">
@@ -134,7 +130,7 @@
                                         <a href="#" class="btn-remove"
                                             title="Remove Product"><span>×</span></a>
                                     </figure>
-                                </div><!-- End .product -->
+                                </div>
 
                                 <div class="product">
                                     <div class="product-details">
@@ -146,7 +142,7 @@
                                             <span class="cart-product-qty">1</span>
                                             × $35.00
                                         </span>
-                                    </div><!-- End .product-details -->
+                                    </div>
 
                                     <figure class="product-image-container">
                                         <a href="demo42-product.html" class="product-image">
@@ -157,7 +153,7 @@
                                         <a href="#" class="btn-remove"
                                             title="Remove Product"><span>×</span></a>
                                     </figure>
-                                </div><!-- End .product -->
+                                </div>
 
                                 <div class="product">
                                     <div class="product-details">
@@ -169,7 +165,7 @@
                                             <span class="cart-product-qty">1</span>
                                             × $35.00
                                         </span>
-                                    </div><!-- End .product-details -->
+                                    </div>
 
                                     <figure class="product-image-container">
                                         <a href="demo42-product.html" class="product-image">
@@ -179,26 +175,26 @@
                                         <a href="#" class="btn-remove"
                                             title="Remove Product"><span>×</span></a>
                                     </figure>
-                                </div><!-- End .product -->
-                            </div><!-- End .cart-product -->
+                                </div>
+                            </div>
 
                             <div class="dropdown-cart-total">
                                 <span>SUBTOTAL:</span>
 
                                 <span class="cart-total-price float-right">$134.00</span>
-                            </div><!-- End .dropdown-cart-total -->
+                            </div>
 
                             <div class="dropdown-cart-action">
                                 <a href="cart.html" class="btn btn-gray btn-block view-cart">View
                                     Cart</a>
                                 <a href="checkout.html" class="btn btn-dark btn-block">Checkout</a>
-                            </div><!-- End .dropdown-cart-total -->
-                        </div><!-- End .dropdownmenu-wrapper -->
-                    </div><!-- End .dropdown-menu -->
-                </div><!-- End .dropdown -->
-            </div><!-- End .header-right -->
-        </div><!-- End .container -->
-    </div><!-- End .header-middle -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="header-bottom sticky-header d-none d-lg-flex" data-sticky-options="{'mobile': false}">
         <div class="container">
@@ -221,67 +217,6 @@
                         <a href="/">Home</a>
                     </li>
                     <li>
-                        <a href="demo42-shop.html">Shop</a>
-                        <div class="megamenu megamenu-fixed-width megamenu-3cols">
-                            <div class="row">
-                                <div class="col-lg-4">
-                                    <a href="#" class="nolink">VARIATION 1</a>
-                                    <ul class="submenu">
-                                        <li><a href="demo42-shop.html" title="shop">Fullwidth Banner</a>
-                                        </li>
-                                        <li><a href="category-banner-boxed-slider.html">Boxed Slider
-                                                Banner</a>
-                                        </li>
-                                        <li><a href="category-banner-boxed-image.html">Boxed Image
-                                                Banner</a>
-                                        </li>
-                                        <li><a href="demo42-shop.html" title="shop">Left Sidebar</a></li>
-                                        <li><a href="category-sidebar-right.html">Right Sidebar</a></li>
-                                        <li><a href="category-off-canvas.html">Off Canvas Filter</a></li>
-                                        <li><a href="category-horizontal-filter1.html">Horizontal
-                                                Filter1</a>
-                                        </li>
-                                        <li><a href="category-horizontal-filter2.html">Horizontal
-                                                Filter2</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="col-lg-4">
-                                    <a href="#" class="nolink">VARIATION 2</a>
-                                    <ul class="submenu">
-                                        <li><a href="category-list.html">List Types</a></li>
-                                        <li><a href="category-infinite-scroll.html">Ajax Infinite Scroll</a>
-                                        </li>
-                                        <li><a href="demo42-shop.html" title="shop">3 Columns Products</a>
-                                        </li>
-                                        <li><a href="category-4col.html">4 Columns Products</a></li>
-                                        <li><a href="category-5col.html">5 Columns Products</a></li>
-                                        <li><a href="category-6col.html">6 Columns Products</a></li>
-                                        <li><a href="category-7col.html">7 Columns Products</a></li>
-                                        <li><a href="category-8col.html">8 Columns Products</a></li>
-                                    </ul>
-                                </div>
-                                <div class="col-lg-4 p-0">
-                                    <div class="menu-banner">
-                                        <figure>
-                                            <img src="{{ asset('assets/ecommerce/images/menu-banner.jpg') }}"
-                                                width="192" height="313" alt="Menu banner">
-                                        </figure>
-                                        <div class="banner-content">
-                                            <h4>
-                                                <span class="">UP TO</span><br />
-                                                <b class="">50%</b>
-                                                <i>OFF</i>
-                                            </h4>
-                                            <a href="demo42-shop.html" class="btn btn-sm btn-dark">SHOP
-                                                NOW</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div><!-- End .megamenu -->
-                    </li>
-                    <li>
                         <a href="demo42-product.html">Products</a>
                         <div class="megamenu megamenu-fixed-width">
                             <div class="row">
@@ -297,7 +232,7 @@
                                         <li><a href="product-sidebar-right.html">WITH RIGHT SIDEBAR</a></li>
                                         <li><a href="product-addcart-sticky.html">ADD CART STICKY</a></li>
                                     </ul>
-                                </div><!-- End .col-lg-4 -->
+                                </div>
 
                                 <div class="col-lg-4">
                                     <a href="#" class="nolink">PRODUCT LAYOUTS</a>
@@ -312,7 +247,7 @@
                                         <li><a href="product-center-vertical.html">CENTER VERTICAL</a></li>
                                         <li><a href="#">BUILD YOUR OWN</a></li>
                                     </ul>
-                                </div><!-- End .col-lg-4 -->
+                                </div>
 
                                 <div class="col-lg-4 p-0">
                                     <div class="menu-banner menu-banner-2">
@@ -329,31 +264,12 @@
                                         </div>
                                         <a href="demo42-shop.html" class="btn btn-sm btn-dark">SHOP NOW</a>
                                     </div>
-                                </div><!-- End .col-lg-4 -->
-                            </div><!-- End .row -->
-                        </div><!-- End .megamenu -->
-                    </li>
-                    <li>
-                        <a href="#">Pages</a>
-                        <ul>
-                            <li><a href="wishlist.html">Wishlist</a></li>
-                            <li><a href="cart.html">Shopping Cart</a></li>
-                            <li><a href="checkout.html">Checkout</a></li>
-                            <li><a href="dashboard.html">Dashboard</a></li>
-                            <li><a href="about.html">About Us</a></li>
-                            <li><a href="#">Blog</a>
-                                <ul>
-                                    <li><a href="blog.html">Blog</a></li>
-                                    <li><a href="single.html">Blog Post</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="contact.html">Contact Us</a></li>
-                            <li><a href="login.html">Login</a></li>
-                            <li><a href="forgot-password.html">Forgot Password</a></li>
-                        </ul>
+                                </div>
+                            </div>
+                        </div>
                     </li>
                 </ul>
             </nav>
-        </div><!-- End .container -->
-    </div><!-- End .header-bottom -->
+        </div>
+    </div>
 </header>

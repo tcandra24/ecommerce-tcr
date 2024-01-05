@@ -189,7 +189,7 @@
                     @endforeach
                 </div>
                 <div class="row row-gutter-sm justify-content-between">
-                    {{ $products->links() }}
+                    {{ $products->links('layouts.sections.admin.pagination') }}
                 </div>
             @else
                 <div class="alert alert-info alert-dismissible fade show text-center" role="alert">

@@ -75,13 +75,14 @@
                 @foreach ($latestProducts as $product)
                     <div class="product-default inner-quickview inner-icon">
                         <figure>
-                            <a href="demo42-product.html">
+                            <a href="/products/{{ $product->slug }}">
                                 <img src="{{ $product->images[0]->name }}" width="300" height="300"
                                     alt="{{ $product->title }}">
                             </a>
                             <div class="btn-icon-group">
-                                <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
-                                        class="icon-shopping-cart"></i></a>
+                                <a href="#" class="btn-icon btn-add-cart product-type-simple">
+                                    <i class="icon-shopping-cart"></i>
+                                </a>
                             </div>
                             <a href="ajax/product-quick-view.html" class="btn-quickview" title="Quick View">Quick
                                 View</a>
@@ -91,11 +92,10 @@
                                 <div class="category-list">
                                     <a href="#">{{ $product->category->name }}</a>
                                 </div>
-                                <a href="wishlist.html" class="btn-icon-wish" title="wishlist"><i
-                                        class="icon-heart"></i></a>
+                                <a href="#" class="btn-icon-wish" title="wishlist"><i class="icon-heart"></i></a>
                             </div>
                             <h3 class="product-title">
-                                <a href="demo42-product.html">{{ $product->title }}</a>
+                                <a href="/products/{{ $product->slug }}">{{ $product->title }}</a>
                             </h3>
                             <div class="ratings-container">
                                 <div class="product-ratings">
@@ -389,7 +389,7 @@
                             @foreach ($brand->products as $product)
                                 <div class="product-default inner-quickview inner-icon">
                                     <figure>
-                                        <a href="demo42-product.html">
+                                        <a href="/products/{{ $product->slug }}">
                                             <img src="{{ $product->images[0]->name }}" width="300" height="300"
                                                 alt="{{ $product->title }}">
                                         </a>
@@ -406,23 +406,22 @@
                                             <div class="category-list">
                                                 <a href="#">{{ $product->category->name }}</a>
                                             </div>
-                                            <a href="wishlist.html" class="btn-icon-wish" title="wishlist"><i
+                                            <a href="#" class="btn-icon-wish" title="wishlist"><i
                                                     class="icon-heart"></i></a>
                                         </div>
                                         <h3 class="product-title">
-                                            <a href="demo42-product.html">{{ $product->title }}</a>
+                                            <a href="/products/{{ $product->slug }}">{{ $product->title }}</a>
                                         </h3>
                                         <div class="ratings-container">
                                             <div class="product-ratings">
                                                 <span class="ratings" style="width:100%"></span>
-                                                <!-- End .ratings -->
                                                 <span class="tooltiptext tooltip-top"></span>
-                                            </div><!-- End .product-ratings -->
-                                        </div><!-- End .product-container -->
+                                            </div>
+                                        </div>
                                         <div class="price-box">
                                             <span class="product-price">Rp. {{ number_format($product->price, 2) }}</span>
-                                        </div><!-- End .price-box -->
-                                    </div><!-- End .product-details -->
+                                        </div>
+                                    </div>
                                 </div>
                             @endforeach
                         </div>
@@ -499,7 +498,7 @@
             viewBox="0 0 649 578">
             <path fill="#f26100"
                 d="M-225.5,154.7l358.45,456.96c7.71,9.83,21.92,11.54,31.75,3.84l456.96-358.45c9.83-7.71,11.54-21.92,3.84-31.75
-                                                                                                                                                                                                    L267.05-231.66c-7.71-9.83-21.92-11.54-31.75-3.84l-456.96,358.45C-231.49,130.66-233.2,144.87-225.5,154.7z">
+                                                                                                                                                                                                                            L267.05-231.66c-7.71-9.83-21.92-11.54-31.75-3.84l-456.96,358.45C-231.49,130.66-233.2,144.87-225.5,154.7z">
             </path>
             <path class="appear-animate appear-animate-svg" data-animation-name="customLineAnim"
                 data-animation-delay="300" data-animation-duration="5000" fill="none" stroke="#FFF"
@@ -532,7 +531,7 @@
                 @foreach ($latestProducts as $product)
                     <div class="product-default inner-quickview inner-icon">
                         <figure>
-                            <a href="demo42-product.html">
+                            <a href="/products/{{ $product->slug }}">
                                 <img src="{{ $product->images[0]->name }}" width="300" height="300"
                                     alt="{{ $product->title }}">
                             </a>
@@ -549,11 +548,10 @@
                                 <div class="category-list">
                                     <a href="#">{{ $product->category->name }}</a>
                                 </div>
-                                <a href="wishlist.html" class="btn-icon-wish" title="wishlist"><i
-                                        class="icon-heart"></i></a>
+                                <a href="#" class="btn-icon-wish" title="wishlist"><i class="icon-heart"></i></a>
                             </div>
                             <h3 class="product-title">
-                                <a href="demo42-product.html">{{ $product->title }}</a>
+                                <a href="/products/{{ $product->slug }}">{{ $product->title }}</a>
                             </h3>
                             <div class="ratings-container">
                                 <div class="product-ratings">

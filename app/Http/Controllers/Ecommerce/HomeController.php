@@ -15,9 +15,9 @@ class HomeController extends Controller
     public function index()
     {
         $categories = Category::take(4)->orderBy('created_at')->get();
-        $latestProducts = Product::with(['images', 'category'])->where('is_active', 1)->latest()->take(6)->get();
+        $latestProducts = Product::with(['images', 'category'])->where('is_active', true)->latest()->take(6)->get();
         $productByBrand = Brand::with(['products' => function($query) {
-            return $query->where('is_active', 1);
+            return $query->where('is_active', true);
         }, 'products.images', 'products.category'])->take(5)->get();
         $sliders = Slider::all();
         $brands = Brand::all();

@@ -16,7 +16,7 @@ class Controller extends BaseController
 
     public function __construct()
     {
-        $categoriesDropdown = Category::all();
+        $categoriesDropdown = Category::take(10)->get();
         View::share('categoriesDropdown', $categoriesDropdown);
     }
 

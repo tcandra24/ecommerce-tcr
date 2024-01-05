@@ -139,6 +139,8 @@
     <script src="{{ asset('assets/ecommerce/js/jquery.appear.min.js') }}"></script>
     <script src="{{ asset('assets/ecommerce/js/jquery.plugin.min.js') }}"></script>
 
+    @yield('script')
+
     <script src="{{ asset('assets/ecommerce/js/main.min.js') }}"></script>
 </body>
 
