@@ -9,14 +9,14 @@ use App\Models\Product;
 use App\Models\Category;
 use App\Models\Brand;
 
-class CategoryController extends Controller
+class BrandController extends Controller
 {
     public function index()
     {
-        $categories = Category::paginate(12);
+        $brands = Brand::paginate(12);
 
-        return view('ecommerce.categories.index', [
-            'categories' => $categories,
+        return view('ecommerce.brands.index', [
+            'brands' => $brands,
         ]);
     }
 
@@ -25,13 +25,13 @@ class CategoryController extends Controller
         $categories = Category::withCount('products')->get();
         $brands = Brand::withCount('products')->get();
 
-        $category = Category::where('slug', $slug)->first();
+        $brand = Brand::where('slug', $slug)->first();
 
-        $products = Product::with('images', 'category')->where('is_active', true)->where('category_id', $category->id)->paginate(9);
+        $products = Product::with('images', 'category')->where('is_active', true)->where('brand_id', $brand->id)->paginate(9);
         $latestProducts = Product::with(['images', 'category'])->where('is_active', true)->latest()->take(3)->get();
 
-        return view('ecommerce.categories.detail', [
-            'title' => $category->name,
+        return view('ecommerce.brands.detail', [
+            'title' => $brand->name,
             'products' => $products,
             'latestProducts' => $latestProducts,
             'categories' => $categories,

@@ -22,7 +22,7 @@ class AuthController extends Controller
 
         try {
             $credentials = $request->only('email', 'password');
-            if (!Auth::attempt($credentials, $request->remember)) {
+            if (!Auth::guard('admin')->attempt($credentials, $request->remember)) {
                 throw new \Exception('Login Failed, Username/Password wrong');
             }
 
@@ -35,7 +35,7 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
-        Auth::logout();
+        Auth::guard('admin')->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 

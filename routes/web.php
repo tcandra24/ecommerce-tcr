@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::prefix('admin')->group(function() {
-    Route::group(['middleware' => ['guest']], function () {
+    Route::group(['middleware' => ['guest:admin']], function () {
         Route::get('/', function(){
           return redirect('/admin/login');
         });
@@ -22,7 +22,7 @@ Route::prefix('admin')->group(function() {
         Route::post('/login', [App\Http\Controllers\Admin\AuthController::class, 'login']);
     });
 
-    Route::group(['middleware' => ['auth']], function () {
+    Route::group(['middleware' => ['auth:admin']], function () {
         Route::get('/dashboard', [ App\Http\Controllers\Admin\DashboardController::class, 'index' , ['as' => 'admin'] ]);
 
         Route::resource('/categories', App\Http\Controllers\Admin\CategoryController::class)
@@ -63,4 +63,9 @@ Route::prefix('products')->group(function() {
 Route::prefix('categories')->group(function() {
     Route::get('/', [App\Http\Controllers\Ecommerce\CategoryController::class, 'index']);
     Route::get('/{slug}', [App\Http\Controllers\Ecommerce\CategoryController::class, 'detail']);
+});
+
+Route::prefix('brands')->group(function() {
+    Route::get('/', [App\Http\Controllers\Ecommerce\BrandController::class, 'index']);
+    Route::get('/{slug}', [App\Http\Controllers\Ecommerce\BrandController::class, 'detail']);
 });

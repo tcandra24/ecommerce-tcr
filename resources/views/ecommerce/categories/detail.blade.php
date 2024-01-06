@@ -12,15 +12,21 @@
     <div class="container">
         <nav aria-label="breadcrumb" class="breadcrumb-nav">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">
-                        <i class="icon-home"></i></a>
+                <li class="breadcrumb-item">
+                    <a href="/">
+                        <i class="icon-home"></i>
+                    </a>
                 </li>
-                <li class="breadcrumb-item active" aria-current="page">Category</li>
+                <li class="breadcrumb-item" aria-current="page">Category</li>
+                <li class="breadcrumb-item active">{{ $title }}</li>
             </ol>
         </nav>
 
         <div class="row">
             <div class="col-lg-9 main-content">
+                <h2 class="title title-underline pb-1 appear-animate" data-animation-name="fadeInLeftShorter">
+                    {{ $title }}
+                </h2>
                 <nav class="toolbox sticky-header" data-sticky-options="{'mobile': true}">
                     <div class="toolbox-left">
                         <a href="#" class="sidebar-toggle">
@@ -79,7 +85,8 @@
                                 <div class="product-details">
                                     <div class="category-wrap">
                                         <div class="category-list">
-                                            <a href="#">{{ $product->category->name }}</a>
+                                            <a
+                                                href="/categories/{{ $product->category->slug }}">{{ $product->category->name }}</a>
                                         </div>
                                         <a href="wishlist.html" class="btn-icon-wish"><i class="icon-heart"></i></a>
                                     </div>
@@ -122,7 +129,7 @@
                                 <ul class="cat-list">
                                     @foreach ($categories as $category)
                                         <li>
-                                            <a href="#">{{ $category->name }}</a><span
+                                            <a href="/categories/{{ $category->slug }}">{{ $category->name }}</a><span
                                                 class="products-count">({{ $category->products_count }})</span>
                                         </li>
                                     @endforeach
@@ -142,7 +149,7 @@
                                 <ul class="cat-list">
                                     @foreach ($brands as $brand)
                                         <li>
-                                            <a href="#">{{ $brand->name }}</a><span
+                                            <a href="/brands/{{ $brand->slug }}">{{ $brand->name }}</a><span
                                                 class="products-count">({{ $brand->products_count }})</span>
                                         </li>
                                     @endforeach

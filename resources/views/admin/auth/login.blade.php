@@ -13,7 +13,7 @@
         <div class="form-group mb-3">
             <label>Email</label>
             <div class="input-group">
-                <input name="email" type="email" class="form-control form-control-lg" />
+                <input name="email" type="email" class="form-control" />
                 <span class="input-group-text">
                     <i class="bx bx-user text-4"></i>
                 </span>
@@ -24,7 +24,7 @@
                 <label class="float-start">Password</label>
             </div>
             <div class="input-group">
-                <input name="password" type="password" class="form-control form-control-lg" />
+                <input name="password" type="password" class="form-control" />
                 <span class="input-group-text">
                     <i class="bx bx-lock text-4"></i>
                 </span>

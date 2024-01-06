@@ -77,13 +77,15 @@
                         <li>
                             CATEGORY:
                             <strong>
-                                <a href="#" class="product-category">{{ $product->category->name }}</a>
+                                <a href="/categories/{{ $product->category->slug }}"
+                                    class="product-category">{{ $product->category->name }}</a>
                             </strong>
                         </li>
                         <li>
                             BRAND:
                             <strong>
-                                <a href="#" class="product-brand">{{ $product->brand->name }}</a>
+                                <a href="/brands/{{ $product->brand->slug }}"
+                                    class="product-brand">{{ $product->brand->name }}</a>
                             </strong>
                         </li>
 
@@ -207,113 +209,55 @@
                                 </div>
                             </div>
                         </div>
-
-                        <div class="divider"></div>
-
-                        <div class="add-product-review">
-                            <h3 class="review-title">Add a review</h3>
-
-                            <form action="#" class="comment-form m-0">
-                                <div class="rating-form">
-                                    <label for="rating">Your rating <span class="required">*</span></label>
-                                    <span class="rating-stars">
-                                        <a class="star-1" href="#">1</a>
-                                        <a class="star-2" href="#">2</a>
-                                        <a class="star-3" href="#">3</a>
-                                        <a class="star-4" href="#">4</a>
-                                        <a class="star-5" href="#">5</a>
-                                    </span>
-
-                                    <select name="rating" id="rating" required="" style="display: none;">
-                                        <option value="">Rate…</option>
-                                        <option value="5">Perfect</option>
-                                        <option value="4">Good</option>
-                                        <option value="3">Average</option>
-                                        <option value="2">Not that bad</option>
-                                        <option value="1">Very poor</option>
-                                    </select>
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Your review <span class="required">*</span></label>
-                                    <textarea cols="5" rows="6" class="form-control form-control-sm"></textarea>
-                                </div>
-
-
-                                <div class="row">
-                                    <div class="col-md-6 col-xl-12">
-                                        <div class="form-group">
-                                            <label>Name <span class="required">*</span></label>
-                                            <input type="text" class="form-control form-control-sm" required>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6 col-xl-12">
-                                        <div class="form-group">
-                                            <label>Email <span class="required">*</span></label>
-                                            <input type="text" class="form-control form-control-sm" required>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-12">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="save-name" />
-                                            <label class="custom-control-label mb-0" for="save-name">Save my
-                                                name, email, and website in this browser for the next time I
-                                                comment.</label>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <input type="submit" class="btn btn-primary" value="Submit">
-                            </form>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="products-section pt-0">
-            <h2 class="section-title">Related Products</h2>
+        @if (count($relateProduct) > 0)
+            <div class="products-section pt-0">
+                <h2 class="section-title">Related Products</h2>
 
-            <div class="products-slider owl-carousel owl-theme dots-top dots-small dots-simple">
-                @foreach ($relateProduct as $product)
-                    <div class="product-default inner-quickview inner-icon">
-                        <figure>
-                            <a href="/products/{{ $product->slug }}">
-                                <img src="{{ $product->images[0]->name }}" width="300" height="300"
-                                    alt="{{ $product->slug }}">
-                            </a>
-                            <div class="btn-icon-group">
-                                <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
-                                        class="icon-shopping-cart"></i></a>
-                            </div>
-                            <a href="ajax/product-quick-view.html" class="btn-quickview" title="Quick View">Quick
-                                View</a>
-                        </figure>
-                        <div class="product-details">
-                            <div class="category-wrap">
-                                <div class="category-list">
-                                    <a href="#">{{ $product->category->name }}</a>
+                <div class="products-slider owl-carousel owl-theme dots-top dots-small dots-simple">
+                    @foreach ($relateProduct as $product)
+                        <div class="product-default inner-quickview inner-icon">
+                            <figure>
+                                <a href="/products/{{ $product->slug }}">
+                                    <img src="{{ $product->images[0]->name }}" width="300" height="300"
+                                        alt="{{ $product->slug }}">
+                                </a>
+                                <div class="btn-icon-group">
+                                    <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
+                                            class="icon-shopping-cart"></i></a>
                                 </div>
-                                <a href="wishlist.html" class="btn-icon-wish"><i class="icon-heart"></i></a>
-                            </div>
-                            <h3 class="product-title">
-                                <a href="/products/{{ $product->slug }}">{{ $product->title }}</a>
-                            </h3>
-                            <div class="ratings-container">
-                                <div class="product-ratings">
-                                    <span class="ratings" style="width:80%"></span>
-                                    <span class="tooltiptext tooltip-top"></span>
+                                <a href="ajax/product-quick-view.html" class="btn-quickview" title="Quick View">Quick
+                                    View</a>
+                            </figure>
+                            <div class="product-details">
+                                <div class="category-wrap">
+                                    <div class="category-list">
+                                        <a
+                                            href="/categories/{{ $product->category->slug }}">{{ $product->category->name }}</a>
+                                    </div>
+                                    <a href="wishlist.html" class="btn-icon-wish"><i class="icon-heart"></i></a>
                                 </div>
-                            </div>
-                            <div class="price-box">
-                                <span class="product-price">Rp. {{ number_format($product->price, 2) }}</span>
+                                <h3 class="product-title">
+                                    <a href="/products/{{ $product->slug }}">{{ $product->title }}</a>
+                                </h3>
+                                <div class="ratings-container">
+                                    <div class="product-ratings">
+                                        <span class="ratings" style="width:80%"></span>
+                                        <span class="tooltiptext tooltip-top"></span>
+                                    </div>
+                                </div>
+                                <div class="price-box">
+                                    <span class="product-price">Rp. {{ number_format($product->price, 2) }}</span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                @endforeach
+                    @endforeach
+                </div>
             </div>
-        </div>
+        @endif
     </div>
 @endsection

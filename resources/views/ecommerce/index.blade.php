@@ -16,7 +16,7 @@
     <section class="category-section container">
         <div class="d-lg-flex align-items-center appear-animate" data-animation-name="fadeInLeftShorter">
             <h2 class="title title-underline divider">Categories</h2>
-            <a href="#" class="sicon-title">VIEW CATEGORIES<i class="fas fa-arrow-right"></i></a>
+            <a href="/categories" class="sicon-title">VIEW CATEGORIES<i class="fas fa-arrow-right"></i></a>
         </div>
         <div class="owl-carousel owl-theme appear-animate"
             data-owl-options="{
@@ -37,7 +37,7 @@
             }">
             @foreach ($categories as $category)
                 <div class="product-category">
-                    <a href="#">
+                    <a href="/categories/{{ $category->slug }}">
                         <figure class="category-custom">
                             <img src="{{ $category->image }}" alt="category" width="250" height="250">
                         </figure>
@@ -90,7 +90,7 @@
                         <div class="product-details">
                             <div class="category-wrap">
                                 <div class="category-list">
-                                    <a href="#">{{ $product->category->name }}</a>
+                                    <a href="/categories/{{ $product->category->slug }}">{{ $product->category->name }}</a>
                                 </div>
                                 <a href="#" class="btn-icon-wish" title="wishlist"><i class="icon-heart"></i></a>
                             </div>
@@ -404,7 +404,8 @@
                                     <div class="product-details">
                                         <div class="category-wrap">
                                             <div class="category-list">
-                                                <a href="#">{{ $product->category->name }}</a>
+                                                <a
+                                                    href="/categories/{{ $product->category->slug }}">{{ $product->category->name }}</a>
                                             </div>
                                             <a href="#" class="btn-icon-wish" title="wishlist"><i
                                                     class="icon-heart"></i></a>
@@ -432,8 +433,10 @@
     </section>
     <section class="brand-section">
         <div class="container">
-            <h2 class="title title-underline pb-1 appear-animate" data-animation-name="fadeInLeftShorter">
-                All Brand</h2>
+            <div class="d-lg-flex align-items-center appear-animate" data-animation-name="fadeInLeftShorter">
+                <h2 class="title title-underline divider">Brands</h2>
+                <a href="/brands" class="sicon-title">VIEW BRANDS<i class="fas fa-arrow-right"></i></a>
+            </div>
 
             <div class="brands-slider owl-carousel owl-theme mb-4 appear-animate owl-loaded owl-drag animated fadeIn appear-animation-visible"
                 data-owl-options="{
@@ -456,7 +459,7 @@
                         style="transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 1241px;">
                         @foreach ($brands as $brand)
                             <div class="owl-item active" style="width: 206.667px;">
-                                <a href="#">
+                                <a href="/brands/{{ $brand->slug }}">
                                     <img src="{{ $brand->image }}" alt="{{ $brand->name }}" width="140"
                                         height="60">
                                 </a>
@@ -496,9 +499,8 @@
         <svg class="custom-svg-3 appear-animate" data-animation-name="fadeIn" version="1.1"
             xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
             viewBox="0 0 649 578">
-            <path fill="#f26100"
-                d="M-225.5,154.7l358.45,456.96c7.71,9.83,21.92,11.54,31.75,3.84l456.96-358.45c9.83-7.71,11.54-21.92,3.84-31.75
-                                                                                                                                                                                                                            L267.05-231.66c-7.71-9.83-21.92-11.54-31.75-3.84l-456.96,358.45C-231.49,130.66-233.2,144.87-225.5,154.7z">
+            <path fill="#de0027"
+                d="M-225.5,154.7l358.45,456.96c7.71,9.83,21.92,11.54,31.75,3.84l456.96-358.45c9.83-7.71,11.54-21.92,3.84-31.75                                                                                                                                                                                                                              L267.05-231.66c-7.71-9.83-21.92-11.54-31.75-3.84l-456.96,358.45C-231.49,130.66-233.2,144.87-225.5,154.7z">
             </path>
             <path class="appear-animate appear-animate-svg" data-animation-name="customLineAnim"
                 data-animation-delay="300" data-animation-duration="5000" fill="none" stroke="#FFF"
@@ -546,7 +548,8 @@
                         <div class="product-details">
                             <div class="category-wrap">
                                 <div class="category-list">
-                                    <a href="#">{{ $product->category->name }}</a>
+                                    <a
+                                        href="/categories/{{ $product->category->slug }}">{{ $product->category->name }}</a>
                                 </div>
                                 <a href="#" class="btn-icon-wish" title="wishlist"><i class="icon-heart"></i></a>
                             </div>

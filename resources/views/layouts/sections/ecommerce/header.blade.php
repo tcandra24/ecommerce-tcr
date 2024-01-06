@@ -49,8 +49,8 @@
                     <i class="fas fa-bars"></i>
                 </button>
                 <a href="/" class="logo">
-                    <img src="{{ asset('assets/admin/img/logo.png') }}" class="w-100" style="filter: brightness(0.3);"
-                        width="202" height="80" alt="Porto Logo">
+                    <img src="{{ asset('assets/admin/img/logo.png') }}" class="w-100" width="202" height="80"
+                        alt="Porto Logo">
                 </a>
             </div>
 
@@ -76,7 +76,7 @@
                     </div>
                     <div class="sicon-header">
                         <h4 class="sicon-title ls-n-25">CALL US NOW</h4>
-                        <p>+123 5678 890</p>
+                        <p>0852-6000-0816</p>
                     </div>
                 </div>
 
@@ -87,7 +87,7 @@
                         <i class="icon-user-2"></i>
                         <div class="header-userinfo">
                             <span>Welcome</span>
-                            <h4>Sign In / Register</h4>
+                            <h4>Log In</h4>
                         </div>
                     </div>
                 </a>
@@ -207,7 +207,7 @@
                         </a>
                         <div class="menu-depart">
                             @foreach ($categoriesDropdown as $category)
-                                <a href="#">
+                                <a href="/categories/{{ $category->slug }}">
                                     {{ $category->name }}
                                 </a>
                             @endforeach
@@ -217,37 +217,21 @@
                         <a href="/">Home</a>
                     </li>
                     <li>
-                        <a href="demo42-product.html">Products</a>
+                        <a href="/products">Products</a>
                         <div class="megamenu megamenu-fixed-width">
                             <div class="row">
-                                <div class="col-lg-4">
-                                    <a href="#" class="nolink">PRODUCT PAGES</a>
-                                    <ul class="submenu">
-                                        <li><a href="product.html">SIMPLE PRODUCT</a></li>
-                                        <li><a href="product-variable.html">VARIABLE PRODUCT</a></li>
-                                        <li><a href="product.html">SALE PRODUCT</a></li>
-                                        <li><a href="product.html">FEATURED & ON SALE</a></li>
-                                        <li><a href="product-custom-tab.html">WITH CUSTOM TAB</a></li>
-                                        <li><a href="product-sidebar-left.html">WITH LEFT SIDEBAR</a></li>
-                                        <li><a href="product-sidebar-right.html">WITH RIGHT SIDEBAR</a></li>
-                                        <li><a href="product-addcart-sticky.html">ADD CART STICKY</a></li>
-                                    </ul>
-                                </div>
-
-                                <div class="col-lg-4">
-                                    <a href="#" class="nolink">PRODUCT LAYOUTS</a>
-                                    <ul class="submenu">
-                                        <li><a href="product-extended-layout.html">EXTENDED LAYOUT</a></li>
-                                        <li><a href="product-grid-layout.html">GRID IMAGE</a></li>
-                                        <li><a href="product-full-width.html">FULL WIDTH LAYOUT</a></li>
-                                        <li><a href="product-sticky-info.html">STICKY INFO</a></li>
-                                        <li><a href="product-sticky-both.html">LEFT & RIGHT STICKY</a></li>
-                                        <li><a href="product-transparent-image.html">TRANSPARENT IMAGE</a>
-                                        </li>
-                                        <li><a href="product-center-vertical.html">CENTER VERTICAL</a></li>
-                                        <li><a href="#">BUILD YOUR OWN</a></li>
-                                    </ul>
-                                </div>
+                                @foreach ($productPerCategoryMenuHeader as $category)
+                                    <div class="col-lg-4">
+                                        <a href="/categories/{{ $category->slug }}"
+                                            class="nolink">{{ $category->name }}</a>
+                                        <ul class="submenu">
+                                            @foreach ($category->products as $product)
+                                                <li><a href="/products/{{ $product->slug }}">{{ $product->title }}</a>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endforeach
 
                                 <div class="col-lg-4 p-0">
                                     <div class="menu-banner menu-banner-2">
@@ -262,7 +246,7 @@
                                                 <b class="">50%</b>
                                             </h4>
                                         </div>
-                                        <a href="demo42-shop.html" class="btn btn-sm btn-dark">SHOP NOW</a>
+                                        <a href="/products" class="btn btn-sm btn-dark">SHOP NOW</a>
                                     </div>
                                 </div>
                             </div>

@@ -1,7 +1,7 @@
 @extends('layouts.ecommerce')
 
 @section('title')
-    Products
+    Brands
 @endsection
 
 @section('scripts')
@@ -13,14 +13,20 @@
         <nav aria-label="breadcrumb" class="breadcrumb-nav">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
-                    <a href="/"><i class="icon-home"></i></a>
+                    <a href="/">
+                        <i class="icon-home"></i>
+                    </a>
                 </li>
-                <li class="breadcrumb-item active" aria-current="page">Products</li>
+                <li class="breadcrumb-item" aria-current="page">Brands</li>
+                <li class="breadcrumb-item active">{{ $title }}</li>
             </ol>
         </nav>
 
         <div class="row">
             <div class="col-lg-9 main-content">
+                <h2 class="title title-underline pb-1 appear-animate" data-animation-name="fadeInLeftShorter">
+                    {{ $title }}
+                </h2>
                 <nav class="toolbox sticky-header" data-sticky-options="{'mobile': true}">
                     <div class="toolbox-left">
                         <a href="#" class="sidebar-toggle">
@@ -82,12 +88,10 @@
                                             <a
                                                 href="/categories/{{ $product->category->slug }}">{{ $product->category->name }}</a>
                                         </div>
-                                        <a href="wishlist.html" class="btn-icon-wish">
-                                            <i class="icon-heart"></i>
-                                        </a>
+                                        <a href="wishlist.html" class="btn-icon-wish"><i class="icon-heart"></i></a>
                                     </div>
                                     <h3 class="product-title">
-                                        <a href="/products/{{ $product->slug }}">{{ $product->title }}</a>
+                                        <a href="#">{{ $product->title }}</a>
                                     </h3>
                                     <div class="ratings-container">
                                         <div class="product-ratings">

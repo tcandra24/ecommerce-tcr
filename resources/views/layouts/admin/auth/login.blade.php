@@ -28,8 +28,7 @@
     <section class="body-sign">
         <div class="center-sign">
             <a href="#" class="logo float-start">
-                <img class="logo-login" src="{{ asset('assets/admin/img/logo.png') }}" height="70"
-                    alt="Fuboru Ecommerce" />
+                <img src="{{ asset('assets/admin/img/logo.png') }}" height="70" alt="Fuboru Ecommerce" />
             </a>
             <div class="panel card-sign">
                 <div class="card-title-sign mt-3 text-end">

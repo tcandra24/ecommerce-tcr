@@ -18,6 +18,12 @@ class Controller extends BaseController
     {
         $categoriesDropdown = Category::take(10)->get();
         View::share('categoriesDropdown', $categoriesDropdown);
+
+        $productPerCategoryMenuHeader = Category::with('products')->take(2)->get();
+        $productPerCategoryMenuHeader = $productPerCategoryMenuHeader->map(function($product){
+            return $product->setRelation('products', $product->products->take(5));
+        });
+        View::share('productPerCategoryMenuHeader', $productPerCategoryMenuHeader);
     }
 
 }
