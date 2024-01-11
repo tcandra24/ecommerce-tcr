@@ -4,15 +4,69 @@
     Product {{ $product->title }}
 @endsection
 
+@section('scripts')
+    <script>
+        $('.add-cart').on('click', function() {
+            const product_slug = $('#slug-product').val()
+            const qty = $('#qty-product').val()
+
+            $.ajax({
+                url: '/carts',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="token"]').attr('content')
+                },
+                type: 'POST',
+                data: {
+                    slug: product_slug,
+                    qty,
+                },
+                beforeSend: function() {
+                    $('.add-cart').text('Loading....')
+                    $('.add-cart').attr('disabled', true)
+                },
+                success: function({
+                    success,
+                    carts,
+                    message
+                }) {
+                    $('.add-cart').text('Add to Cart')
+                    $('.add-cart').attr('disabled', false)
+
+                    if (success) {
+
+
+                        $('.add-cart').hasClass("disabled") ||
+                            ($('.add-cart').addClass(
+                                    "added-to-cart"
+                                ),
+                                $('.view-cart').removeClass("d-none"),
+                                $('.cart-message').removeClass(
+                                    "d-none"
+                                ));
+                        cart_items = carts
+                        renderCart(cart_items)
+                    }
+                },
+                error: function(xhr) {
+                    $('.add-cart').text('Add to Cart')
+                    $('.add-cart').attr('disabled', false)
+                    console.log(xhr)
+                }
+            })
+        })
+    </script>
+@endsection
+
 @section('main')
     <div class="container">
         <nav aria-label="breadcrumb" class="breadcrumb-nav">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/"><i class="icon-home"></i></a></li>
                 <li class="breadcrumb-item"><a href="/products">Products</a></li>
-                <li class="breadcrumb-item"><a
-                        href="/categories/{{ $product->category->slug }}">{{ $product->category->name }}</a></li>
-                <li class="breadcrumb-item active">{{ $product->title }}</li>
+                <li class="breadcrumb-item">
+                    <a href="/categories/{{ $product->category->slug }}">{{ $product->category->name }}</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">{{ $product->title }}</li>
             </ol>
         </nav>
 
@@ -94,13 +148,19 @@
                     <div class="product-action">
 
                         <div class="product-single-qty">
-                            <input class="horizontal-quantity form-control" type="text">
+                            <input class="horizontal-quantity form-control" id="qty-product" type="text">
+                            <input type="hidden" name="slug" id="slug-product" value="{{ $product->slug }}">
                         </div>
 
-                        <a href="javascript:;" class="btn btn-dark add-cart mr-2" title="Add to Cart">Add to
-                            Cart</a>
+                        @if (Auth::guard('customer')->check())
+                            <button class="btn btn-dark add-cart mr-2" title="Add to Cart">
+                                Add to Cart
+                            </button>
+                        @else
+                            <a href="/login" class="btn btn-dark mr-2" title="Add to Cart">Add to Cart</a>
+                        @endif
 
-                        <a href="#" class="btn btn-gray view-cart d-none">View cart</a>
+                        <a href="/carts" class="btn btn-gray view-cart d-none">View cart</a>
                     </div>
 
                     <hr class="divider mb-0 mt-0">
@@ -251,7 +311,8 @@
                                     </div>
                                 </div>
                                 <div class="price-box">
-                                    <span class="product-price">Rp. {{ number_format($product->price, 2) }}</span>
+                                    <span class="product-price">Rp.
+                                        {{ number_format($product->price, 2) }}</span>
                                 </div>
                             </div>
                         </div>

@@ -4,6 +4,10 @@
     Homepage
 @endsection
 
+@section('scripts')
+    {{--  --}}
+@endsection
+
 @section('main')
     <div class="intro-slider slide-animate owl-carousel owl-theme show-nav-hover nav-inside nav-big"
         data-owl-options="{ 'loop': false, 'dots': false, 'nav': true }">
@@ -100,14 +104,13 @@
                             <div class="ratings-container">
                                 <div class="product-ratings">
                                     <span class="ratings" style="width:0%"></span>
-                                    <!-- End .ratings -->
                                     <span class="tooltiptext tooltip-top"></span>
-                                </div><!-- End .product-ratings -->
-                            </div><!-- End .product-container -->
+                                </div>
+                            </div>
                             <div class="price-box">
                                 <span class="product-price">Rp. {{ number_format($product->price, 2) }}</span>
-                            </div><!-- End .price-box -->
-                        </div><!-- End .product-details -->
+                            </div>
+                        </div>
                     </div>
                 @endforeach
             </div>
@@ -420,7 +423,8 @@
                                             </div>
                                         </div>
                                         <div class="price-box">
-                                            <span class="product-price">Rp. {{ number_format($product->price, 2) }}</span>
+                                            <span class="product-price">Rp.
+                                                {{ number_format($product->price, 2) }}</span>
                                         </div>
                                     </div>
                                 </div>

@@ -12,6 +12,7 @@
     <meta name="keywords" content="Ecommerce TCR" />
     <meta name="description" content="Ecommerce TCR">
     <meta name="author" content="Fuboru">
+    <meta name="token" content="{{ csrf_token() }}">
 
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="{{ asset('assets/ecommerce/images/favicon.png') }}">
@@ -38,6 +39,7 @@
     </script>
 
     <link rel="stylesheet" href="{{ asset('assets/ecommerce/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/ecommerce/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/ecommerce/css/base-style.min.css') }}">
     <link rel="stylesheet" type="text/css"
         href="{{ asset('assets/ecommerce/vendor/fontawesome-free/css/all.min.css') }}">
@@ -67,12 +69,12 @@
 
     <div class="sticky-navbar">
         <div class="sticky-info">
-            <a href="demo42.html">
+            <a href="/">
                 <i class="icon-home"></i>Home
             </a>
         </div>
         <div class="sticky-info">
-            <a href="demo42-shop.html" class="">
+            <a href="/categories" class="">
                 <i class="icon-bars"></i>Categories
             </a>
         </div>
@@ -83,14 +85,15 @@
         </div>
         <div class="sticky-info">
             <a href="login.html" class="">
-                <i class="icon-user-2"></i>Account
+                <i class="icon-user-2"></i>My Account
             </a>
         </div>
         <div class="sticky-info">
-            <a href="cart.html" class="">
-                <i class="icon-shopping-cart position-relative">
-                    <span class="cart-count badge-circle">3</span>
-                </i>Cart
+            <a href="/carts" class="">
+                <i class="icon-shopping-cart position-relative" id="cart-badge-mobile">
+
+                </i>
+                Cart
             </a>
         </div>
     </div>
@@ -268,6 +271,10 @@
 
     <a id="scroll-top" href="#top" title="Top" role="button"><i class="icon-angle-up"></i></a>
 
+    <form method="POST" id="form-logout-ecommerce" action="/logout" style="display: none;">
+        @csrf
+    </form>
+
     {{-- <script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script> --}}
     <script src="{{ asset('assets/ecommerce/js/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/ecommerce/js/bootstrap.bundle.min.js') }}"></script>
@@ -275,10 +282,105 @@
     <script src="{{ asset('assets/ecommerce/js/plugins.min.js') }}"></script>
     <script src="{{ asset('assets/ecommerce/js/jquery.appear.min.js') }}"></script>
     <script src="{{ asset('assets/ecommerce/js/jquery.plugin.min.js') }}"></script>
+    @if (Auth::guard('customer')->check())
+        <script>
+            let cart_items = []
 
-    @yield('script')
+            function templateCart(object) {
+                return `
+                <div class="product">
+                    <div class="product-details">
+                        <h4 class="product-title">
+                            <a href="products/${ object.product.slug }">
+                                ${ object.product.title }
+                            </a>
+                        </h4>
+
+                        <span class="cart-product-info">
+                            <span class="cart-product-qty">${ object.qty }</span>
+                            × Rp. ${ object.price.toFixed(2).replace(/(\d)(?=(\d{3})+(\.(\d){0,2})*$)/g, '$1,') }
+                        </span>
+                    </div>
+
+                    <figure class="product-image-container">
+                        <a href="products/${ object.product.slug }"
+                            class="product-image">
+                            <img src="${ object.product.images[0].name }"
+                                alt="product" width="80" height="80">
+                        </a>
+                        <a href="#" class="btn-remove"
+                            title="Remove Product"><span>×</span></a>
+                    </figure>
+                </div>
+            `
+            }
+
+            function renderCart(carts) {
+                if (carts.length > 0) {
+                    let concatStringTepmlate = '';
+                    for (cart of carts) {
+                        concatStringTepmlate += templateCart(cart)
+                    }
+
+                    const total_cart = carts.reduce((accumulator, item) => accumulator + item.total, 0)
+
+                    $('#cart-badge').html(`
+                        <i class="icon-cart-thick"></i>
+                        <span class="cart-count badge-circle">${cart_items.length}</span>`)
+                    $('#cart-badge-mobile').html(`
+                        <span class="cart-count badge-circle">${cart_items.length}</span>`)
+                    $('#side-subtotal-cart').text(
+                        `Rp ${total_cart.toFixed(2).replace(/(\d)(?=(\d{3})+(\.(\d){0,2})*$)/g, '$1,')}`)
+
+
+                    $('#header-carts').html(concatStringTepmlate)
+                } else {
+                    $('#cart-badge').html(`
+                        <i class="icon-cart-thick"></i>`)
+                    $('#cart-badge-mobile').html()
+                    $('#side-subtotal-cart').text(`Rp 0,00`)
+
+                    $('#header-carts').html(`
+                    <div class="alert alert-rounded alert-info">
+                        <i class="fas fa-info-circle" style="color: #67cce0;"></i>
+                        <span><strong>Information!</strong> Cart Empty</span>
+                    </div>`)
+                }
+
+            }
+
+            $(document).ready(function() {
+                $.ajax({
+                    url: '/cart-simple',
+                    type: 'GET',
+                    success: function({
+                        success,
+                        carts
+                    }) {
+                        cart_items = carts
+                        renderCart(cart_items)
+                    },
+                    error: function({
+                        success,
+                        message
+                    }) {
+                        console.log(message)
+                    }
+                })
+            })
+        </script>
+    @endif
+
+    @yield('scripts')
 
     <script src="{{ asset('assets/ecommerce/js/main.min.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            $('.logout-btn').on('click', function() {
+                $("#form-logout-ecommerce").submit();
+            })
+        })
+    </script>
 </body>
 
 </html>

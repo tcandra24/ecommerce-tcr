@@ -38,11 +38,8 @@
                             </li>
                         </ul>
                         <div class="social-icons">
-                            <a href="#" class="social-icon social-facebook icon-facebook" target="_blank"
-                                title="Facebook"></a>
-                            <a href="#" class="social-icon social-twitter icon-twitter" target="_blank"
-                                title="Twitter"></a>
-                            <a href="#" class="social-icon social-instagram fab fa-instagram" target="_blank"
+                            <a href="https://www.instagram.com/tcr_distribution?igsh=ZjlidmZ2NXpyb2xn"
+                                class="social-icon social-instagram fab fa-instagram" target="_blank"
                                 title="Instagram"></a>
                         </div>
                     </div>

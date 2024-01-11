@@ -5,7 +5,7 @@
 @endsection
 
 @section('scripts')
-    <script src="{{ asset('assets/ecommerce/js/nouislider.min.js') }}"></script>
+    {{--  --}}
 @endsection
 
 @section('main')

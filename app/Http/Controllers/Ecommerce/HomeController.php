@@ -4,11 +4,14 @@ namespace App\Http\Controllers\Ecommerce;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\View;
 
 use App\Models\Category;
 use App\Models\Slider;
 use App\Models\Product;
 use App\Models\Brand;
+use App\Models\Cart;
 
 class HomeController extends Controller
 {

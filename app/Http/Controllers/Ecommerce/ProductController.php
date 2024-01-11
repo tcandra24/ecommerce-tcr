@@ -13,9 +13,16 @@ class ProductController extends Controller
 {
     public function index()
     {
+        $products = Product::with('images', 'category')->where('is_active', true)
+        ->when(request()->q, function($products){
+            $products = $products->where('title', 'like', '%' . request()->q . '%');
+        })
+        ->when(request()->price_start || request()->price_end, function($products){
+            $products = $products->whereBetween('price', [request()->price_start, request()->price_end]);
+        })->paginate(9);
+
         $categories = Category::withCount('products')->get();
         $brands = Brand::withCount('products')->get();
-        $products = Product::with('images', 'category')->where('is_active', true)->paginate(9);
         $latestProducts = Product::with(['images', 'category'])->where('is_active', true)->latest()->take(3)->get();
 
         return view('ecommerce.products.index', [
@@ -36,4 +43,9 @@ class ProductController extends Controller
             'relateProduct' => $relateProduct
         ]);
     }
+
+    // public function search($q)
+    // {
+    //     $products = Product::with('images', 'category')->where('title', 'LIKE', '%' . $q . '%')->get();
+    // }
 }

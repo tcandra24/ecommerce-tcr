@@ -5,7 +5,7 @@
 @endsection
 
 @section('scripts')
-    <script src="{{ asset('assets/ecommerce/js/nouislider.min.js') }}"></script>
+    {{--  --}}
 @endsection
 
 @section('main')
@@ -69,7 +69,7 @@
                                     </a>
                                 </figure>
                                 <div class="product-details">
-                                    <h3 class="product-title text-center">
+                                    <h3 class="product-title text-center col-12">
                                         <a href="/categories/{{ $category->slug }}">{{ $category->name }}</a>
                                     </h3>
                                 </div>
@@ -80,7 +80,6 @@
                 </div>
                 <nav class="toolbox toolbox-pagination">
                     <div class="toolbox-item toolbox-show"></div>
-                    <!-- End .toolbox-item -->
                     {{ $categories->links('layouts.sections.ecommerce.pagination') }}
                 </nav>
             </div>

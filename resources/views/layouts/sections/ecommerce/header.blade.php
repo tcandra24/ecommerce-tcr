@@ -26,17 +26,18 @@
                     <li class="menu-item menu-item-type-post_type menu-item-object-page narrow">
                         <a href="#"><i class="icon-wishlist-2"></i>Wishlist</a>
                     </li>
+                    @if (Auth::guard('customer')->check())
+                        <li class="menu-item menu-item-type-post_type menu-item-object-page narrow">
+                            <a href="#" class="logout-btn"></i>Log Out</a>
+                        </li>
+                    @endif
                 </ul>
 
                 <span class="separator d-none d-md-block mr-0 ml-4"></span>
 
                 <div class="social-icons">
-                    <a href="#" class="social-icon social-facebook icon-facebook" target="_blank"
-                        title="facebook"></a>
-                    <a href="#" class="social-icon social-twitter icon-twitter" target="_blank"
-                        title="twitter"></a>
-                    <a href="#" class="social-icon social-instagram icon-instagram mr-0" target="_blank"
-                        title="instagram"></a>
+                    <a href="https://www.instagram.com/tcr_distribution?igsh=ZjlidmZ2NXpyb2xn"
+                        class="social-icon social-instagram icon-instagram mr-0" target="_blank" title="instagram"></a>
                 </div>
             </div>
         </div>
@@ -58,7 +59,7 @@
                 <div
                     class="header-icon header-search header-search-inline header-search-category w-lg-max text-right mb-0">
                     <a href="#" class="search-toggle" role="button"><i class="icon-search-3"></i></a>
-                    <form action="#" method="get">
+                    <form action="/products" method="GET">
                         <div class="header-search-wrapper">
                             <input type="search" class="form-control" name="q" id="q"
                                 placeholder="Search..." required>
@@ -82,116 +83,67 @@
 
                 <span class="separator d-none d-lg-block mr-4"></span>
 
-                <a href="login.html" class="d-lg-block d-none">
-                    <div class="header-user">
-                        <i class="icon-user-2"></i>
-                        <div class="header-userinfo">
-                            <span>Welcome</span>
-                            <h4>Log In</h4>
+                @if (Auth::guard('customer')->check())
+                    <a href="#" class="d-lg-block d-none">
+                        <div class="header-user">
+                            <i class="icon-user-2"></i>
+                            <div class="header-userinfo">
+                                <span>Welcome</span>
+                                <h4>{{ Auth::guard('customer')->user()->name }}</h4>
+                            </div>
                         </div>
-                    </div>
-                </a>
-
-                <span class="separator d-block"></span>
-
-                <div class="dropdown cart-dropdown">
-                    <a href="#" title="Cart" class="dropdown-toggle dropdown-arrow cart-toggle" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
-                        <i class="icon-cart-thick"></i>
-                        <span class="cart-count badge-circle">3</span>
                     </a>
-
-                    <div class="cart-overlay"></div>
-
-                    <div class="dropdown-menu mobile-cart">
-                        <a href="#" title="Close (Esc)" class="btn-close">×</a>
-
-                        <div class="dropdownmenu-wrapper custom-scrollbar">
-                            <div class="dropdown-cart-header">Shopping Cart</div>
-
-                            <div class="dropdown-cart-products">
-                                <div class="product">
-                                    <div class="product-details">
-                                        <h4 class="product-title">
-                                            <a href="demo42-product.html">Ultimate 3D Bluetooth Speaker</a>
-                                        </h4>
-
-                                        <span class="cart-product-info">
-                                            <span class="cart-product-qty">1</span>
-                                            × $99.00
-                                        </span>
-                                    </div>
-
-                                    <figure class="product-image-container">
-                                        <a href="demo42-product.html" class="product-image">
-                                            <img src="{{ asset('assets/ecommerce/images/products/product-1.jpg') }}"
-                                                alt="product" width="80" height="80">
-                                        </a>
-                                        <a href="#" class="btn-remove"
-                                            title="Remove Product"><span>×</span></a>
-                                    </figure>
-                                </div>
-
-                                <div class="product">
-                                    <div class="product-details">
-                                        <h4 class="product-title">
-                                            <a href="demo42-product.html">Brown Women Casual HandBag</a>
-                                        </h4>
-
-                                        <span class="cart-product-info">
-                                            <span class="cart-product-qty">1</span>
-                                            × $35.00
-                                        </span>
-                                    </div>
-
-                                    <figure class="product-image-container">
-                                        <a href="demo42-product.html" class="product-image">
-                                            <img src="{{ asset('assets/ecommerce/images/products/product-2.jpg') }}"
-                                                alt="product" width="80" height="80">
-                                        </a>
-
-                                        <a href="#" class="btn-remove"
-                                            title="Remove Product"><span>×</span></a>
-                                    </figure>
-                                </div>
-
-                                <div class="product">
-                                    <div class="product-details">
-                                        <h4 class="product-title">
-                                            <a href="demo42-product.html">Circled Ultimate 3D Speaker</a>
-                                        </h4>
-
-                                        <span class="cart-product-info">
-                                            <span class="cart-product-qty">1</span>
-                                            × $35.00
-                                        </span>
-                                    </div>
-
-                                    <figure class="product-image-container">
-                                        <a href="demo42-product.html" class="product-image">
-                                            <img src="{{ asset('assets/ecommerce/images/products/product-3.jpg') }}"
-                                                alt="product" width="80" height="80">
-                                        </a>
-                                        <a href="#" class="btn-remove"
-                                            title="Remove Product"><span>×</span></a>
-                                    </figure>
-                                </div>
+                @else
+                    <a href="/login" class="d-lg-block d-none">
+                        <div class="header-user">
+                            <i class="icon-user-2"></i>
+                            <div class="header-userinfo">
+                                <span>Welcome</span>
+                                <h4>Log In</h4>
                             </div>
+                        </div>
+                    </a>
+                @endif
 
-                            <div class="dropdown-cart-total">
-                                <span>SUBTOTAL:</span>
 
-                                <span class="cart-total-price float-right">$134.00</span>
-                            </div>
+                @if (Auth::guard('customer')->check())
+                    <span class="separator d-block"></span>
+                    <div class="dropdown cart-dropdown">
+                        <a href="#" title="Cart" class="dropdown-toggle dropdown-arrow cart-toggle"
+                            id="cart-badge" role="button" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false" data-display="static">
+                            <i class="icon-cart-thick"></i>
+                        </a>
 
-                            <div class="dropdown-cart-action">
-                                <a href="cart.html" class="btn btn-gray btn-block view-cart">View
-                                    Cart</a>
-                                <a href="checkout.html" class="btn btn-dark btn-block">Checkout</a>
+                        <div class="cart-overlay"></div>
+
+                        <div class="dropdown-menu mobile-cart">
+                            <a href="#" title="Close (Esc)" class="btn-close">×</a>
+
+                            <div class="dropdownmenu-wrapper custom-scrollbar">
+                                <div class="dropdown-cart-header">Shopping Cart</div>
+
+                                <div class="dropdown-cart-products" id="header-carts">
+                                </div>
+
+                                <div class="dropdown-cart-total">
+                                    <span>SUBTOTAL:</span>
+
+                                    <span class="cart-total-price float-right" id="side-subtotal-cart"></span>
+                                </div>
+
+                                <div class="dropdown-cart-action">
+                                    <a href="/carts" class="btn btn-gray btn-block view-cart">
+                                        View Cart
+                                    </a>
+                                    <a href="/checkout" class="btn btn-dark btn-block">
+                                        Checkout
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                @endif
             </div>
         </div>
     </div>
@@ -206,17 +158,17 @@
                             <span> All Category</span>
                         </a>
                         <div class="menu-depart">
-                            @foreach ($categoriesDropdown as $category)
+                            @foreach ($categoriesMenuHeader as $category)
                                 <a href="/categories/{{ $category->slug }}">
                                     {{ $category->name }}
                                 </a>
                             @endforeach
                         </div>
                     </li>
-                    <li class="active">
+                    <li class="{{ Request::segment(1) == '' ? 'active' : '' }}">
                         <a href="/">Home</a>
                     </li>
-                    <li>
+                    <li class="{{ Request::segment(1) == 'products' ? 'active' : '' }}">
                         <a href="/products">Products</a>
                         <div class="megamenu megamenu-fixed-width">
                             <div class="row">

@@ -27,7 +27,11 @@ class CategoryController extends Controller
 
         $category = Category::where('slug', $slug)->first();
 
-        $products = Product::with('images', 'category')->where('is_active', true)->where('category_id', $category->id)->paginate(9);
+        $products = Product::with('images', 'category')
+        ->when(request()->price_start || request()->price_end, function($products){
+            $products = $products->whereBetween('price', [request()->price_start, request()->price_end]);
+        })
+        ->where('is_active', true)->where('category_id', $category->id)->paginate(9);
         $latestProducts = Product::with(['images', 'category'])->where('is_active', true)->latest()->take(3)->get();
 
         return view('ecommerce.categories.detail', [

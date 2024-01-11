@@ -5156,6 +5156,11 @@ span.page-link {
     max-width: 872px;
     background-color: #fff;
 }
+
+.login-container {
+    margin-top: 3.9rem;
+}
+
 .login-popup .btn-regist {
     margin-top: 3.6rem;
     font-size: 1.6rem;
