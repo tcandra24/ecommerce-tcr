@@ -24,7 +24,7 @@
                         <a href="#"><i class="icon-help-circle"></i>Help</a>
                     </li>
                     <li class="menu-item menu-item-type-post_type menu-item-object-page narrow">
-                        <a href="#"><i class="icon-wishlist-2"></i>Wishlist</a>
+                        <a href="/wishlists"><i class="icon-wishlist-2"></i>Wishlist</a>
                     </li>
                     @if (Auth::guard('customer')->check())
                         <li class="menu-item menu-item-type-post_type menu-item-object-page narrow">

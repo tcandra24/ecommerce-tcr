@@ -303,13 +303,9 @@
                     </div>
 
                     <figure class="product-image-container">
-                        <a href="products/${ object.product.slug }"
-                            class="product-image">
-                            <img src="${ object.product.images[0].name }"
-                                alt="product" width="80" height="80">
+                        <a href="products/${ object.product.slug }" class="product-image">
+                            <img src="${ object.product.images[0].name }" alt="${ object.product.slug }" width="80" height="80">
                         </a>
-                        <a href="#" class="btn-remove"
-                            title="Remove Product"><span>×</span></a>
                     </figure>
                 </div>
             `

@@ -63,12 +63,50 @@ class CartController extends Controller
         }
     }
 
+    public function changeCart($method, $slug)
+    {
+        try {
+            $product = Product::select('id', 'price', 'weight')->where('slug', $slug)->first();
+            $cart = Cart::where('product_id', $product->id)->where('customer_id', Auth::guard('customer')->user()->id);
+
+            if($method === 'increment') {
+                $cart->increment('qty');
+            } else {
+                $cart->decrement('qty');
+            }
+            $cart = $cart->first();
+
+            $total = $product->price * $cart->qty;
+            $weight = $product->weight * $cart->qty;
+
+            $cart->update([
+                'total'     => $total,
+                'weight'    => $weight
+            ]);
+
+           $cartOnHeader = Cart::with('product', 'product.images')
+            ->where('customer_id', Auth::guard('customer')->user()->id)
+            ->take(10)->get();
+
+            return response()->json([
+                'success' => true,
+                'carts' => $cartOnHeader,
+                'message' => 'Success add to Cart'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
+
     public function getSimpleCartData()
     {
         try {
             $cartOnHeader = Cart::with('product', 'product.images')
             ->where('customer_id', Auth::guard('customer')->user()->id)
-            ->take(10)->get();
+            ->take(5)->latest()->get();
 
             return response()->json([
                 'success' => true,
@@ -82,26 +120,26 @@ class CartController extends Controller
         }
     }
 
-    // public function destroy($slug)
-    // {
-    //     try {
-    //         $product = Product::where('slug', $slug)->first();
-    //         Cart::where('product_id', $product->id)->where('customer_id', Auth::guard('customer')->user()->id)->delete();
+    public function destroy($slug)
+    {
+        try {
+            $product = Product::where('slug', $slug)->first();
+            Cart::where('product_id', $product->id)->where('customer_id', Auth::guard('customer')->user()->id)->delete();
 
-    //         $cartOnHeader = Cart::with('product', 'product.images')
-    //         ->where('customer_id', Auth::guard('customer')->user()->id)
-    //         ->take(10)->get();
+            $cartOnHeader = Cart::with('product', 'product.images')
+            ->where('customer_id', Auth::guard('customer')->user()->id)
+            ->take(10)->get();
 
-    //         return response()->json([
-    //             'success' => true,
-    //             'carts' => $cartOnHeader,
-    //             'message' => 'Success delete from Cart'
-    //         ]);
-    //     } catch (\Exception $e) {
-    //         return response()->json([
-    //             'success' => false,
-    //             'message' => $e->getMessage()
-    //         ]);
-    //     }
-    // }
+            return response()->json([
+                'success' => true,
+                'carts' => $cartOnHeader,
+                'message' => 'Success delete from Cart'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
 }
