@@ -43,6 +43,8 @@
     <link rel="stylesheet" href="{{ asset('assets/ecommerce/css/base-style.min.css') }}">
     <link rel="stylesheet" type="text/css"
         href="{{ asset('assets/ecommerce/vendor/fontawesome-free/css/all.min.css') }}">
+
+    @yield('styles')
 </head>
 
 <body>

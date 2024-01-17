@@ -5,7 +5,64 @@
 @endsection
 
 @section('scripts')
-    {{--  --}}
+    <script src="{{ asset('assets/ecommerce/vendor/sweetalert2/sweetalert2.min.js') }}"></script>
+
+    <script>
+        $('.btn-remove').on('click', function() {
+            const slug = $(this).attr('data-product-slug')
+            const name = $(this).attr('data-product-name')
+
+            Swal.fire({
+                title: "Are you Sure ?",
+                text: 'Delete ' + name,
+                type: "warning",
+                showCancelButton: !0,
+                confirmButtonColor: "#ccc",
+                confirmButtonText: "Yes",
+                closeOnConfirm: !1
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    deleteWishlistRow(slug)
+                }
+            })
+        })
+
+        function deleteWishlistRow(slug) {
+            $.ajax({
+                url: `/wishlists/${slug}`,
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="token"]').attr('content')
+                },
+                type: 'DELETE',
+                success: function({
+                    success,
+                    wishlists
+                }) {
+                    if (success) {
+                        $(`#product-slug-${slug}`).remove()
+                        if (wishlists.length === 0) {
+                            $('.table-wishlist tbody').html(`
+                                <tr>
+                                    <td colspan="5">
+                                        <div class="alert alert-rounded alert-info">
+                                            <i class="fas fa-info-circle" style="color: #67cce0;"></i>
+                                            <span><strong>Information!</strong> Wishlist is Empty</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                            `)
+                        }
+                    }
+                },
+                error: function({
+                    success,
+                    message
+                }) {
+                    console.log(message)
+                }
+            })
+        }
+    </script>
 @endsection
 
 @section('main')
@@ -31,7 +88,7 @@
 
         <div class="container">
             <div class="wishlist-title">
-                <h2 class="p-2">My wishlist on Porto Shop 4</h2>
+                <h2 class="p-2">My wishlist</h2>
             </div>
             <div class="wishlist-table-container">
                 <table class="table table-wishlist mb-0">
@@ -47,7 +104,7 @@
                     <tbody>
                         @if (count($wishlists) > 0)
                             @foreach ($wishlists as $wishlist)
-                                <tr class="product-row">
+                                <tr class="product-row" id="product-slug-{{ $wishlist->product->slug }}">
                                     <td>
                                         <figure class="product-image-container">
                                             <a href="/products/{{ $wishlist->product->slug }}" class="product-image">
@@ -55,7 +112,9 @@
                                                     alt="{{ $wishlist->product->slug }}">
                                             </a>
 
-                                            <a href="#" class="btn-remove icon-cancel" title="Remove Product"></a>
+                                            <a href="javascript:void(0)" class="btn-remove icon-cancel"
+                                                title="Remove Product" data-product-slug="{{ $wishlist->product->slug }}"
+                                                data-product-name="{{ $wishlist->product->title }}"></a>
                                         </figure>
                                     </td>
                                     <td>
@@ -71,9 +130,6 @@
                                     <td class="action">
                                         <a href="/products/{{ $wishlist->product->slug }}"
                                             class="btn btn-quickview mt-1 mt-md-0" title="View Product">VIEW PRODUCT</a>
-                                        <button class="btn btn-dark btn-add-cart product-type-simple btn-shop">
-                                            ADD TO CART
-                                        </button>
                                     </td>
                                 </tr>
                             @endforeach

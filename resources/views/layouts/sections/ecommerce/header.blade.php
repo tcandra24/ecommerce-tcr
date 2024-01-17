@@ -18,15 +18,15 @@
 
                 <ul class="top-links mega-menu d-none d-xl-flex mb-0 pr-2">
                     <li class="menu-item menu-item-type-post_type menu-item-object-page narrow">
-                        <a href="#"><i class="icon-pin"></i>Our Stores</a>
-                    </li>
-                    <li class="menu-item menu-item-type-post_type menu-item-object-page narrow">
-                        <a href="#"><i class="icon-help-circle"></i>Help</a>
+                        <a href="/about-us"><i class="icon-help-circle"></i>About Us</a>
                     </li>
                     <li class="menu-item menu-item-type-post_type menu-item-object-page narrow">
                         <a href="/wishlists"><i class="icon-wishlist-2"></i>Wishlist</a>
                     </li>
                     @if (Auth::guard('customer')->check())
+                        <li class="menu-item menu-item-type-post_type menu-item-object-page narrow">
+                            <a href="/my-account"><i class="icon-user-2"></i>My Account</a>
+                        </li>
                         <li class="menu-item menu-item-type-post_type menu-item-object-page narrow">
                             <a href="#" class="logout-btn"></i>Log Out</a>
                         </li>

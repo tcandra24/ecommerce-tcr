@@ -31,12 +31,12 @@
             const qty = $(this).val()
             const slug = $(this).attr('data-slug-product')
 
-            const {
-                qty: qtyCart
-            } = cart_items.find(element => element.product.slug === slug)
+            // const {
+            //     qty: qtyCart
+            // } = cart_items.find(element => element.product.slug === slug)
 
-            const method = qty > qtyCart ? 'increment' : 'decrement';
-            updateCartRow(method, slug)
+            // const method = qty > qtyCart ? 'increment' : 'decrement';
+            updateCartRow(qty, slug)
         })
 
         function deleteCartRow(slug) {
@@ -78,13 +78,16 @@
             })
         }
 
-        function updateCartRow(method, slug) {
+        function updateCartRow(qty, slug) {
             $.ajax({
-                url: `/change-carts/${method}/${slug}`,
+                url: `/change-carts/${slug}`,
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="token"]').attr('content')
                 },
                 type: 'POST',
+                data: {
+                    qty
+                },
                 success: function({
                     success,
                     carts
@@ -215,7 +218,7 @@
                     </table>
 
                     <div class="checkout-methods">
-                        <a href="cart.html" class="btn btn-block btn-dark">Proceed to Checkout
+                        <a href="/checkout" class="btn btn-block btn-dark">Proceed to Checkout
                             <i class="fa fa-arrow-right"></i></a>
                     </div>
                 </div>

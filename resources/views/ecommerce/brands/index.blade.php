@@ -60,10 +60,10 @@
 
                 <div class="row">
                     @foreach ($brands as $brand)
-                        <div class="col-6 col-sm-4 col-md-3 col-xl-2">
+                        <div class="col-6 col-sm-4 col-md-3 col-xl-2 pt-4 pb-4">
                             <div class="product-default inner-quickview inner-icon">
                                 <figure>
-                                    <a href="/brands/{{ $brand->slug }}" style="width: 80% !important;">
+                                    <a href="/brands/{{ $brand->slug }}" style="width: 90% !important;">
                                         <img src="{{ $brand->image }}" width="300" height="300"
                                             alt="{{ $brand->slug }}">
                                     </a>

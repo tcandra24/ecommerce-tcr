@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Ecommerce;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Brand;
+use App\Models\Wishlist;
 
 class ProductController extends Controller
 {
@@ -19,7 +21,9 @@ class ProductController extends Controller
         })
         ->when(request()->price_start || request()->price_end, function($products){
             $products = $products->whereBetween('price', [request()->price_start, request()->price_end]);
-        })->paginate(9);
+        })->withExists(['wishlist' => function($query){
+            $query->where('customer_id', Auth::guard('customer')->user()->id ?? null);
+        }])->paginate(9);
 
         $categories = Category::withCount('products')->get();
         $brands = Brand::withCount('products')->get();
@@ -36,11 +40,16 @@ class ProductController extends Controller
     public function detail($slug)
     {
         $product = Product::with('images', 'category')->where('slug', $slug)->first();
-        $relateProduct = Product::with('images', 'category')->where('category_id', $product->category_id)->where('slug', '<>', $slug)->get();
+        $onWishlist = Wishlist::where('customer_id', Auth::guard('customer')->user()->id ?? null)->where('product_id', $product->id)->exists();
+
+        $relateProduct = Product::with('images', 'category')->withExists(['wishlist' => function($query){
+            $query->where('customer_id', Auth::guard('customer')->user()->id ?? null);
+        }])->where('is_active', true)->where('category_id', $product->category_id)->where('slug', '<>', $slug)->get();
 
         return view('ecommerce.products.detail', [
             'product' => $product,
-            'relateProduct' => $relateProduct
+            'relateProduct' => $relateProduct,
+            'onWishlist' => $onWishlist,
         ]);
     }
 

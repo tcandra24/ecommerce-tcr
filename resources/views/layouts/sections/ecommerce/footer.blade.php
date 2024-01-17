@@ -47,18 +47,15 @@
 
                 <div class="col-lg-3 col-sm-6 pb-2 pb-sm-0">
                     <div class="widget">
-                        <h4 class="widget-title pb-1">Customer Services</h4>
+                        <h4 class="widget-title pb-1">Usefull Link</h4>
 
                         <ul class="links">
-                            <li><a href="#">Help &amp; FAQs</a></li>
-                            <li><a href="#">Order Tracking</a></li>
-                            <li><a href="#">Shipping &amp; Delivery</a></li>
-                            <li><a href="#">Orders History</a></li>
-                            <li><a href="#">Advanced Search</a></li>
-                            <li><a href="#">Login</a></li>
-                            <li><a href="#">Careers</a></li>
-                            <li><a href="#">About Us</a></li>
-                            <li><a href="#">Corporate Sales</a></li>
+                            @if (Auth::guard('customer')->check())
+                                <li><a href="#">Orders History</a></li>
+                            @else
+                                <li><a href="#">Login</a></li>
+                            @endif
+                            <li><a href="/about-us">About Us</a></li>
                         </ul>
                     </div>
                 </div>

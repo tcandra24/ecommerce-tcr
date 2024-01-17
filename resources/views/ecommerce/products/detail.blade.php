@@ -33,8 +33,6 @@
                     $('.add-cart').attr('disabled', false)
 
                     if (success) {
-
-
                         $('.add-cart').hasClass("disabled") ||
                             ($('.add-cart').addClass(
                                     "added-to-cart"
@@ -180,10 +178,14 @@
                             <a href="#" class="social-icon social-mail icon-mail-alt" target="_blank"
                                 title="Mail"></a>
                         </div>
-
-                        <a href="wishlist.html" class="btn-icon-wish add-wishlist" title="Add to Wishlist"><i
-                                class="icon-wishlist-2"></i><span>Add to
-                                Wishlist</span></a>
+                        @if (Auth::guard('customer')->check())
+                            <a href="/wishlists"
+                                class="btn-icon-wish add-wishlist {{ $onWishlist ? 'added-wishlist' : '' }}"
+                                title="Add to Wishlist" data-product-slug="{{ $product->slug }}">
+                                <i class="icon-wishlist-2"></i>
+                                <span>{{ $onWishlist ? 'Browse Wishlist' : 'Add to Wishlist' }}</span>
+                            </a>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -287,8 +289,10 @@
                                         alt="{{ $product->slug }}">
                                 </a>
                                 <div class="btn-icon-group">
-                                    <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
-                                            class="icon-shopping-cart"></i></a>
+                                    <button class="btn-icon btn-add-cart product-type-simple"
+                                        data-product-slug="{{ $product->slug }}">
+                                        <i class="icon-shopping-cart"></i>
+                                    </button>
                                 </div>
                                 <a href="ajax/product-quick-view.html" class="btn-quickview" title="Quick View">Quick
                                     View</a>
@@ -299,7 +303,11 @@
                                         <a
                                             href="/categories/{{ $product->category->slug }}">{{ $product->category->name }}</a>
                                     </div>
-                                    <a href="wishlist.html" class="btn-icon-wish"><i class="icon-heart"></i></a>
+                                    @if (Auth::guard('customer')->check())
+                                        <a href="/wishlists"
+                                            class="btn-icon-wish {{ $product->wishlist_exists ? 'added-wishlist' : '' }}"
+                                            data-product-slug="{{ $product->slug }}"><i class="icon-heart"></i></a>
+                                    @endif
                                 </div>
                                 <h3 class="product-title">
                                     <a href="/products/{{ $product->slug }}">{{ $product->title }}</a>

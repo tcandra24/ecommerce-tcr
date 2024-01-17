@@ -62,11 +62,17 @@ Route::group(['middleware' => ['guest:customer']], function () {
 Route::group(['middleware' => ['auth:customer']], function () {
     Route::get('/carts', [App\Http\Controllers\Ecommerce\CartController::class, 'index']);
     Route::get('/cart-simple', [App\Http\Controllers\Ecommerce\CartController::class, 'getSimpleCartData']);
-    Route::post('/change-carts/{method}/{slug}', [App\Http\Controllers\Ecommerce\CartController::class, 'changeCart']);
+    Route::post('/change-carts/{slug}', [App\Http\Controllers\Ecommerce\CartController::class, 'changeCart']);
     Route::post('/carts', [App\Http\Controllers\Ecommerce\CartController::class, 'store']);
     Route::delete('/carts/{slug}', [App\Http\Controllers\Ecommerce\CartController::class, 'destroy']);
 
     Route::get('/wishlists', [App\Http\Controllers\Ecommerce\WishlistController::class, 'index']);
+    Route::post('/wishlists', [App\Http\Controllers\Ecommerce\WishlistController::class, 'store']);
+    Route::delete('/wishlists/{slug}', [App\Http\Controllers\Ecommerce\WishlistController::class, 'destroy']);
+
+    Route::prefix('my-account')->group(function() {
+        Route::get('/', [App\Http\Controllers\Ecommerce\CustomerController::class, 'profile']);
+    });
 
     Route::post('/logout', [App\Http\Controllers\Ecommerce\AuthController::class, 'logout']);
 });

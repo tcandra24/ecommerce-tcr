@@ -48,6 +48,16 @@ class Product extends Model
     }
 
     /**
+     * wishlist
+     *
+     * @return void
+     */
+    public function wishlist()
+    {
+        return $this->hasMany(Wishlist::class);
+    }
+
+    /**
      * products images
      *
      * @return void

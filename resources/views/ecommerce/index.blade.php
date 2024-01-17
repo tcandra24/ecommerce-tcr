@@ -84,9 +84,10 @@
                                     alt="{{ $product->title }}">
                             </a>
                             <div class="btn-icon-group">
-                                <a href="#" class="btn-icon btn-add-cart product-type-simple">
+                                <button class="btn-icon btn-add-cart product-type-simple"
+                                    data-product-slug="{{ $product->slug }}">
                                     <i class="icon-shopping-cart"></i>
-                                </a>
+                                </button>
                             </div>
                             <a href="ajax/product-quick-view.html" class="btn-quickview" title="Quick View">Quick
                                 View</a>
@@ -96,7 +97,12 @@
                                 <div class="category-list">
                                     <a href="/categories/{{ $product->category->slug }}">{{ $product->category->name }}</a>
                                 </div>
-                                <a href="#" class="btn-icon-wish" title="wishlist"><i class="icon-heart"></i></a>
+                                @if (Auth::guard('customer')->check())
+                                    <a href="/wishlists"
+                                        class="btn-icon-wish {{ $product->wishlist_exists ? 'added-wishlist' : '' }}"
+                                        title="wishlist" data-product-slug="{{ $product->slug }}"><i
+                                            class="icon-heart"></i></a>
+                                @endif
                             </div>
                             <h3 class="product-title">
                                 <a href="/products/{{ $product->slug }}">{{ $product->title }}</a>
@@ -397,8 +403,10 @@
                                                 alt="{{ $product->title }}">
                                         </a>
                                         <div class="btn-icon-group">
-                                            <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
-                                                    class="icon-shopping-cart"></i></a>
+                                            <button class="btn-icon btn-add-cart product-type-simple"
+                                                data-product-slug="{{ $product->slug }}">
+                                                <i class="icon-shopping-cart"></i>
+                                            </button>
                                         </div>
                                         <a href="ajax/product-quick-view.html" class="btn-quickview"
                                             title="Quick View">Quick
@@ -410,8 +418,12 @@
                                                 <a
                                                     href="/categories/{{ $product->category->slug }}">{{ $product->category->name }}</a>
                                             </div>
-                                            <a href="#" class="btn-icon-wish" title="wishlist"><i
-                                                    class="icon-heart"></i></a>
+                                            @if (Auth::guard('customer')->check())
+                                                <a href="/wishlists"
+                                                    class="btn-icon-wish {{ $product->wishlist_exists ? 'added-wishlist' : '' }}"
+                                                    title="wishlist" data-product-slug="{{ $product->slug }}"><i
+                                                        class="icon-heart"></i></a>
+                                            @endif
                                         </div>
                                         <h3 class="product-title">
                                             <a href="/products/{{ $product->slug }}">{{ $product->title }}</a>
@@ -485,18 +497,18 @@
                 <div class="col-lg-7">
                     <h4 class="text-white text-uppercase">looking for help to
                         find auto parts?</h4>
-                    <h2 class="text-white">Best Auto Parts Downtown Los Angeles CA</h2>
+                    <h2 class="text-white">Best Auto Parts In Indonesia</h2>
                     <h3>Call Us or Drop Us a Message Through Our Contact Form</h3>
                 </div>
                 <div class="col-lg-5 call-action">
                     <div class="d-inline-flex align-items-center text-left divider">
                         <i class="icon-phone-1 text-white mr-2"></i>
                         <h6 class="pt-1 line-height-1 text-uppercase text-white">Call us now<a href="tel:#"
-                                class="d-block text-white ls-10 pt-2">+123 5678 890</a></h6>
+                                class="d-block text-white ls-10 pt-2">0852-6000-0816</a></h6>
                     </div>
-                    <a href="contact.html" class="btn btn-borders btn-rounded btn-outline-white ls-25">Send
-                        Us a
-                        Message</a>
+                    <a href="/about-us" class="btn btn-borders btn-rounded btn-outline-white ls-25">
+                        Send Us a Message
+                    </a>
                 </div>
             </div>
         </div>
@@ -542,9 +554,10 @@
                                     alt="{{ $product->title }}">
                             </a>
                             <div class="btn-icon-group">
-                                <a href="#" class="btn-icon btn-add-cart product-type-simple">
+                                <button class="btn-icon btn-add-cart product-type-simple"
+                                    data-product-slug="{{ $product->slug }}">
                                     <i class="icon-shopping-cart"></i>
-                                </a>
+                                </button>
                             </div>
                             <a href="ajax/product-quick-view.html" class="btn-quickview" title="Quick View">Quick
                                 View</a>
@@ -555,7 +568,12 @@
                                     <a
                                         href="/categories/{{ $product->category->slug }}">{{ $product->category->name }}</a>
                                 </div>
-                                <a href="#" class="btn-icon-wish" title="wishlist"><i class="icon-heart"></i></a>
+                                @if (Auth::guard('customer')->check())
+                                    <a href="/wishlists"
+                                        class="btn-icon-wish {{ $product->wishlist_exists ? 'added-wishlist' : '' }}"
+                                        title="wishlist" data-product-slug="{{ $product->slug }}"><i
+                                            class="icon-heart"></i></a>
+                                @endif
                             </div>
                             <h3 class="product-title">
                                 <a href="/products/{{ $product->slug }}">{{ $product->title }}</a>
@@ -563,14 +581,13 @@
                             <div class="ratings-container">
                                 <div class="product-ratings">
                                     <span class="ratings" style="width:0%"></span>
-                                    <!-- End .ratings -->
                                     <span class="tooltiptext tooltip-top"></span>
-                                </div><!-- End .product-ratings -->
-                            </div><!-- End .product-container -->
+                                </div>
+                            </div>
                             <div class="price-box">
                                 <span class="product-price">Rp. {{ number_format($product->price, 2) }}</span>
-                            </div><!-- End .price-box -->
-                        </div><!-- End .product-details -->
+                            </div>
+                        </div>
                     </div>
                 @endforeach
             </div>

@@ -63,25 +63,25 @@ class CartController extends Controller
         }
     }
 
-    public function changeCart($method, $slug)
+    public function changeCart(Request $request, $slug)
     {
         try {
             $product = Product::select('id', 'price', 'weight')->where('slug', $slug)->first();
             $cart = Cart::where('product_id', $product->id)->where('customer_id', Auth::guard('customer')->user()->id);
 
-            if($method === 'increment') {
-                $cart->increment('qty');
-            } else {
-                $cart->decrement('qty');
-            }
-            $cart = $cart->first();
-
-            $total = $product->price * $cart->qty;
-            $weight = $product->weight * $cart->qty;
+            // if($method === 'increment') {
+            //     $cart->increment('qty');
+            // } else {
+            //     $cart->decrement('qty');
+            // }
+            // $cart = $cart->first();
+            // $total = $product->price * $cart->qty;
+            // $weight = $product->weight * $cart->qty;
 
             $cart->update([
-                'total'     => $total,
-                'weight'    => $weight
+                'qty'       => $request->qty,
+                'total'     => $product->price * $request->qty,
+                'weight'    => $product->weight * $request->qty
             ]);
 
            $cartOnHeader = Cart::with('product', 'product.images')

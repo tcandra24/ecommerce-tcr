@@ -32,6 +32,7 @@
             </ul>
             @if (Auth::guard('customer')->check())
                 <ul class="mobile-menu">
+                    <li><a href="/my-account" class="login-link">My Account</a></li>
                     <li><a href="#" class="login-link logout-btn">Log Out</a></li>
                 </ul>
             @else

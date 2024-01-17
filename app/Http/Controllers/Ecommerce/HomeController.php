@@ -18,12 +18,19 @@ class HomeController extends Controller
     public function index()
     {
         $categories = Category::take(4)->orderBy('created_at')->get();
-        $latestProducts = Product::with(['images', 'category'])->where('is_active', true)->latest()->take(6)->get();
+        $latestProducts = Product::with(['images', 'category'])
+        ->withExists(['wishlist' => function($query){
+            $query->where('customer_id', Auth::guard('customer')->user()->id ?? null);
+        }])->where('is_active', true)->latest()->take(6)->get();
+
         $productByBrand = Brand::with(['products' => function($query) {
-            return $query->where('is_active', true);
+            $query->withExists(['wishlist' => function($query){
+                $query->where('customer_id', Auth::guard('customer')->user()->id ?? null);
+            }])->where('is_active', true);
         }, 'products.images', 'products.category'])->take(5)->get();
+
         $sliders = Slider::all();
-        $brands = Brand::all();
+        $brands = Brand::take(10)->get();
 
         return view('ecommerce.index', [
             'categories' => $categories,
