@@ -3,17 +3,21 @@
 namespace App\Http\Controllers\Ecommerce;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
-use App\Models\Customer;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Invoice;
 
 class CustomerController extends Controller
 {
     public function profile()
     {
+        $user = Auth::guard('customer')->user();
+        $invoices = Invoice::where('customer_id', $user->id)->get();
+
         return view('ecommerce.customer.my-profile.index', [
-            'customer' => Auth::guard('customer')->user(),
+            'customer' => $user,
+            'invoices' => $invoices,
         ]);
     }
 }

@@ -10,7 +10,7 @@
             <nav id="menu" class="nav-main" role="navigation">
                 <ul class="nav nav-main">
                     @can('dashboard.index')
-                        <li>
+                        <li class="{{ request()->segment(2) == 'dashboard' ? 'nav-expanded nav-active' : '' }}">
                             <a class="nav-link" href="/admin">
                                 <i class="bx bx-home-alt" aria-hidden="true"></i>
                                 <span>Dashboard</span>
@@ -95,7 +95,7 @@
                                 </a>
                                 <ul class="nav nav-children">
                                     <li>
-                                        <a class="nav-link" href="index-2.html">
+                                        <a class="nav-link" href="/admin/invoices">
                                             - List
                                         </a>
                                     </li>
@@ -126,19 +126,19 @@
                                 </a>
                             </li>
                         @endcan
-                        @can('setting.permissions.index')
-                            <li>
-                                <a class="nav-link" href="/admin/permissions">
-                                    <i class="bx bx-lock" aria-hidden="true"></i>
-                                    <span>Permission</span>
-                                </a>
-                            </li>
-                        @endcan
                         @can('setting.roles.index')
                             <li>
                                 <a class="nav-link" href="/admin/roles">
                                     <i class="bx bx-door-open" aria-hidden="true"></i>
                                     <span>Role</span>
+                                </a>
+                            </li>
+                        @endcan
+                        @can('setting.permissions.index')
+                            <li>
+                                <a class="nav-link" href="/admin/permissions">
+                                    <i class="bx bx-lock" aria-hidden="true"></i>
+                                    <span>Permission</span>
                                 </a>
                             </li>
                         @endcan

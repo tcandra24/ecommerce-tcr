@@ -37,6 +37,9 @@ Route::prefix('admin')->group(function() {
         Route::resource('/sliders', App\Http\Controllers\Admin\SliderController::class, [ 'except' => [ 'show' ]])
         ->middleware('permission:master.sliders.index|master.sliders.create|master.sliders.edit|master.sliders.delete');
 
+        Route::resource('/invoices', App\Http\Controllers\Admin\InvoiceController::class, [ 'only' => [ 'index', 'show' ]])
+        ->middleware('permission:transaction.invoices.index|transaction.invoices.show');
+
         Route::resource('/users', App\Http\Controllers\Admin\UserController::class, [ 'except' => [ 'show' ]])
         ->middleware('permission:setting.users.index|setting.users.create|setting.users.edit|setting.users.delete');
 
@@ -69,6 +72,9 @@ Route::group(['middleware' => ['auth:customer']], function () {
     Route::get('/wishlists', [App\Http\Controllers\Ecommerce\WishlistController::class, 'index']);
     Route::post('/wishlists', [App\Http\Controllers\Ecommerce\WishlistController::class, 'store']);
     Route::delete('/wishlists/{slug}', [App\Http\Controllers\Ecommerce\WishlistController::class, 'destroy']);
+
+    Route::get('/checkouts', [App\Http\Controllers\Ecommerce\CheckoutController::class, 'index']);
+    Route::post('/checkouts', [App\Http\Controllers\Ecommerce\CheckoutController::class, 'store']);
 
     Route::prefix('my-account')->group(function() {
         Route::get('/', [App\Http\Controllers\Ecommerce\CustomerController::class, 'profile']);

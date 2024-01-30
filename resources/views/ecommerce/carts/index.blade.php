@@ -131,7 +131,7 @@
                 <a href="/carts">Shopping Cart</a>
             </li>
             <li>
-                <a href="/checkout">Checkout</a>
+                <a href="/checkouts">Checkout</a>
             </li>
             <li class="disabled">
                 <a href="javascript:void(0)">Order Complete</a>
@@ -218,7 +218,7 @@
                     </table>
 
                     <div class="checkout-methods">
-                        <a href="/checkout" class="btn btn-block btn-dark">Proceed to Checkout
+                        <a href="/checkouts" class="btn btn-block btn-dark">Proceed to Checkout
                             <i class="fa fa-arrow-right"></i></a>
                     </div>
                 </div>

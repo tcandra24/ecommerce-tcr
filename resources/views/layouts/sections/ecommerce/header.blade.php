@@ -136,7 +136,7 @@
                                     <a href="/carts" class="btn btn-gray btn-block view-cart">
                                         View Cart
                                     </a>
-                                    <a href="/checkout" class="btn btn-dark btn-block">
+                                    <a href="/checkouts" class="btn btn-dark btn-block">
                                         Checkout
                                     </a>
                                 </div>

@@ -1,9 +1,9 @@
 <header class="header header-nav-menu header-nav-links">
     <div class="logo-container">
         <a href="#" class="logo">
-            <img src="{{ asset('assets/admin/img/logo.png') }}" class="logo-image" width="90" height="24"
+            <img src="{{ asset('assets/admin/img/logo-dark.png') }}" class="logo-image" width="90" height="24"
                 alt="TCR Ecommerce" />
-            <img src="{{ asset('assets/admin/img/logo.png') }}" class="logo-mobile logo-image-mobile" width="150"
+            <img src="{{ asset('assets/admin/img/logo-dark.png') }}" class="logo-mobile logo-image-mobile" width="150"
                 height="41" alt="TCR Ecommerce" />
         </a>
         <button class="btn header-btn-collapse-nav d-lg-none" data-bs-toggle="collapse" data-bs-target=".header-nav">
@@ -68,7 +68,7 @@
                                 <ul class="dropdown-menu">
                                     @can('transactions.invoices.index')
                                         <li>
-                                            <a class="nav-link" href="#">
+                                            <a class="nav-link" href="/admin/invoices">
                                                 Invoice
                                             </a>
                                         </li>
@@ -323,16 +323,7 @@
                 <i class="fas fa-chevron-down text-color-dark"></i>
             </a>
             <div class="dropdown-menu">
-                <ul class="list-unstyled">
-                    <li>
-                        <a role="menuitem" tabindex="-1" href="pages-user-profile.html"><i class="bx bx-user"></i>
-                            My Profile</a>
-                    </li>
-                    <li>
-                        <a role="menuitem" tabindex="-1" href="#" data-lock-screen="true">
-                            <i class="bx bx-lock-open-alt"></i> Lock Screen
-                        </a>
-                    </li>
+                <ul class="list-unstyled pt-3">
                     <li>
                         <a role="menuitem" tabindex="-1" id="btn-logout" href="javascript:void(0)">
                             <i class="bx bx-log-out"></i>

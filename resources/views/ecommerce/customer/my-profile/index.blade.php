@@ -112,7 +112,7 @@
                             <table class="table table-order text-left">
                                 <thead>
                                     <tr>
-                                        <th class="order-id">ORDER</th>
+                                        <th class="order-id">INVOICE</th>
                                         <th class="order-date">DATE</th>
                                         <th class="order-status">STATUS</th>
                                         <th class="order-price">TOTAL</th>
@@ -120,13 +120,35 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td class="text-center p-0" colspan="5">
-                                            <p class="mb-5 mt-5">
-                                                No Order has been made yet.
-                                            </p>
-                                        </td>
-                                    </tr>
+                                    @if (count($invoices) > 0)
+                                        @foreach ($invoices as $invoice)
+                                            <tr>
+                                                <td>
+                                                    {{ $invoice->invoice }}
+                                                </td>
+                                                <td>
+                                                    {{ $invoice->created_at }}
+                                                </td>
+                                                <td>
+                                                    {{ $invoice->status }}
+                                                </td>
+                                                <td>
+                                                    Rp. {{ number_format($invoice->grand_total, 2) }}
+                                                </td>
+                                                <td>
+                                                    -
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    @else
+                                        <tr>
+                                            <td class="text-center p-0" colspan="5">
+                                                <p class="mb-5 mt-5">
+                                                    No Order has been made yet.
+                                                </p>
+                                            </td>
+                                        </tr>
+                                    @endif
                                 </tbody>
                             </table>
                             <hr class="mt-0 mb-3 pb-2">
@@ -192,8 +214,8 @@
                         <div class="form-group mb-2">
                             <label for="customer-address">Address </label>
                             <textarea class="form-control" name="address" id="customer-address" cols="30" rows="10" disabled>
-                                    {{ $customer->address }}
-                                </textarea>
+                                {{ $customer->address }}
+                            </textarea>
                         </div>
                         <form action="#">
                             <div class="change-password">

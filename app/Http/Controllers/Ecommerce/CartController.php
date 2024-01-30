@@ -42,7 +42,7 @@ class CartController extends Controller
                     'qty'           => $request->qty,
                     'price'         => $product->price,
                     'total'         => $request->qty * $product->price,
-                    'weight'        => $product->weight,
+                    'weight'        => $request->qty * $product->weight,
                 ]);
             }
 
