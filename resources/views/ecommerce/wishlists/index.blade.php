@@ -15,7 +15,7 @@
             Swal.fire({
                 title: "Are you Sure ?",
                 text: 'Delete ' + name,
-                type: "warning",
+                icon: "warning",
                 showCancelButton: !0,
                 confirmButtonColor: "#ccc",
                 confirmButtonText: "Yes",
@@ -40,11 +40,11 @@
                 }) {
                     if (success) {
                         $(`#product-slug-${slug}`).remove()
-                        if (wishlists.length === 0) {
+                        if (parseInt(wishlists) === 0) {
                             $('.table-wishlist tbody').html(`
                                 <tr>
                                     <td colspan="5">
-                                        <div class="alert alert-rounded alert-info">
+                                        <div class="alert alert-rounded alert-info justify-content-center">
                                             <i class="fas fa-info-circle" style="color: #67cce0;"></i>
                                             <span><strong>Information!</strong> Wishlist is Empty</span>
                                         </div>
@@ -128,15 +128,15 @@
                                         <span class="stock-status">In stock</span>
                                     </td>
                                     <td class="action">
-                                        <a href="/products/{{ $wishlist->product->slug }}"
-                                            class="btn btn-quickview mt-1 mt-md-0" title="View Product">VIEW PRODUCT</a>
+                                        <a href="/products/{{ $wishlist->product->slug }}" class="btn mt-1 mt-md-0"
+                                            title="View Product">VIEW PRODUCT</a>
                                     </td>
                                 </tr>
                             @endforeach
                         @else
                             <tr>
                                 <td colspan="5">
-                                    <div class="alert alert-rounded alert-info">
+                                    <div class="alert alert-rounded alert-info justify-content-center">
                                         <i class="fas fa-info-circle" style="color: #67cce0;"></i>
                                         <span><strong>Information!</strong> Wishlist is Empty</span>
                                     </div>

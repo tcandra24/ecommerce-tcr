@@ -10,47 +10,7 @@
             const product_slug = $('#slug-product').val()
             const qty = $('#qty-product').val()
 
-            $.ajax({
-                url: '/carts',
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="token"]').attr('content')
-                },
-                type: 'POST',
-                data: {
-                    slug: product_slug,
-                    qty,
-                },
-                beforeSend: function() {
-                    $('.add-cart').text('Loading....')
-                    $('.add-cart').attr('disabled', true)
-                },
-                success: function({
-                    success,
-                    carts,
-                    message
-                }) {
-                    $('.add-cart').text('Add to Cart')
-                    $('.add-cart').attr('disabled', false)
-
-                    if (success) {
-                        $('.add-cart').hasClass("disabled") ||
-                            ($('.add-cart').addClass(
-                                    "added-to-cart"
-                                ),
-                                $('.view-cart').removeClass("d-none"),
-                                $('.cart-message').removeClass(
-                                    "d-none"
-                                ));
-                        cart_items = carts
-                        renderCart(cart_items)
-                    }
-                },
-                error: function(xhr) {
-                    $('.add-cart').text('Add to Cart')
-                    $('.add-cart').attr('disabled', false)
-                    console.log(xhr)
-                }
-            })
+            addToCart(product_slug, qty)
         })
     </script>
 @endsection
@@ -214,7 +174,7 @@
                 <div class="tab-pane fade show active" id="product-desc-content" role="tabpanel"
                     aria-labelledby="product-tab-desc">
                     <div class="product-desc-content">
-                        {!! $product->description !!}
+                        {!! html_entity_decode($product->description) !!}
                     </div>
                 </div>
 
@@ -294,8 +254,10 @@
                                         <i class="icon-shopping-cart"></i>
                                     </button>
                                 </div>
-                                <a href="ajax/product-quick-view.html" class="btn-quickview" title="Quick View">Quick
-                                    View</a>
+                                <a href="/products/quick-view/{{ $product->slug }}" class="btn-quickview"
+                                    title="Quick View">
+                                    Quick View
+                                </a>
                             </figure>
                             <div class="product-details">
                                 <div class="category-wrap">

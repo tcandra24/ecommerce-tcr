@@ -81,7 +81,7 @@
                         <figure>
                             <a href="/products/{{ $product->slug }}">
                                 <img src="{{ $product->images[0]->name }}" width="300" height="300"
-                                    alt="{{ $product->title }}">
+                                    alt="{{ $product->slug }}">
                             </a>
                             <div class="btn-icon-group">
                                 <button class="btn-icon btn-add-cart product-type-simple"
@@ -89,7 +89,8 @@
                                     <i class="icon-shopping-cart"></i>
                                 </button>
                             </div>
-                            <a href="ajax/product-quick-view.html" class="btn-quickview" title="Quick View">Quick
+                            <a href="/products/quick-view/{{ $product->slug }}" class="btn-quickview"
+                                title="Quick View">Quick
                                 View</a>
                         </figure>
                         <div class="product-details">
@@ -128,37 +129,17 @@
                 <h3 class="custom-title">Special Offers</h3>
                 <div class="owl-carousel owl-theme dots-simple">
                     <div class="banner banner1"
-                        style="background: url({{ asset('assets/ecommerce/images/demoes/demo42/banner/banner1.jpg') }}) rgb(232, 127, 59); background-position: center; background-size: cover; background-repeat: no-repeat; min-height: 40.2rem;">
+                        style="background: url({{ asset('assets/ecommerce/images/special-offer.jpg') }}) #de0027; background-position: center; background-size: cover; background-repeat: no-repeat; min-height: 40.2rem;">
                         <div class="banner-content banner-layer-middle position-absolute">
-
-                            <img src="{{ asset('assets/ecommerce/images/demoes/demo42/shop_brand1.png') }}" width="232"
-                                height="28" alt="brand" />
-                            <h3 class="banner-subtitle text-uppercase text-white">Interior
-                                Accessories</h3>
+                            <h3 class="banner-subtitle text-uppercase text-white">
+                                Power Tools
+                            </h3>
                             <h2 class="banner-title text-uppercase text-white font-weight-bold">
-                                Starting<br>At <sup>$</sup>99<sup>99</sup>
+                                Starting<br>At <sup>Rp</sup>{{ number_format(30000) }}<sup>00</sup>
                             </h2>
                             <p class="banner-desc text-white">Start Shopping Right Now</p>
-                            <a href="#" class="btn btn-dark btn-rounded btn-icon-right ls-25" role="button">Shop
-                                Now
-                                <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="banner banner2"
-                        style="background: url({{ asset('assets/ecommerce/images/demoes/demo42/banner/banner2.jpg') }}) rgb(83, 86, 91); background-position: center; background-size: cover; background-repeat: no-repeat; min-height: 40.2rem;">
-                        <div class="banner-content banner-layer-middle position-absolute">
-
-                            <img src="{{ asset('assets/ecommerce/images/demoes/demo42/shop_brand1.png') }}" width="232"
-                                height="28" alt="brand" />
-                            <h3 class="banner-subtitle text-uppercase text-white">Interior
-                                Accessories</h3>
-                            <h2 class="banner-title text-uppercase text-white font-weight-bold">
-                                Starting<br>At <sup>$</sup>99<sup>99</sup>
-                            </h2>
-                            <p class="banner-desc text-white">Start Shopping Right Now</p>
-                            <a href="#" class="btn btn-primary btn-rounded btn-icon-right ls-25" role="button">Shop
-                                Now
+                            <a href="/products" class="btn btn-dark btn-rounded btn-icon-right ls-25" role="button">
+                                Shop Now
                                 <i class="fas fa-arrow-right"></i>
                             </a>
                         </div>
@@ -167,198 +148,69 @@
             </div>
             <div class="col-md-4 appear-animate" data-animation-name="fadeInLeftShorter" data-animation-delay="200">
                 <div class="d-lg-flex align-items-center">
-                    <h3 class="custom-title divider">We Suggest</h3>
-                    <a href="demo42-shop.html" class="sicon-title">VIEW ALL<i class="fas fa-arrow-right"></i></a>
+                    <h3 class="custom-title divider">Promo Product</h3>
+                    <a href="/products" class="sicon-title">VIEW ALL<i class="fas fa-arrow-right"></i></a>
                 </div>
-                <div class="product-default left-details product-widget">
-                    <figure>
-                        <a href="demo42-product.html">
-                            <img src="{{ asset('assets/ecommerce/images/demoes/demo42/product/product7-300x300.jpg') }}"
-                                width="95" height="95" alt="product">
-                        </a>
-                    </figure>
-                    <div class="product-details">
-                        <div class="category-list">
-                            <a href="category.html">Interior Accessories</a>
-                        </div>
-                        <h3 class="product-title">
-                            <a href="#">Product Short Name</a>
-                        </h3>
-                        <div class="ratings-container">
-                            <div class="product-ratings">
-                                <span class="ratings" style="width:0%"></span>
-                                <!-- End .ratings -->
-                                <span class="tooltiptext tooltip-top"></span>
+                @foreach ($latestProducts->take(3) as $product)
+                    <div class="product-default left-details product-widget">
+                        <figure>
+                            <a href="/products/{{ $product->slug }}">
+                                <img src="{{ $product->images[0]->name }}" width="95" height="95"
+                                    alt="{{ $product->slug }}">
+                            </a>
+                        </figure>
+                        <div class="product-details">
+                            <div class="category-list">
+                                <a href="/categories/{{ $product->category->slug }}">{{ $product->category->name }}</a>
                             </div>
-                            <!-- End .product-ratings -->
-                        </div>
-                        <!-- End .product-container -->
-                        <div class="price-box">
-                            <del class="old-price">$199.00</del>
-                            <span class="product-price">$129.00</span>
-                        </div>
-                        <!-- End .price-box -->
-                    </div>
-                    <!-- End .product-details -->
-                </div>
-                <div class="product-default left-details product-widget">
-                    <figure>
-                        <a href="demo42-product.html">
-                            <img src="{{ asset('assets/ecommerce/images/demoes/demo42/product/product8-300x300.jpg') }}"
-                                width="95" height="95" alt="product">
-                        </a>
-                    </figure>
-                    <div class="product-details">
-                        <div class="category-list">
-                            <a href="category.html">Auto Parts</a>
-                        </div>
-                        <h3 class="product-title">
-                            <a href="#">Product Short Name</a>
-                        </h3>
-                        <div class="ratings-container">
-                            <div class="product-ratings">
-                                <span class="ratings" style="width:0%"></span>
-                                <!-- End .ratings -->
-                                <span class="tooltiptext tooltip-top"></span>
+                            <h3 class="product-title">
+                                <a href="/products/{{ $product->slug }}">{{ $product->title }}</a>
+                            </h3>
+                            <div class="ratings-container">
+                                <div class="product-ratings">
+                                    <span class="ratings" style="width:0%"></span>
+                                    <span class="tooltiptext tooltip-top"></span>
+                                </div>
                             </div>
-                            <!-- End .product-ratings -->
-                        </div>
-                        <!-- End .product-container -->
-                        <div class="price-box">
-                            <span class="product-price">$288.00</span>
-                        </div>
-                        <!-- End .price-box -->
-                    </div>
-                    <!-- End .product-details -->
-                </div>
-                <div class="product-default left-details product-widget">
-                    <figure>
-                        <a href="demo42-product.html">
-                            <img src="{{ asset('assets/ecommerce/images/demoes/demo42/product/product9-300x300.jpg') }}"
-                                width="95" height="95" alt="product">
-                        </a>
-                    </figure>
-                    <div class="product-details">
-                        <div class="category-list">
-                            <a href="category.html">Interior Accessories</a>
-                        </div>
-                        <h3 class="product-title">
-                            <a href="#">Product Short Name</a>
-                        </h3>
-                        <div class="ratings-container">
-                            <div class="product-ratings">
-                                <span class="ratings" style="width:0%"></span>
-                                <!-- End .ratings -->
-                                <span class="tooltiptext tooltip-top"></span>
+                            <div class="price-box">
+                                <span class="product-price">Rp. {{ number_format($product->price, 2) }}</span>
                             </div>
-                            <!-- End .product-ratings -->
                         </div>
-                        <!-- End .product-container -->
-                        <div class="price-box">
-                            <del class="old-price">$299.00</del>
-                            <span class="product-price">$259.00</span>
-                        </div>
-                        <!-- End .price-box -->
                     </div>
-                    <!-- End .product-details -->
-                </div>
+                @endforeach
             </div>
             <div class="col-md-4 appear-animate" data-animation-name="fadeInLeftShorter" data-animation-delay="400">
                 <div class="d-lg-flex align-items-center">
                     <h3 class="custom-title divider">Customer Favorites</h3>
-                    <a href="demo42-shop.html" class="sicon-title">VIEW ALL<i class="fas fa-arrow-right"></i></a>
+                    <a href="/products" class="sicon-title">VIEW ALL<i class="fas fa-arrow-right"></i></a>
                 </div>
-                <div class="product-default left-details product-widget">
-                    <figure>
-                        <a href="demo42-product.html">
-                            <img src="{{ asset('assets/ecommerce/images/demoes/demo42/product/product10-300x300.jpg') }}"
-                                width="95" height="95" alt="product">
-                        </a>
-                    </figure>
-                    <div class="product-details">
-                        <div class="category-list">
-                            <a href="category.html">Performance</a>
-                        </div>
-                        <h3 class="product-title">
-                            <a href="#">Product Short Name</a>
-                        </h3>
-                        <div class="ratings-container">
-                            <div class="product-ratings">
-                                <span class="ratings" style="width:100%"></span>
-                                <!-- End .ratings -->
-                                <span class="tooltiptext tooltip-top"></span>
+                @foreach ($latestProducts->take(3) as $product)
+                    <div class="product-default left-details product-widget">
+                        <figure>
+                            <a href="/products/{{ $product->slug }}">
+                                <img src="{{ $product->images[0]->name }}" width="95" height="95"
+                                    alt="{{ $product->slug }}">
+                            </a>
+                        </figure>
+                        <div class="product-details">
+                            <div class="category-list">
+                                <a href="/categories/{{ $product->category->slug }}">{{ $product->category->name }}</a>
                             </div>
-                            <!-- End .product-ratings -->
-                        </div>
-                        <!-- End .product-container -->
-                        <div class="price-box">
-                            <span class="product-price">$488.00</span>
-                        </div>
-                        <!-- End .price-box -->
-                    </div>
-                    <!-- End .product-details -->
-                </div>
-                <div class="product-default left-details product-widget">
-                    <figure>
-                        <a href="demo42-product.html">
-                            <img src="{{ asset('assets/ecommerce/images/demoes/demo42/product/product11-300x300.jpg') }}"
-                                width="95" height="95" alt="product">
-                        </a>
-                    </figure>
-                    <div class="product-details">
-                        <div class="category-list">
-                            <a href="category.html">Sound & Video</a>
-                        </div>
-                        <h3 class="product-title">
-                            <a href="#">Product Short Name</a>
-                        </h3>
-                        <div class="ratings-container">
-                            <div class="product-ratings">
-                                <span class="ratings" style="width:80%"></span>
-                                <!-- End .ratings -->
-                                <span class="tooltiptext tooltip-top"></span>
+                            <h3 class="product-title">
+                                <a href="/products/{{ $product->slug }}">{{ $product->title }}</a>
+                            </h3>
+                            <div class="ratings-container">
+                                <div class="product-ratings">
+                                    <span class="ratings" style="width:0%"></span>
+                                    <span class="tooltiptext tooltip-top"></span>
+                                </div>
                             </div>
-                            <!-- End .product-ratings -->
-                        </div>
-                        <!-- End .product-container -->
-                        <div class="price-box">
-                            <span class="product-price">$299.00</span>
-                        </div>
-                        <!-- End .price-box -->
-                    </div>
-                    <!-- End .product-details -->
-                </div>
-                <div class="product-default left-details product-widget">
-                    <figure>
-                        <a href="demo42-product.html">
-                            <img src="{{ asset('assets/ecommerce/images/demoes/demo42/product/product12-300x300.jpg') }}"
-                                width="95" height="95" alt="product">
-                        </a>
-                    </figure>
-                    <div class="product-details">
-                        <div class="category-list">
-                            <a href="category.html">Hot Deals</a>,
-                            <a href="category.html">Steering Wheels</a>
-                        </div>
-                        <h3 class="product-title">
-                            <a href="#">Product Short Name</a>
-                        </h3>
-                        <div class="ratings-container">
-                            <div class="product-ratings">
-                                <span class="ratings" style="width:80%"></span>
-                                <!-- End .ratings -->
-                                <span class="tooltiptext tooltip-top"></span>
+                            <div class="price-box">
+                                <span class="product-price">Rp. {{ number_format($product->price, 2) }}</span>
                             </div>
-                            <!-- End .product-ratings -->
                         </div>
-                        <!-- End .product-container -->
-                        <div class="price-box">
-                            <span class="product-price">$55.00</span>
-                        </div>
-                        <!-- End .price-box -->
                     </div>
-                    <!-- End .product-details -->
-                </div>
+                @endforeach
             </div>
         </div>
     </section>
@@ -400,7 +252,7 @@
                                     <figure>
                                         <a href="/products/{{ $product->slug }}">
                                             <img src="{{ $product->images[0]->name }}" width="300" height="300"
-                                                alt="{{ $product->title }}">
+                                                alt="{{ $product->slug }}">
                                         </a>
                                         <div class="btn-icon-group">
                                             <button class="btn-icon btn-add-cart product-type-simple"
@@ -408,9 +260,10 @@
                                                 <i class="icon-shopping-cart"></i>
                                             </button>
                                         </div>
-                                        <a href="ajax/product-quick-view.html" class="btn-quickview"
-                                            title="Quick View">Quick
-                                            View</a>
+                                        <a href="/products/quick-view/{{ $product->slug }}" class="btn-quickview"
+                                            title="Quick View">
+                                            Quick View
+                                        </a>
                                     </figure>
                                     <div class="product-details">
                                         <div class="category-wrap">
@@ -476,7 +329,7 @@
                         @foreach ($brands as $brand)
                             <div class="owl-item active" style="width: 206.667px;">
                                 <a href="/brands/{{ $brand->slug }}">
-                                    <img src="{{ $brand->image }}" alt="{{ $brand->name }}" width="140"
+                                    <img src="{{ $brand->image }}" alt="{{ $brand->slug }}" width="140"
                                         height="60">
                                 </a>
                             </div>
@@ -494,17 +347,19 @@
     <section class="call-section appear-animate" style="background-color: #212529;">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-lg-7">
+                <div class="col-lg-6">
                     <h4 class="text-white text-uppercase">looking for help to
                         find auto parts?</h4>
                     <h2 class="text-white">Best Auto Parts In Indonesia</h2>
                     <h3>Call Us or Drop Us a Message Through Our Contact Form</h3>
                 </div>
-                <div class="col-lg-5 call-action">
+                <div class="col-lg-6 call-action">
                     <div class="d-inline-flex align-items-center text-left divider">
                         <i class="icon-phone-1 text-white mr-2"></i>
-                        <h6 class="pt-1 line-height-1 text-uppercase text-white">Call us now<a href="tel:#"
-                                class="d-block text-white ls-10 pt-2">0852-6000-0816</a></h6>
+                        <h6 class="pt-1 line-height-1 text-uppercase text-white">
+                            Call us now
+                            <a href="tel:#" class="d-block text-white ls-10 pt-2">0852-6000-0816</a>
+                        </h6>
                     </div>
                     <a href="/about-us" class="btn btn-borders btn-rounded btn-outline-white ls-25">
                         Send Us a Message
@@ -551,7 +406,7 @@
                         <figure>
                             <a href="/products/{{ $product->slug }}">
                                 <img src="{{ $product->images[0]->name }}" width="300" height="300"
-                                    alt="{{ $product->title }}">
+                                    alt="{{ $product->slug }}">
                             </a>
                             <div class="btn-icon-group">
                                 <button class="btn-icon btn-add-cart product-type-simple"
@@ -559,8 +414,10 @@
                                     <i class="icon-shopping-cart"></i>
                                 </button>
                             </div>
-                            <a href="ajax/product-quick-view.html" class="btn-quickview" title="Quick View">Quick
-                                View</a>
+                            <a href="/products/quick-view/{{ $product->slug }}" class="btn-quickview"
+                                title="Quick View">
+                                Quick View
+                            </a>
                         </figure>
                         <div class="product-details">
                             <div class="category-wrap">

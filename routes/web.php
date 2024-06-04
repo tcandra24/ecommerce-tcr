@@ -57,6 +57,8 @@ Route::prefix('admin')->group(function() {
 });
 
 Route::get('/', [ App\Http\Controllers\Ecommerce\HomeController::class, 'index' ]);
+Route::get('/about-us', App\Http\Controllers\Ecommerce\AboutController::class);
+
 Route::group(['middleware' => ['guest:customer']], function () {
     Route::get('/login', [App\Http\Controllers\Ecommerce\AuthController::class, 'index']);
     Route::post('/login', [App\Http\Controllers\Ecommerce\AuthController::class, 'login']);
@@ -86,6 +88,7 @@ Route::group(['middleware' => ['auth:customer']], function () {
 Route::prefix('products')->group(function() {
     Route::get('/', [App\Http\Controllers\Ecommerce\ProductController::class, 'index']);
     Route::get('/{slug}', [App\Http\Controllers\Ecommerce\ProductController::class, 'detail']);
+    Route::get('/quick-view/{slug}', [App\Http\Controllers\Ecommerce\ProductController::class, 'quickView']);
 });
 
 Route::prefix('categories')->group(function() {

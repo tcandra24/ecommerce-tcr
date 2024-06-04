@@ -8,26 +8,11 @@
                 <li><a href="/">Home</a></li>
                 <li>
                     <a href="/categories" title="shop">Categories</a>
-                    <ul>
-                        @foreach ($categoriesMenuHeader as $category)
-                            <li><a href="/categories/{{ $category->slug }}">{{ $category->name }}</a></li>
-                        @endforeach
-                    </ul>
+                    <x-categories-header-mobile />
                 </li>
                 <li>
                     <a href="/products">Products</a>
-                    <ul>
-                        @foreach ($productPerCategoryMenuHeader as $category)
-                            <li>
-                                <a href="/categories/{{ $category->slug }}" class="nolink">{{ $category->name }}</a>
-                                <ul>
-                                    @foreach ($category->products as $product)
-                                        <li><a href="/products/{{ $product->slug }}">{{ $product->title }}</a></li>
-                                    @endforeach
-                                </ul>
-                            </li>
-                        @endforeach
-                    </ul>
+                    <x-products-per-category-header-mobile />
                 </li>
             </ul>
             @if (Auth::guard('customer')->check())

@@ -51,12 +51,14 @@ class WishlistController extends Controller
     {
         try {
             $product = Product::where('slug', $slug)->first();
-            $wishlists = Wishlist::where('product_id', $product->id)->where('customer_id', Auth::guard('customer')->user()->id);
-            $wishlists->delete();
+            $wishlist = Wishlist::where('product_id', $product->id)->where('customer_id', Auth::guard('customer')->user()->id);
+            $wishlist->delete();
+
+            $wishlists = Wishlist::where('customer_id', Auth::guard('customer')->user()->id)->get();
 
             return response()->json([
                 'success' => true,
-                'wishlists' => $wishlists->get(),
+                'wishlists' => $wishlists->count(),
                 'message' => 'Success delete from Wishlist'
             ]);
         } catch (\Exception $e) {

@@ -15,7 +15,7 @@
             Swal.fire({
                 title: "Are you Sure ?",
                 text: 'Delete ' + name,
-                type: "warning",
+                icon: "warning",
                 showCancelButton: !0,
                 confirmButtonColor: "#ccc",
                 confirmButtonText: "Yes",
@@ -56,10 +56,13 @@
 
                         $(`#product-slug-${slug}`).remove()
                         if (carts.length === 0) {
+                            $('#cart-total-container').remove()
+                            $('#container-table-cart').removeClass('col-lg-8')
+                            $('#container-table-cart').addClass('col-lg-12')
                             $('.table-cart tbody').html(`
                                 <tr>
                                     <td colspan="5">
-                                        <div class="alert alert-rounded alert-info">
+                                        <div class="alert alert-rounded alert-info justify-content-center">
                                             <i class="fas fa-info-circle" style="color: #67cce0;"></i>
                                             <span><strong>Information!</strong> Cart is Empty</span>
                                         </div>
@@ -139,7 +142,7 @@
         </ul>
 
         <div class="row">
-            <div class="col-lg-8">
+            <div id="container-table-cart" class="{{ count($carts) > 0 ? 'col-lg-8' : 'col-lg-12' }}">
                 <div class="cart-table-container">
                     <table class="table table-cart">
                         <thead>
@@ -192,7 +195,7 @@
                             @else
                                 <tr>
                                     <td colspan="5">
-                                        <div class="alert alert-rounded alert-info">
+                                        <div class="alert alert-rounded alert-info justify-content-center">
                                             <i class="fas fa-info-circle" style="color: #67cce0;"></i>
                                             <span><strong>Information!</strong> Cart is Empty</span>
                                         </div>
@@ -204,25 +207,27 @@
                 </div>
             </div>
 
-            <div class="col-lg-4">
-                <div class="cart-summary">
-                    <h3>CART TOTALS</h3>
+            @if (count($carts) > 0)
+                <div id="cart-total-container" class="col-lg-4">
+                    <div class="cart-summary">
+                        <h3>CART TOTALS</h3>
 
-                    <table class="table table-totals">
-                        <tbody>
-                            <tr>
-                                <td>Total</td>
-                                <td id="grant-total-product">Rp. {{ number_format($carts->sum('total'), 2) }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                        <table class="table table-totals">
+                            <tbody>
+                                <tr>
+                                    <td>Total</td>
+                                    <td id="grant-total-product">Rp. {{ number_format($carts->sum('total'), 2) }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
 
-                    <div class="checkout-methods">
-                        <a href="/checkouts" class="btn btn-block btn-dark">Proceed to Checkout
-                            <i class="fa fa-arrow-right"></i></a>
+                        <div class="checkout-methods">
+                            <a href="/checkouts" class="btn btn-block btn-dark">Proceed to Checkout
+                                <i class="fa fa-arrow-right"></i></a>
+                        </div>
                     </div>
                 </div>
-            </div>
+            @endif
         </div>
     </div>
 

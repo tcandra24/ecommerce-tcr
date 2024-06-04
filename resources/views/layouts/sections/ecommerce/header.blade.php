@@ -158,11 +158,7 @@
                             <span> All Category</span>
                         </a>
                         <div class="menu-depart">
-                            @foreach ($categoriesMenuHeader as $category)
-                                <a href="/categories/{{ $category->slug }}">
-                                    {{ $category->name }}
-                                </a>
-                            @endforeach
+                            <x-categories-header />
                         </div>
                     </li>
                     <li class="{{ Request::segment(1) == '' ? 'active' : '' }}">
@@ -172,18 +168,7 @@
                         <a href="/products">Products</a>
                         <div class="megamenu megamenu-fixed-width">
                             <div class="row">
-                                @foreach ($productPerCategoryMenuHeader as $category)
-                                    <div class="col-lg-4">
-                                        <a href="/categories/{{ $category->slug }}"
-                                            class="nolink">{{ $category->name }}</a>
-                                        <ul class="submenu">
-                                            @foreach ($category->products as $product)
-                                                <li><a href="/products/{{ $product->slug }}">{{ $product->title }}</a>
-                                                </li>
-                                            @endforeach
-                                        </ul>
-                                    </div>
-                                @endforeach
+                                <x-products-per-category-header />
 
                                 <div class="col-lg-4 p-0">
                                     <div class="menu-banner menu-banner-2">
