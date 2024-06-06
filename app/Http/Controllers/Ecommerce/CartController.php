@@ -69,15 +69,6 @@ class CartController extends Controller
             $product = Product::select('id', 'price', 'weight')->where('slug', $slug)->first();
             $cart = Cart::where('product_id', $product->id)->where('customer_id', Auth::guard('customer')->user()->id);
 
-            // if($method === 'increment') {
-            //     $cart->increment('qty');
-            // } else {
-            //     $cart->decrement('qty');
-            // }
-            // $cart = $cart->first();
-            // $total = $product->price * $cart->qty;
-            // $weight = $product->weight * $cart->qty;
-
             $cart->update([
                 'qty'       => $request->qty,
                 'total'     => $product->price * $request->qty,

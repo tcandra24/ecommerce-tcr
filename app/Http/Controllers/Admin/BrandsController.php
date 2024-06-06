@@ -3,14 +3,17 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\BrandRequest;
 use Illuminate\Support\Str;
-use Illuminate\Http\Request;
 
 use App\Models\Brand;
+use App\Traits\ImageTrait;
 use Illuminate\Support\Facades\Storage;
 
 class BrandsController extends Controller
 {
+    use ImageTrait;
+
     /**
      * Display a listing of the resource.
      *
@@ -38,18 +41,10 @@ class BrandsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(BrandRequest $request)
     {
-        $request->validate([
-            'name' => 'required'
-        ]);
-
         try {
-            $filename = $request->images[0]['tmpImageName'];
-            $srcFolder = 'public/images/tmp/';
-            $dstFolder = 'public/images/brands/';
-
-            Storage::disk('local')->move($srcFolder . $filename, $dstFolder . $filename);
+            $filename = $this->upload('public/images/brands/', $request);
 
             Brand::create([
                 'name' => $request->name,
@@ -67,17 +62,6 @@ class BrandsController extends Controller
                 'message' => $e->getMessage()
             ]);
         }
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
@@ -99,23 +83,11 @@ class BrandsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Brand $brand)
+    public function update(BrandRequest $request, Brand $brand)
     {
-        $request->validate([
-            'name' => 'required'
-        ]);
-
         try {
             if (isset($request->images[0]['tmpImageName'])){
-                $filename = $request->images[0]['tmpImageName'];
-                $srcFolder = 'public/images/tmp/';
-                $dstFolder = 'public/images/brands/';
-
-                if(Storage::disk('local')->exists('public/images/brands/'. basename($brand->image))){
-                    Storage::disk('local')->delete('public/images/brands/'. basename($brand->image));
-                }
-
-                Storage::disk('local')->move($srcFolder . $filename, $dstFolder . $filename);
+                $filename = $this->upload('public/images/brands/', $request, $brand);
 
                 $brand->update([
                     'name' => $request->name,

@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\Admin\ProductRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Str;
 use App\Models\Brand;
 use App\Models\Category;
-use Illuminate\Http\Request;
 
 use App\Models\Product;
 use App\Models\ProductImage;
@@ -56,21 +56,8 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
-        $request->validate([
-            'title' => 'required',
-            'brand' => 'required',
-            'category' => 'required',
-            'description' => 'required',
-            'images' => 'required',
-            'price' => 'required',
-            'sku' => 'required',
-            'status' => 'required',
-            'weight' => 'required',
-            'stock' => 'required',
-        ]);
-
         try {
             DB::transaction(function () use ($request) {
                 $product = Product::create([
@@ -94,12 +81,13 @@ class ProductController extends Controller
                     $srcFolder = 'public/images/tmp/';
                     $dstFolder = 'public/images/products/';
 
+                    Storage::disk('local')->move($srcFolder . $filename, $dstFolder . $filename);
+
                     ProductImage::create([
                         'product_id' => $product->id,
                         'name' => $filename
                     ]);
 
-                    Storage::disk('local')->move($srcFolder . $filename, $dstFolder . $filename);
                 }
             });
 
@@ -113,17 +101,6 @@ class ProductController extends Controller
                 'message' => $e->getMessage()
             ]);
         }
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
@@ -161,22 +138,9 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(ProductRequest $request, Product $product)
     {
-        $request->validate([
-            'title' => 'required',
-            'brand' => 'required',
-            'category' => 'required',
-            'description' => 'required',
-            'price' => 'required',
-            'sku' => 'required',
-            'status' => 'required',
-            'weight' => 'required',
-            'stock' => 'required',
-        ]);
-
         try {
-
             DB::transaction(function () use ($request, $product) {
                 $product->update([
                     'title' => $request->title,

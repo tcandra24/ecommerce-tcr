@@ -3,13 +3,16 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\Admin\SliderRequest;
 
 use App\Models\Slider;
+use App\Traits\ImageTrait;
 use Illuminate\Support\Facades\Storage;
 
 class SliderController extends Controller
 {
+    use ImageTrait;
+
     /**
      * Display a listing of the resource.
      *
@@ -37,18 +40,10 @@ class SliderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SliderRequest $request)
     {
-        $request->validate([
-            'name' => 'required'
-        ]);
-
         try {
-            $filename = $request->images[0]['tmpImageName'];
-            $srcFolder = 'public/images/tmp/';
-            $dstFolder = 'public/images/sliders/';
-
-            Storage::disk('local')->move($srcFolder . $filename, $dstFolder . $filename);
+            $filename = $this->upload('public/images/sliders/', $request);
 
             Slider::create([
                 'name' => $request->name,
@@ -66,17 +61,6 @@ class SliderController extends Controller
                 'message' => $e->getMessage()
             ]);
         }
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
@@ -98,23 +82,11 @@ class SliderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Slider $slider)
+    public function update(SliderRequest $request, Slider $slider)
     {
-        $request->validate([
-            'name' => 'required'
-        ]);
-
         try {
             if (isset($request->images[0]['tmpImageName'])){
-                $filename = $request->images[0]['tmpImageName'];
-                $srcFolder = 'public/images/tmp/';
-                $dstFolder = 'public/images/sliders/';
-
-                if(Storage::disk('local')->exists('public/images/sliders/'. basename($slider->image))){
-                    Storage::disk('local')->delete('public/images/sliders/'. basename($slider->image));
-                }
-
-                Storage::disk('local')->move($srcFolder . $filename, $dstFolder . $filename);
+                $filename = $this->upload('public/images/sliders/', $request, $slider);
 
                 $slider->update([
                     'name' => $request->name,

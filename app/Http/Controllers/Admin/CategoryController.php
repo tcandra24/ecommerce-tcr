@@ -3,14 +3,17 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\CategoryRequest;
 use Illuminate\Support\Str;
-use Illuminate\Http\Request;
 
 use App\Models\Category;
+use App\Traits\ImageTrait;
 use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
 {
+    use ImageTrait;
+
     /**
      * Display a listing of the resource.
      *
@@ -38,18 +41,10 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
-        $request->validate([
-            'name' => 'required'
-        ]);
-
         try {
-            $filename = $request->images[0]['tmpImageName'];
-            $srcFolder = 'public/images/tmp/';
-            $dstFolder = 'public/images/categories/';
-
-            Storage::disk('local')->move($srcFolder . $filename, $dstFolder . $filename);
+            $filename = $this->upload('public/images/categories/', $request);
 
             Category::create([
                 'name' => $request->name,
@@ -67,17 +62,6 @@ class CategoryController extends Controller
                 'message' => $e->getMessage()
             ]);
         }
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
@@ -99,23 +83,11 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(CategoryRequest $request, Category $category)
     {
-        $request->validate([
-            'name' => 'required'
-        ]);
-
         try {
             if (isset($request->images[0]['tmpImageName'])){
-                $filename = $request->images[0]['tmpImageName'];
-                $srcFolder = 'public/images/tmp/';
-                $dstFolder = 'public/images/categories/';
-
-                if(Storage::disk('local')->exists('public/images/categories/'. basename($category->image))){
-                    Storage::disk('local')->delete('public/images/categories/'. basename($category->image));
-                }
-
-                Storage::disk('local')->move($srcFolder . $filename, $dstFolder . $filename);
+                $filename = $this->upload('public/images/categories/', $request, $category);
 
                 $category->update([
                     'name' => $request->name,

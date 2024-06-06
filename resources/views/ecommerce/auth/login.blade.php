@@ -35,7 +35,6 @@
                         </div>
 
                         <form action="/login" method="POST">
-                            {{ $errors->any() }}
                             @csrf
                             @if (Session::has('error'))
                                 <div class="alert alert-rounded alert-danger">
@@ -47,14 +46,27 @@
                                 Username or email address
                                 <span class="required">*</span>
                             </label>
-                            <input type="email" name="email" class="form-input form-wide" id="login-email" required>
+                            @error('email')
+                                <div class="invalid-text">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                            <input type="email" name="email"
+                                class="form-input form-wide {{ $errors->has('email') ? 'is-invalid-input' : '' }}"
+                                id="login-email">
 
                             <label for="login-password">
                                 Password
                                 <span class="required">*</span>
                             </label>
-                            <input type="password" name="password" class="form-input form-wide" id="login-password"
-                                required>
+                            @error('password')
+                                <div class="invalid-text">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                            <input type="password" name="password"
+                                class="form-input form-wide {{ $errors->has('password') ? 'is-invalid-input' : '' }}"
+                                id="login-password">
 
                             <div class="form-footer">
                                 <div class="custom-control custom-checkbox mb-0">

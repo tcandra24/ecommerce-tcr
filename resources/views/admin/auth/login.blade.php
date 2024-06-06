@@ -12,23 +12,29 @@
         @endif
         <div class="form-group mb-3">
             <label>Email</label>
-            <div class="input-group">
+            <div class="input-group {{ $errors->has('email') ? 'is-invalid-input' : '' }}">
                 <input name="email" type="email" class="form-control" />
                 <span class="input-group-text">
                     <i class="bx bx-user text-4"></i>
                 </span>
             </div>
+            @error('email')
+                <label class="error" for="fullname">{{ $message }}</label>
+            @enderror
         </div>
         <div class="form-group mb-3">
             <div class="clearfix">
                 <label class="float-start">Password</label>
             </div>
-            <div class="input-group">
+            <div class="input-group {{ $errors->has('password') ? 'is-invalid-input' : '' }}">
                 <input name="password" type="password" class="form-control" />
                 <span class="input-group-text">
                     <i class="bx bx-lock text-4"></i>
                 </span>
             </div>
+            @error('password')
+                <label class="error" for="fullname">{{ $message }}</label>
+            @enderror
         </div>
         <div class="row">
             <div class="col-sm-8">

@@ -2,27 +2,25 @@
 
 namespace App\Http\Controllers\Ecommerce;
 
+use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Traits\Auth\LoginTrait;
 use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
+    use LoginTrait;
+
     public function index()
     {
         return view('ecommerce.auth.login');
     }
 
-    public function login(Request $request)
+    public function login(LoginRequest $request)
     {
-        $request->validate([
-            'email' => 'required',
-            'password' => 'required'
-        ]);
-
         try {
-            $credentials = $request->only('email', 'password');
-            if (!Auth::guard('customer')->attempt($credentials, $request->remember)) {
+            if(!$this->doLogin($request, 'customer')){
                 throw new \Exception('Login Failed, Username/Password wrong');
             }
 

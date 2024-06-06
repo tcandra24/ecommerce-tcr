@@ -16625,6 +16625,16 @@ i.wishlist-empty {
     line-height: 21px;
 }
 
+.invalid-text {
+    width: 100%;
+    font-size: 80%;
+    color: #dc3545;
+}
+
+.is-invalid-input {
+    border: 1px solid #dc3545 !important;
+}
+
 @media (min-width: 768px) {
     .login-container .col-md-6:first-child {
         padding-right: 3.4rem;
