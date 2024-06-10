@@ -45,6 +45,7 @@
         href="{{ asset('assets/ecommerce/vendor/fontawesome-free/css/all.min.css') }}">
 
     @yield('styles')
+    @yield('scripts-head')
 </head>
 
 <body>

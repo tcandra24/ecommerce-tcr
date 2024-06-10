@@ -9,8 +9,31 @@
         href="{{ asset('assets/ecommerce/vendor/simple-line-icons/css/simple-line-icons.min.css') }}">
 @endsection
 
+@section('scripts-head')
+    <script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js"
+        data-client-key="SB-Mid-client-u9b0rGRutsfrJPzV"></script>
+@endsection
+
 @section('scripts')
-    {{--  --}}
+    <script>
+        function payment(snap_token) {
+            snap.pay(snap_token, {
+                onSuccess: function() {
+                    console.log('success')
+                },
+                onPending: function() {
+                    console.log('pending')
+                },
+                onError: function() {
+                    console.log('error')
+                },
+                onClose: function() {
+                    console.log('close')
+                }
+            })
+
+        }
+    </script>
 @endsection
 
 @section('main')
@@ -30,6 +53,16 @@
             <h1>My Order</h1>
         </div>
     </div>
+
+    <nav aria-label="breadcrumb" class="breadcrumb-nav">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/my-account"><i class="icon-home"></i></a></li>
+                <li class="breadcrumb-item active" aria-current="page">{{ $invoice->invoice }}</li>
+            </ol>
+        </div>
+    </nav>
+
     <div class="container account-container custom-account-container">
         <div class="row">
             <div class="col-lg-7">
@@ -106,6 +139,25 @@
                                     <span>{{ $invoice->phone }}</span>
                                 </td>
                             </tr>
+                            <tr>
+                                <td class="product-col">
+                                    <h3 class="product-title">
+                                        Status
+                                    </h3>
+                                </td>
+
+                                <td class="price-col">
+                                    @if ($invoice->status === 'success')
+                                        <span class="badge badge-pill badge-success">Success</span>
+                                    @elseif($invoice->status === 'expired')
+                                        <span class="badge badge-pill badge-secondary">Expired</span>
+                                    @elseif($invoice->status === 'failed')
+                                        <span class="badge badge-pill badge-danger">Failed</span>
+                                    @else
+                                        <span class="badge badge-pill badge-warning">Pending</span>
+                                    @endif
+                                </td>
+                            </tr>
                         </tbody>
                         <tfoot>
                             <tr class="order-total">
@@ -119,9 +171,12 @@
                         </tfoot>
                     </table>
 
-                    <button class="btn btn-dark btn-place-order" form="checkout-form">
-                        Pay
-                    </button>
+                    @if ($invoice->status === 'pending')
+                        <button onclick="payment('{{ $invoice->snap_token }}')" class="btn btn-dark btn-place-order"
+                            form="checkout-form">
+                            Pay
+                        </button>
+                    @endif
                 </div>
             </div>
         </div>

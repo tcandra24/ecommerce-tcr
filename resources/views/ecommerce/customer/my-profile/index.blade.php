@@ -146,7 +146,15 @@
                                                     {{ $invoice->created_at }}
                                                 </td>
                                                 <td>
-                                                    {{ $invoice->status }}
+                                                    @if ($invoice->status === 'success')
+                                                        <span class="badge badge-pill badge-success">Success</span>
+                                                    @elseif($invoice->status === 'expired')
+                                                        <span class="badge badge-pill badge-secondary">Expired</span>
+                                                    @elseif($invoice->status === 'failed')
+                                                        <span class="badge badge-pill badge-danger">Failed</span>
+                                                    @else
+                                                        <span class="badge badge-pill badge-warning">Pending</span>
+                                                    @endif
                                                 </td>
                                                 <td>
                                                     Rp. {{ number_format($invoice->grand_total, 2) }}
