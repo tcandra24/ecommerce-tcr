@@ -133,7 +133,7 @@
 
                         <span class="cart-product-info">
                             <span class="cart-product-qty">${ object.qty }</span>
-                            × Rp. ${ moneyFormat.format(object.price) }
+                            × ${ moneyFormat.format(object.price) }
                         </span>
                     </div>
 
@@ -161,7 +161,7 @@
                     $('#cart-badge-mobile').html(`
                         <span class="cart-count badge-circle">${cart_items.length}</span>`)
                     $('#side-subtotal-cart').text(
-                        `Rp ${ moneyFormat.format(total_cart) }`)
+                        `${ moneyFormat.format(total_cart) }`)
 
 
                     $('#header-carts').html(concatStringTepmlate)
