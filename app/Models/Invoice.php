@@ -46,7 +46,7 @@ class Invoice extends Model
      */
     public function customer()
     {
-        return $this->belongsTo(Customer::class);
+        return $this->belongsTo(Customer::class)->withDefault();
     }
 
     /**
@@ -56,7 +56,7 @@ class Invoice extends Model
      */
     public function city()
     {
-        return $this->belongsTo(City::class, 'city_id', 'city_id');
+        return $this->belongsTo(City::class, 'city_id', 'city_id')->withDefault();
     }
 
     /**
@@ -66,7 +66,7 @@ class Invoice extends Model
      */
     public function province()
     {
-        return $this->belongsTo(Province::class, 'province_id', 'province_id');
+        return $this->belongsTo(Province::class, 'province_id', 'province_id')->withDefault();
     }
 
     private function getStatusClass($status)

@@ -80,6 +80,11 @@ Route::group(['middleware' => ['auth:customer']], function () {
 
     Route::prefix('my-account')->group(function() {
         Route::get('/', [App\Http\Controllers\Ecommerce\CustomerController::class, 'profile']);
+        Route::put('/change-password', [App\Http\Controllers\Ecommerce\UserChangePassword::class, 'update']);
+    });
+
+    Route::prefix('my-order')->group(function() {
+        Route::get('/{invoice}', [App\Http\Controllers\Ecommerce\OrderController::class, 'show']);
     });
 
     Route::post('/logout', [App\Http\Controllers\Ecommerce\AuthController::class, 'logout']);

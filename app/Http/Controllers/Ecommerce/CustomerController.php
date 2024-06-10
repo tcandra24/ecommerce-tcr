@@ -13,7 +13,7 @@ class CustomerController extends Controller
     public function profile()
     {
         $user = Auth::guard('customer')->user();
-        $invoices = Invoice::where('customer_id', $user->id)->get();
+        $invoices = Invoice::where('customer_id', $user->id)->orderBy('created_at', 'desc')->get();
 
         return view('ecommerce.customer.my-profile.index', [
             'customer' => $user,

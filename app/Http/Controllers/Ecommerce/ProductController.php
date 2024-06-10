@@ -23,7 +23,7 @@ class ProductController extends Controller
             $products = $products->whereBetween('price', [request()->price_start, request()->price_end]);
         })->withExists(['wishlist' => function($query){
             $query->where('customer_id', Auth::guard('customer')->user()->id ?? null);
-        }])->paginate(9);
+        }])->where('is_active', true)->paginate(9);
 
         return view('ecommerce.products.index', [
             'products' => $products,
@@ -32,7 +32,11 @@ class ProductController extends Controller
 
     public function detail($slug)
     {
-        $product = Product::with('images', 'category')->where('slug', $slug)->first();
+        $product = Product::with('images', 'category')->where('is_active', true)->where('slug', $slug)->first();
+        if(!$product){
+            abort(404);
+        }
+
         $onWishlist = Wishlist::where('customer_id', Auth::guard('customer')->user()->id ?? null)->where('product_id', $product->id)->exists();
 
         $relateProduct = Product::with('images', 'category')->withExists(['wishlist' => function($query){

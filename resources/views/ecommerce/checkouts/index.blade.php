@@ -62,7 +62,7 @@
                                 <label>Province
                                     <abbr class="required" title="required">*</abbr>
                                 </label>
-                                <select class="form-control" name="province">
+                                <select class="form-control" name="province" required>
                                     <option value="" selected="selected">
                                         Select Province
                                     </option>
@@ -74,7 +74,7 @@
 
                             <div class="select-custom">
                                 <label>City
-                                    <abbr class="required" title="required">*</abbr>
+                                    <abbr class="required" title="required" required>*</abbr>
                                 </label>
                                 <select class="form-control" name="city">
                                     <option value="" selected="selected">

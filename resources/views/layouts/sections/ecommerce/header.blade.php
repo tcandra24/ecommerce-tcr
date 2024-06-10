@@ -1,6 +1,13 @@
 <header class="header">
     <div class="header-top">
         <div class="container">
+            <div class="header-left d-none d-md-block">
+                <div class="info-box info-box-icon-left text-primary justify-content-start p-0">
+                    <div class="info-box-content">
+                        <h4>PT. Tri Cipta Ragam Makmur</h4>
+                    </div>
+                </div>
+            </div>
             <div class="header-right header-dropdowns ml-0 ml-md-auto w-md-100">
 
                 <div class="header-dropdown mr-auto mr-md-0">

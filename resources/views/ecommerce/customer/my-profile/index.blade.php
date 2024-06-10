@@ -60,6 +60,20 @@
                 </ul>
             </div>
             <div class="col-lg-9 order-lg-last order-1 tab-content">
+                @if (Session::has('error'))
+                    <div class="alert alert-rounded alert-danger alert-dismissible" role="alert">
+                        <i class="fa fa-exclamation-circle" style="color: #ef8495;"></i>
+                        <span><strong>Error!</strong> {{ Session::get('error') }}</span>
+                    </div>
+                @endif
+
+                @if (Session::has('success'))
+                    <div class="alert alert-rounded alert-success alert-dismissible" role="alert">
+                        <i class="fa fa-check-circle"></i>
+                        <span><strong>Success!</strong> {{ Session::get('success') }}</span>
+                    </div>
+                @endif
+
                 <div class="tab-pane fade show active" id="dashboard" role="tabpanel">
                     <div class="dashboard-content">
                         <div class="row row-lg">
@@ -124,7 +138,9 @@
                                         @foreach ($invoices as $invoice)
                                             <tr>
                                                 <td>
-                                                    {{ $invoice->invoice }}
+                                                    <a href="/my-order/{{ $invoice->invoice }}">
+                                                        {{ $invoice->invoice }}
+                                                    </a>
                                                 </td>
                                                 <td>
                                                     {{ $invoice->created_at }}
@@ -217,27 +233,49 @@
                                 {{ $customer->address }}
                             </textarea>
                         </div>
-                        <form action="#">
+                        <form action="/my-account/change-password" method="POST">
+                            @csrf
+                            @method('PUT')
                             <div class="change-password">
                                 <h3 class="text-uppercase mb-2">Password Change</h3>
 
                                 <div class="form-group">
-                                    <label for="customer-password">Current Password (leave blank to leave
-                                        unchanged)</label>
-                                    <input type="password" class="form-control" id="customer-password" name="password">
+                                    <label for="customer-password">
+                                        Current Password (leave blank to leave unchanged)
+                                    </label>
+                                    <input type="password"
+                                        class="form-control {{ $errors->has('password_old') ? 'is-invalid-input' : '' }}"
+                                        id="customer-password" name="password_old">
+                                    @error('password_old')
+                                        <div class="invalid-text">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
                                 </div>
 
                                 <div class="form-group">
                                     <label for="customer-new-password">New Password (leave blank to leave
                                         unchanged)</label>
-                                    <input type="password" class="form-control" id="customer-new-password"
-                                        name="new_password">
+                                    <input type="password"
+                                        class="form-control {{ $errors->has('new_password') ? 'is-invalid-input' : '' }}"
+                                        id="customer-new-password" name="new_password">
+                                    @error('new_password')
+                                        <div class="invalid-text">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
                                 </div>
 
                                 <div class="form-group">
                                     <label for="customer-confirm-new-password">Confirm New Password</label>
-                                    <input type="password" class="form-control" id="customer-confirm-new-password"
-                                        name="confirm_password">
+                                    <input type="password"
+                                        class="form-control {{ $errors->has('new_password_confirm') ? 'is-invalid-input' : '' }}"
+                                        id="customer-confirm-new-password" name="new_password_confirm">
+                                    @error('new_password_confirm')
+                                        <div class="invalid-text">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
                                 </div>
                             </div>
 

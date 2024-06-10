@@ -54,7 +54,8 @@
                             </li>
                         @endcan
                         @can('master.products.index')
-                            <li class="nav-parent">
+                            <li
+                                class="nav-parent {{ request()->segment(2) == 'products' ? 'nav-expanded nav-active' : '' }}">
                                 <a class="nav-link" href="#">
                                     <i class="bx bx-package" aria-hidden="true"></i>
                                     <span>Product</span>

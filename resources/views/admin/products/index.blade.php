@@ -67,74 +67,7 @@
         </div>
     </div>
     <div class="row row-gutter-sm mb-5">
-        <div class="col-lg-2-5 col-xl-1-5 mb-4 mb-lg-0">
-            <div class="filters-sidebar-wrapper bg-light rounded">
-                <div class="card card-modern">
-                    <div class="card-header">
-                        <div class="card-actions">
-                            <a href="#" class="card-action card-action-toggle" data-card-toggle></a>
-                        </div>
-                        <h4 class="card-title">CATEGORIES</h4>
-                    </div>
-                    <div class="card-body">
-                        <ul class="list list-unstyled mb-0">
-                            @foreach ($categories as $category)
-                                <li>
-                                    <a href="#">{{ $category->name }}</a>
-                                </li>
-                            @endforeach
-                        </ul>
-                    </div>
-                </div>
-                <hr class="solid opacity-7">
-                <div class="card card-modern">
-                    <div class="card-header">
-                        <div class="card-actions">
-                            <a href="#" class="card-action card-action-toggle" data-card-toggle></a>
-                        </div>
-                        <h4 class="card-title">PRICE</h4>
-                    </div>
-                    <div class="card-body">
-                        <div class="slider-range-wrapper">
-                            <div class="m-md slider-primary slider-modern" data-plugin-slider
-                                data-plugin-options='{ "half_values": true, "values": [ 25, 270 ], "range": true, "max": 300 }'
-                                data-plugin-slider-output="#priceRange"
-                                data-plugin-slider-link-values-to="#priceRangeValues">
-                                <input id="priceRange" type="hidden" value="25, 270" />
-                            </div>
-                            <form class="d-flex align-items-center justify-content-between mb-2" method="get">
-                                <span id="priceRangeValues" class="price-range-values">
-                                    Price $<span class="min price-range-low">25</span> - $<span
-                                        class="max price-range-high">270</span>
-                                </span>
-                                <input type="hidden" class="hidden-price-range-low" name="priceLow" value="" />
-                                <input type="hidden" class="hidden-price-range-high" name="priceHigh" value="" />
-                                <button type="submit"
-                                    class="btn btn-primary btn-h-1 font-weight-semibold rounded-0 btn-px-3 btn-py-1 text-2">FILTER</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <hr class="solid opacity-7">
-                <div class="card card-modern">
-                    <div class="card-header">
-                        <div class="card-actions">
-                            <a href="#" class="card-action card-action-toggle" data-card-toggle></a>
-                        </div>
-                        <h4 class="card-title">BRANDS</h4>
-                    </div>
-                    <div class="card-body">
-                        <ul class="list list-unstyled mb-0">
-                            @foreach ($brands as $brand)
-                                <li><a href="#">{{ $brand->name }} <span
-                                            class="float-end">{{ $brand->products_count }}</span></a></li>
-                            @endforeach
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3-5 col-xl-4-5">
+        <div class="col-lg-3-6 col-xl-4-6">
             @if (count($products) > 0)
                 <div class="row row-gutter-sm">
                     @foreach ($products as $product)

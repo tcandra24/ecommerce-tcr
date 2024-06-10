@@ -21,6 +21,6 @@ class City extends Model
      */
     public function province()
     {
-        return $this->belongsTo(Province::class, 'province_id');
+        return $this->belongsTo(Province::class, 'province_id')->withDefault();
     }
 }
