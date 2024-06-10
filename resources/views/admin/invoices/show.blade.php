@@ -128,13 +128,10 @@
                         <div class="form-row">
                             <div class="form-group col mb-3">
                                 <label>Customer</label>
-                                <select class="form-control form-control-modern" name="orderCustomer" required
+                                <select class="form-control form-control-modern" name="orderCustomer" disabled
                                     data-plugin-selectTwo>
-                                    @foreach ($customers as $customer)
-                                        <option value="{{ $customer->id }}"
-                                            {{ $customer->id === $invoice->customer->id ? 'selected' : '' }}>
-                                            {{ $customer->name }}</option>
-                                    @endforeach
+                                    <option value="{{ $invoice->customer->id }}" selected>
+                                        {{ $invoice->customer->name }}</option>
                                 </select>
                             </div>
                         </div>

@@ -17,18 +17,25 @@
 @section('scripts')
     <script>
         function payment(snap_token) {
+            $('.btn-place-order').attr('disabled', true)
+            $('#loading-spinner').css('display', 'unset')
+
             snap.pay(snap_token, {
                 onSuccess: function() {
-                    console.log('success')
+                    $('.btn-place-order').css('display', 'none')
+                    location.reload()
                 },
                 onPending: function() {
-                    console.log('pending')
+                    $('.btn-place-order').css('display', 'none')
+                    location.reload()
                 },
                 onError: function() {
-                    console.log('error')
+                    $('.btn-place-order').css('display', 'none')
+                    location.reload()
                 },
                 onClose: function() {
-                    console.log('close')
+                    $('.btn-place-order').attr('disabled', false)
+                    $('#loading-spinner').css('display', 'none')
                 }
             })
 
@@ -186,6 +193,20 @@
                     @if ($invoice->payment_status === 'pending')
                         <button onclick="payment('{{ $invoice->snap_token }}')" class="btn btn-dark btn-place-order"
                             form="checkout-form">
+                            <svg id="loading-spinner" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"
+                                preserveAspectRatio="xMidYMid" width="30" height="30"
+                                style="background: rgba(255, 255, 255, 0); display: none;"
+                                xmlns:xlink="http://www.w3.org/1999/xlink">
+                                <g>
+                                    <circle stroke-dasharray="164.93361431346415 56.97787143782138" r="35" stroke-width="10"
+                                        stroke="#959595" fill="none" cy="50" cx="50">
+                                        <animateTransform keyTimes="0;1" values="0 50 50;360 50 50" dur="1s"
+                                            repeatCount="indefinite" type="rotate" attributeName="transform">
+                                        </animateTransform>
+                                    </circle>
+                                    <g></g>
+                                </g>
+                            </svg>
                             Pay
                         </button>
                     @endif
