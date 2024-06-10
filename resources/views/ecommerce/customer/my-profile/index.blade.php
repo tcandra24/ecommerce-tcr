@@ -128,7 +128,8 @@
                                     <tr>
                                         <th class="order-id">INVOICE</th>
                                         <th class="order-date">DATE</th>
-                                        <th class="order-status">STATUS</th>
+                                        <th class="order-status">STATUS PAYMENT</th>
+                                        <th class="order-status">STATUS ORDER</th>
                                         <th class="order-price">TOTAL</th>
                                         <th class="order-action">ACTIONS</th>
                                     </tr>
@@ -146,15 +147,18 @@
                                                     {{ $invoice->created_at }}
                                                 </td>
                                                 <td>
-                                                    @if ($invoice->status === 'success')
+                                                    @if ($invoice->payment_status === 'success')
                                                         <span class="badge badge-pill badge-success">Success</span>
-                                                    @elseif($invoice->status === 'expired')
+                                                    @elseif($invoice->payment_status === 'expired')
                                                         <span class="badge badge-pill badge-secondary">Expired</span>
-                                                    @elseif($invoice->status === 'failed')
+                                                    @elseif($invoice->payment_status === 'failed')
                                                         <span class="badge badge-pill badge-danger">Failed</span>
                                                     @else
                                                         <span class="badge badge-pill badge-warning">Pending</span>
                                                     @endif
+                                                </td>
+                                                <td>
+                                                    {{ ucwords(str_replace('_', ' ', $invoice->order_status)) }}
                                                 </td>
                                                 <td>
                                                     Rp. {{ moneyFormat($invoice->grand_total) }}

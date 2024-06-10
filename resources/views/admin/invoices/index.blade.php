@@ -53,10 +53,11 @@
                                 <tr>
                                     <th width="5%">No</th>
                                     <th width="20%">Invoice</th>
-                                    <th width="30%">Date</th>
+                                    <th width="25%">Date</th>
                                     <th width="20%">Name</th>
-                                    <th width="15%">Grand Total</th>
-                                    <th width="10%">Status</th>
+                                    <th width="10%">Grand Total</th>
+                                    <th width="10%">Status Payment</th>
+                                    <th width="10%">Status Order</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -81,8 +82,11 @@
                                         </td>
                                         <td>
                                             <span class="ecommerce-status {{ $invoice->statusClass }}">
-                                                {{ $invoice->status }}
+                                                {{ $invoice->payment_status }}
                                             </span>
+                                        </td>
+                                        <td>
+                                            {{ ucwords(str_replace('_', ' ', $invoice->order_status)) }}
                                         </td>
                                     </tr>
                                 @endforeach

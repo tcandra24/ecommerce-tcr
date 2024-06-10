@@ -39,7 +39,7 @@ class CheckoutController extends Controller
                 *   update invoice to pending
                 */
                 $data_transaction->update([
-                    'status' => 'pending'
+                    'payment_status' => 'pending',
                 ]);
 
               } else {
@@ -48,7 +48,8 @@ class CheckoutController extends Controller
                 *   update invoice to success
                 */
                 $data_transaction->update([
-                    'status' => 'success'
+                    'payment_status' => 'success',
+                    'order_status' => 'waiting_confirmation',
                 ]);
 
               }
@@ -61,7 +62,8 @@ class CheckoutController extends Controller
             *   update invoice to success
             */
             $data_transaction->update([
-                'status' => 'success'
+                'payment_status' => 'success',
+                'order_status' => 'waiting_confirmation',
             ]);
 
 
@@ -72,7 +74,8 @@ class CheckoutController extends Controller
             *   update invoice to pending
             */
             $data_transaction->update([
-                'status' => 'pending'
+                'payment_status' => 'pending',
+                'order_status' => 'waiting_confirmation',
             ]);
 
 
@@ -83,7 +86,8 @@ class CheckoutController extends Controller
             *   update invoice to failed
             */
             $data_transaction->update([
-                'status' => 'failed'
+                'payment_status' => 'failed',
+                'order_status' => 'waiting_confirmation',
             ]);
 
 
@@ -94,7 +98,8 @@ class CheckoutController extends Controller
             *   update invoice to expired
             */
             $data_transaction->update([
-                'status' => 'expired'
+                'payment_status' => 'expired',
+                'order_status' => 'waiting_confirmation',
             ]);
 
 
@@ -104,7 +109,8 @@ class CheckoutController extends Controller
             *   update invoice to failed
             */
             $data_transaction->update([
-                'status' => 'failed'
+                'payment_status' => 'failed',
+                'order_status' => 'waiting_confirmation',
             ]);
 
         }

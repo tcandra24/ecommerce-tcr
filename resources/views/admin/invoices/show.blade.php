@@ -16,14 +16,14 @@
 
             'use strict';
 
-            $('select[name="orderStatus"]').select2({
+            $('select[name="paymentStatus"]').select2({
                 minimumResultsForSearch: -1,
-                templateResult: formatOrderStatus,
-                templateSelection: formatOrderStatus,
+                templateResult: formatPaymentStatus,
+                templateSelection: formatPaymentStatus,
                 theme: 'bootstrap'
             });
 
-            function formatOrderStatus(status) {
+            function formatPaymentStatus(status) {
                 if (!status.id) {
                     return status.text;
                 }
@@ -50,15 +50,52 @@
                     <div class="card-body">
                         <div class="form-row">
                             <div class="form-group col mb-3">
-                                <label>Status</label>
+                                <label>Status Payment</label>
+                                <select class="form-control form-control-modern" name="paymentStatus" required>
+                                    <option value="pending" {{ $invoice->payment_status === 'pending' ? 'selected' : '' }}>
+                                        Pending
+                                    </option>
+                                    <option value="completed"
+                                        {{ $invoice->payment_status === 'success' ? 'selected' : '' }}>Success
+                                    </option>
+                                    <option value="cancelled"
+                                        {{ $invoice->payment_status === 'expired' ? 'selected' : '' }}>Expired
+                                    </option>
+                                    <option value="failed" {{ $invoice->payment_status === 'failed' ? 'selected' : '' }}>
+                                        Failed
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col mb-3">
+                                <label>Status Order</label>
                                 <select class="form-control form-control-modern" name="orderStatus" required>
-                                    <option value="pending" {{ $invoice->status === 'pending' ? 'selected' : '' }}>Pending
+                                    <option value="waiting_payment"
+                                        {{ $invoice->order_status === 'waiting_payment' ? 'selected' : '' }}>
+                                        Waiting Payment
                                     </option>
-                                    <option value="completed" {{ $invoice->status === 'success' ? 'selected' : '' }}>Success
+                                    <option value="waiting_confirmation"
+                                        {{ $invoice->order_status === 'waiting_confirmation ' ? 'selected' : '' }}>
+                                        Waiting Confirmation
                                     </option>
-                                    <option value="cancelled" {{ $invoice->status === 'expired' ? 'selected' : '' }}>Expired
+                                    <option value="process" {{ $invoice->order_status === 'process' ? 'selected' : '' }}>
+                                        Process
                                     </option>
-                                    <option value="failed" {{ $invoice->status === 'failed' ? 'selected' : '' }}>Failed
+                                    <option value="sent" {{ $invoice->order_status === 'sent' ? 'selected' : '' }}>
+                                        Sent
+                                    </option>
+                                    <option value="arrive" {{ $invoice->order_status === 'arrive' ? 'selected' : '' }}>
+                                        Arrive
+                                    </option>
+                                    <option value="complain" {{ $invoice->order_status === 'complain' ? 'selected' : '' }}>
+                                        Complain
+                                    </option>
+                                    <option value="done" {{ $invoice->order_status === 'done' ? 'selected' : '' }}>
+                                        Done
+                                    </option>
+                                    <option value="canceled" {{ $invoice->order_status === 'canceled' ? 'selected' : '' }}>
+                                        Canceled
                                     </option>
                                 </select>
                             </div>

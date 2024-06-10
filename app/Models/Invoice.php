@@ -19,14 +19,15 @@ class Invoice extends Model
         'city_id',
         'province_id',
         'address',
-        'status',
+        'payment_status',
+        'order_status',
         'grand_total',
         'snap_token'
     ];
 
     public function getStatusClassAttribute()
     {
-        return $this->getStatusClass($this->status);
+        return $this->getStatusClass($this->payment_status);
     }
 
     /**
@@ -69,9 +70,9 @@ class Invoice extends Model
         return $this->belongsTo(Province::class, 'province_id', 'province_id')->withDefault();
     }
 
-    private function getStatusClass($status)
+    private function getStatusClass($payment_status)
     {
-        switch ($status) {
+        switch ($payment_status) {
             case 'failed':
                 return 'failed';
                 break;

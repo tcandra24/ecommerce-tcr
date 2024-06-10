@@ -142,20 +142,31 @@
                             <tr>
                                 <td class="product-col">
                                     <h3 class="product-title">
-                                        Status
+                                        Status Payment
                                     </h3>
                                 </td>
 
                                 <td class="price-col">
-                                    @if ($invoice->status === 'success')
+                                    @if ($invoice->payment_status === 'success')
                                         <span class="badge badge-pill badge-success">Success</span>
-                                    @elseif($invoice->status === 'expired')
+                                    @elseif($invoice->payment_status === 'expired')
                                         <span class="badge badge-pill badge-secondary">Expired</span>
-                                    @elseif($invoice->status === 'failed')
+                                    @elseif($invoice->payment_status === 'failed')
                                         <span class="badge badge-pill badge-danger">Failed</span>
                                     @else
                                         <span class="badge badge-pill badge-warning">Pending</span>
                                     @endif
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="product-col">
+                                    <h3 class="product-title">
+                                        Status Order
+                                    </h3>
+                                </td>
+
+                                <td class="price-col">
+                                    <span>{{ ucwords(str_replace('_', ' ', $invoice->order_status)) }}</span>
                                 </td>
                             </tr>
                         </tbody>
@@ -172,7 +183,7 @@
                         </tfoot>
                     </table>
 
-                    @if ($invoice->status === 'pending')
+                    @if ($invoice->payment_status === 'pending')
                         <button onclick="payment('{{ $invoice->snap_token }}')" class="btn btn-dark btn-place-order"
                             form="checkout-form">
                             Pay

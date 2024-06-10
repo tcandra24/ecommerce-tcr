@@ -69,7 +69,8 @@ class CheckoutController extends Controller
                 'city_id' => $request->city,
                 'province_id' => $request->province,
                 'address' => $user->address,
-                'status' => 'pending',
+                'payment_status' => 'pending',
+                'order_status' => 'waiting_payment',
                 'grand_total' => $carts->sum('total'),
             ]);
 
