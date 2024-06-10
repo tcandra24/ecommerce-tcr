@@ -91,7 +91,7 @@
                             </div>
                             <div class="price-box">
                                 <span class="product-price">Rp.
-                                    {{ number_format($product->price, 2) }}</span>
+                                    {{ moneyFormat($product->price) }}</span>
                             </div>
                         </div>
                     </div>

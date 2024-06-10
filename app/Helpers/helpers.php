@@ -18,3 +18,15 @@ if (! function_exists('initialName')) {
         return strtoupper($result);
     }
 }
+
+if (! function_exists('moneyFormat')) {
+    /**
+     * moneyFormat
+     *
+     * @param  mixed $str
+     * @return void
+     */
+    function moneyFormat($value) {
+        return number_format($value, 2, ',', '.');
+    }
+}

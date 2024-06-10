@@ -91,10 +91,10 @@
                                             {{ $order->qty }}
                                         </td>
                                         <td>
-                                            Rp. {{ number_format($order->price, 2) }}
+                                            Rp. {{ moneyFormat($order->price) }}
                                         </td>
                                         <td>
-                                            Rp. {{ number_format($order->total, 2) }}
+                                            Rp. {{ moneyFormat($order->total) }}
                                         </td>
                                     </tr>
                                 @endforeach
@@ -165,7 +165,8 @@
                                     <h4>Total</h4>
                                 </td>
                                 <td>
-                                    <b class="total-price"><span>Rp. {{ number_format($grandTotal, 2) }}</span></b>
+                                    <b class="total-price"><span>Rp.
+                                            {{ moneyFormat($grandTotal) }}</span></b>
                                 </td>
                             </tr>
                         </tfoot>

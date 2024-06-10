@@ -77,7 +77,7 @@
                                             {{ $invoice->name }}
                                         </td>
                                         <td>
-                                            Rp. {{ number_format($invoice->grand_total, 2) }}
+                                            Rp. {{ moneyFormat($invoice->grand_total) }}
                                         </td>
                                         <td>
                                             <span class="ecommerce-status {{ $invoice->statusClass }}">

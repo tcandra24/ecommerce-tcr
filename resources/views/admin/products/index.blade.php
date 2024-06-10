@@ -114,7 +114,7 @@
                                         <i class="fas fa-star"></i>
                                     </div>
                                     <div class="product-price">
-                                        <div class="sale-price">Rp. {{ number_format($product->price, 2) }}</div>
+                                        <div class="sale-price">Rp. {{ moneyFormat($product->price) }}</div>
                                     </div>
                                 </div>
                             </div>

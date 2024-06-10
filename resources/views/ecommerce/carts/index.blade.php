@@ -178,7 +178,7 @@
                                                 </a>
                                             </h5>
                                         </td>
-                                        <td>Rp. {{ number_format($cart->product->price, 2) }}</td>
+                                        <td>Rp. {{ moneyFormat($cart->product->price) }}</td>
                                         <td>
                                             <div class="product-single-qty">
                                                 <input class="horizontal-quantity form-control qty-carts" type="text"
@@ -188,7 +188,7 @@
                                         </td>
                                         <td class="text-right">
                                             <span class="subtotal-price">Rp.
-                                                {{ number_format($cart->total, 2) }}</span>
+                                                {{ moneyFormat($cart->total) }}</span>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -216,7 +216,8 @@
                             <tbody>
                                 <tr>
                                     <td>Total</td>
-                                    <td id="grant-total-product">Rp. {{ number_format($carts->sum('total'), 2) }}</td>
+                                    <td id="grant-total-product">Rp. {{ moneyFormat($carts->sum('total')) }}
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>

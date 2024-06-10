@@ -123,7 +123,7 @@
                                                 href="/products/{{ $wishlist->product->slug }}">{{ $wishlist->product->title }}</a>
                                         </h5>
                                     </td>
-                                    <td class="price-box">Rp. {{ number_format($wishlist->product->price, 2) }}</td>
+                                    <td class="price-box">Rp. {{ moneyFormat($wishlist->product->price) }}</td>
                                     <td>
                                         <span class="stock-status">In stock</span>
                                     </td>

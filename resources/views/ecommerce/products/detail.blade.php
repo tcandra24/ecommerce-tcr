@@ -77,7 +77,7 @@
                     <hr class="short-divider">
 
                     <div class="price-box">
-                        <span class="product-price">Rp. {{ number_format($product->price, 2) }}</span>
+                        <span class="product-price">Rp. {{ moneyFormat($product->price) }}</span>
                     </div>
 
                     <ul class="single-info-list">
@@ -282,7 +282,7 @@
                                 </div>
                                 <div class="price-box">
                                     <span class="product-price">Rp.
-                                        {{ number_format($product->price, 2) }}</span>
+                                        {{ moneyFormat($product->price) }}</span>
                                 </div>
                             </div>
                         </div>

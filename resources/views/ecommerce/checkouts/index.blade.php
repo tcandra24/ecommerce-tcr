@@ -137,7 +137,7 @@
                                     </td>
 
                                     <td class="price-col">
-                                        <span>Rp. {{ number_format($cart->price, 2) }}</span>
+                                        <span>Rp. {{ moneyFormat($cart->price) }}</span>
                                     </td>
                                 </tr>
                             @endforeach
@@ -150,7 +150,7 @@
                                 <td>
                                     <b class="total-price">
                                         <span>
-                                            Rp. {{ number_format($carts->sum('total'), 2) }}
+                                            Rp. {{ moneyFormat($carts->sum('total')) }}
                                         </span>
                                     </b>
                                 </td>

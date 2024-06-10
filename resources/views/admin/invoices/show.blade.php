@@ -155,9 +155,10 @@
                                                     {{ $order->product->title }}
                                                 </strong>
                                             </td>
-                                            <td class="text-end">Rp. {{ number_format($order->price, 2) }}</td>
+                                            <td class="text-end">Rp. {{ moneyFormat($order->price) }}</td>
                                             <td class="text-end">{{ $order->qty }}</td>
-                                            <td class="text-end">Rp. {{ number_format($order->qty * $order->price, 2) }}
+                                            <td class="text-end">Rp.
+                                                {{ moneyFormat($order->qty * $order->price) }}
                                             </td>
                                         </tr>
                                     @endforeach
@@ -169,7 +170,7 @@
                                 <h3 class="font-weight-bold text-color-dark text-4 mb-3">Grand Total</h3>
                                 <span class="d-flex align-items-center justify-content-lg-end">
                                     <strong class="text-color-dark text-5">Rp.
-                                        {{ number_format($invoice->grand_total, 2) }}</strong>
+                                        {{ moneyFormat($invoice->grand_total) }}</strong>
                                 </span>
                             </div>
                         </div>
