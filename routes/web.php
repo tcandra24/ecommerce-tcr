@@ -105,5 +105,3 @@ Route::prefix('brands')->group(function() {
     Route::get('/', [App\Http\Controllers\Ecommerce\BrandController::class, 'index']);
     Route::get('/{slug}', [App\Http\Controllers\Ecommerce\BrandController::class, 'detail']);
 });
-
-Route::post('/notification-handler', [App\Http\Controllers\Ecommerce\CheckoutController::class, 'notificationHandler'])->name('notificationHanlder');
