@@ -116,6 +116,10 @@
     @if (Auth::guard('customer')->check())
         <script>
             let cart_items = []
+            let moneyFormat = new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR',
+            });
 
             function templateCart(object) {
                 return `
@@ -129,7 +133,7 @@
 
                         <span class="cart-product-info">
                             <span class="cart-product-qty">${ object.qty }</span>
-                            × Rp. ${ object.price.toFixed(2).replace(/(\d)(?=(\d{3})+(\.(\d){0,2})*$)/g, '$1,') }
+                            × Rp. ${ moneyFormat.format(object.price) }
                         </span>
                     </div>
 
@@ -157,7 +161,7 @@
                     $('#cart-badge-mobile').html(`
                         <span class="cart-count badge-circle">${cart_items.length}</span>`)
                     $('#side-subtotal-cart').text(
-                        `Rp ${total_cart.toFixed(2).replace(/(\d)(?=(\d{3})+(\.(\d){0,2})*$)/g, '$1,')}`)
+                        `Rp ${ moneyFormat.format(total_cart) }`)
 
 
                     $('#header-carts').html(concatStringTepmlate)
