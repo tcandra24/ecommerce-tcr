@@ -24,6 +24,10 @@ class BrandController extends Controller
     {
         $brand = Brand::where('slug', $slug)->first();
 
+        if(!$brand){
+            abort(404);
+        }
+
         $products = Product::with('images', 'category')
         ->when(request()->price_start || request()->price_end, function($products){
             $products = $products->whereBetween('price', [request()->price_start, request()->price_end]);

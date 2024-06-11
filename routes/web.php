@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,6 +37,9 @@ Route::prefix('admin')->group(function() {
 
         Route::resource('/sliders', App\Http\Controllers\Admin\SliderController::class, [ 'except' => [ 'show' ]])
         ->middleware('permission:master.sliders.index|master.sliders.create|master.sliders.edit|master.sliders.delete');
+
+        Route::resource('/customers', App\Http\Controllers\Admin\CustomerController::class, [ 'except' => [ 'show', 'destroy' ]])
+        ->middleware('permission:master.customers.index|master.customers.create|master.customers.edit');
 
         Route::resource('/invoices', App\Http\Controllers\Admin\InvoiceController::class, [ 'only' => [ 'index', 'show' ]])
         ->middleware('permission:transaction.invoices.index|transaction.invoices.show');
@@ -105,3 +109,4 @@ Route::prefix('brands')->group(function() {
     Route::get('/', [App\Http\Controllers\Ecommerce\BrandController::class, 'index']);
     Route::get('/{slug}', [App\Http\Controllers\Ecommerce\BrandController::class, 'detail']);
 });
+

@@ -24,6 +24,9 @@ class CategoryController extends Controller
     public function detail($slug)
     {
         $category = Category::where('slug', $slug)->first();
+        if(!$category){
+            abort(404);
+        }
 
         $products = Product::with('images', 'category')
         ->when(request()->price_start || request()->price_end, function($products){

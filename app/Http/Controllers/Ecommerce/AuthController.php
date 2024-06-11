@@ -31,6 +31,15 @@ class AuthController extends Controller
         }
     }
 
+    // public function register(Request $request)
+    // {
+    //     try {
+    //         //code...
+    //     } catch (\Exception $e) {
+    //         return back()->with('error', $e->getMessage());
+    //     }
+    // }
+
     public function logout(Request $request)
     {
         Auth::guard('customer')->logout();

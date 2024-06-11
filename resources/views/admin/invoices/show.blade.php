@@ -23,6 +23,10 @@
                 theme: 'bootstrap'
             });
 
+            $('select[name="orderStatus"]').select2({
+                theme: 'bootstrap'
+            });
+
             function formatPaymentStatus(status) {
                 if (!status.id) {
                     return status.text;
@@ -51,7 +55,7 @@
                         <div class="form-row">
                             <div class="form-group col mb-3">
                                 <label>Status Payment</label>
-                                <select class="form-control form-control-modern" name="paymentStatus" required>
+                                <select class="form-control form-control-modern" name="paymentStatus" disabled>
                                     <option value="pending" {{ $invoice->payment_status === 'pending' ? 'selected' : '' }}>
                                         Pending
                                     </option>
@@ -69,8 +73,10 @@
                         </div>
                         <div class="form-row">
                             <div class="form-group col mb-3">
+                                {{ $invoice->order_status === 'waiting_confirmation' ? 'selected' : '---' }}
                                 <label>Status Order</label>
                                 <select class="form-control form-control-modern" name="orderStatus" required>
+                                    <option value="" selected>Choose Status Order</option>
                                     <option value="waiting_payment"
                                         {{ $invoice->order_status === 'waiting_payment' ? 'selected' : '' }}>
                                         Waiting Payment
@@ -227,7 +233,7 @@
             <div class="col-12 col-md-auto ms-md-auto mt-3 mt-md-0 ms-auto">
                 <a href="#"
                     class="delete-button btn btn-danger btn-px-4 py-3 d-flex align-items-center font-weight-semibold line-height-1">
-                    <i class="bx bx-trash text-4 me-2"></i> Delete Order
+                    <i class="bx bx-trash text-4 me-2"></i> Cancel Order
                 </a>
             </div>
         </div>

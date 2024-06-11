@@ -108,3 +108,13 @@ class CheckoutController extends Controller
         return redirect()->to('/my-account')->with('success', 'Invoice Create Successfully');
     }
 }
+
+
+// $details = [
+//     'title' => 'Mail from ItSolutionStuff.com',
+//     'body' => 'This is for testing email using smtp'
+// ];
+
+// Mail::to('tcandra007@gmail.com')->send(new \App\Mail\TestMail($details));
+
+// dd("Email is Sent.");

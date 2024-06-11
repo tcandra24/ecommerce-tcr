@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    Users
+    Customers
 @endsection
 
 @section('styles')
@@ -12,28 +12,6 @@
     <script src="{{ asset('assets/admin/vendor/datatables/media/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('assets/admin/vendor/datatables/media/js/dataTables.bootstrap5.min.js') }}"></script>
     <script src="{{ asset('assets/admin/js/examples/examples.ecommerce.datatables.list.js') }}"></script>
-    <script src="{{ asset('assets/admin/vendor/sweetalert2/sweetalert2.min.js') }}"></script>
-    <script>
-        $('.delete-row').on('click', function() {
-            const id = $(this).attr('data-id')
-            const name = $(this).attr('data-name')
-
-            Swal.fire({
-                title: "Are you Sure ?",
-                text: 'Delete ' + name,
-                type: "warning",
-                showCancelButton: !0,
-                confirmButtonColor: "#ccc",
-                confirmButtonText: "Yes",
-                closeOnConfirm: !1
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $('#form-delete-users-' + id).submit()
-                }
-            })
-
-        })
-    </script>
 @endsection
 
 @section('main')
@@ -60,10 +38,10 @@
                     <div class="datatables-header-footer-wrapper mt-2">
                         <div class="datatable-header">
                             <div class="row align-items-center mb-3">
-                                @can('setting.users.create')
+                                @can('master.customers.create')
                                     <div class="col-12 col-lg-auto mb-3 mb-lg-0">
                                         <a class="btn btn-primary btn-md font-weight-semibold btn-py-2 px-4"
-                                            href="/admin/users/create">+ Add User</a>
+                                            href="/admin/customers/create">+ Add Customer</a>
                                     </div>
                                 @endcan
                                 <div class="col-8 col-lg-auto ms-auto ml-auto mb-3 mb-lg-0">
@@ -95,48 +73,36 @@
                             style="min-width: 550px;">
                             <thead>
                                 <tr>
-                                    <th width="8%">No</th>
-                                    <th width="20%">Name</th>
+                                    <th width="4%">No</th>
+                                    <th width="24%">Name</th>
                                     <th width="17%">Email</th>
-                                    <th width="24%">Roles</th>
-                                    <th width="24%">Created At</th>
+                                    <th width="18%">Company</th>
+                                    <th width="18%">City</th>
+                                    <th width="12%">Phone</th>
                                     <th width="7%">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($users as $user)
+                                @foreach ($customers as $customer)
                                     <tr>
                                         <td>
                                             {{ $loop->iteration }}
                                         </td>
-                                        <td>
-                                            <strong>{{ $user->name }}</strong>
+                                        <td class="d-flex flex-column">
+                                            <strong>{{ $customer->name }}</strong>
+                                            <small>
+                                                {{ $customer->code }}
+                                            </small>
                                         </td>
-                                        <td>{{ $user->email }}</td>
-                                        <td>
-                                            @foreach ($user->roles as $role)
-                                                <span class="badge bg-secondary rounded-3 fw-semibold">
-                                                    {{ ucwords(str_replace('_', ' ', $role->name)) }}
-                                                </span>
-                                            @endforeach
-                                        </td>
-                                        <td>{{ $user->created_at }}</td>
+                                        <td>{{ $customer->email }}</td>
+                                        <td>{{ $customer->company }}</td>
+                                        <td>{{ $customer->city }}</td>
+                                        <td>{{ $customer->phone }}</td>
                                         <td class="actions">
-                                            @can('setting.users.edit')
-                                                <a href="/admin/users/{{ $user->id }}/edit">
+                                            @can('master.customers.edit')
+                                                <a href="/admin/customers/{{ $customer->id }}/edit">
                                                     <i class="fas fa-pencil-alt"></i>
                                                 </a>
-                                            @endcan
-                                            @can('setting.users.delete')
-                                                <a href="javascript:void(0)" class="delete-row" data-id="{{ $user->id }}"
-                                                    data-name="{{ $user->name }}">
-                                                    <i class="far fa-trash-alt"></i>
-                                                </a>
-                                                <form id="form-delete-users-{{ $user->id }}" method="POST"
-                                                    action=" {{ url('/admin/users/' . $user->id) }}">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                </form>
                                             @endcan
                                         </td>
                                     </tr>

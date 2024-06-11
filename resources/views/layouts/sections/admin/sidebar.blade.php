@@ -20,7 +20,8 @@
                     @if (auth()->user()->can('master.categories.index') ||
                             auth()->user()->can('master.brands.index') ||
                             auth()->user()->can('master.products.index') ||
-                            auth()->user()->can('master.sliders.index'))
+                            auth()->user()->can('master.sliders.index') ||
+                            auth()->user()->can('master.customers.index'))
                         <li class="nav-group-label">Master</li>
                         @can('master.categories.index')
                             <li
@@ -63,6 +64,22 @@
                                 <ul class="nav nav-children">
                                     <li class="nav-active">
                                         <a class="nav-link" href="/admin/products">
+                                            - List
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        @endcan
+                        @can('master.customers.index')
+                            <li
+                                class="nav-parent {{ request()->segment(2) == 'customers' ? 'nav-expanded nav-active' : '' }}">
+                                <a class="nav-link" href="#">
+                                    <i class="bx bx-store" aria-hidden="true"></i>
+                                    <span>Customers</span>
+                                </a>
+                                <ul class="nav nav-children">
+                                    <li class="nav-active">
+                                        <a class="nav-link" href="/admin/customers">
                                             - List
                                         </a>
                                     </li>

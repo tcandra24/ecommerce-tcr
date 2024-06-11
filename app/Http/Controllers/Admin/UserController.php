@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\UserStoreRequest;
+use App\Http\Requests\Admin\UserUpdateRequest;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
-use Illuminate\Http\Request;
 
 use App\Models\User;
 
@@ -39,16 +40,8 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserStoreRequest $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required',
-            'roles' => 'required',
-            'password' => 'required|min:6|required_with:confirm_password|same:confirm_password',
-            'confirm_password' => 'min:6',
-        ]);
-
         try {
             $user = User::create([
                 'name' => $request->name,
@@ -84,15 +77,8 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(UserUpdateRequest $request, User $user)
     {
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required',
-            'roles' => 'required',
-            'password' => 'nullable',
-        ]);
-
         try {
             if($request->password == '') {
                 $user->update([
