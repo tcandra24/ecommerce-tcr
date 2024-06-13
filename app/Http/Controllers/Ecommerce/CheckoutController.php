@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Ecommerce;
 
+use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use App\Mail\InvoiceMail;
 
 use Midtrans\Snap;
 use App\Models\Cart;
@@ -35,13 +37,14 @@ class CheckoutController extends Controller
 
     public function index()
     {
-        $carts = Cart::with('product')->where('customer_id', Auth::guard('customer')->user()->id)->get();
+        $user = Auth::guard('customer')->user();
+        $carts = Cart::with('product')->where('customer_id', $user->id)->get();
 
         $provinces = Province::all();
         $cities = City::all();
         return view('ecommerce.checkouts.index', [
             'carts' => $carts,
-            'customer' => Auth::guard('customer')->user(),
+            'customer' => $user,
             'provinces' => $provinces,
             'cities' => $cities,
         ]);
@@ -57,7 +60,9 @@ class CheckoutController extends Controller
             }
 
             $user = Auth::guard('customer')->user();
-            $carts = Cart::where('customer_id', Auth::guard('customer')->user()->id)->get();
+            $carts = Cart::where('customer_id', $user->id)->get();
+
+            $grandTotal = $carts->sum('total');
 
             $noInvoice = 'INV-TCR-' . Str::upper($random);
             $invoice = Invoice::create([
@@ -71,7 +76,7 @@ class CheckoutController extends Controller
                 'address' => $user->address,
                 'payment_status' => 'pending',
                 'order_status' => 'waiting_payment',
-                'grand_total' => $carts->sum('total'),
+                'grand_total' => $grandTotal,
             ]);
 
             foreach($carts as $cart){
@@ -91,7 +96,7 @@ class CheckoutController extends Controller
                 ],
                 'customer_details' => [
                     'first_name' => $invoice->name,
-                    'email' => Auth::guard('customer')->user()->email,
+                    'email' => $user->email,
                     'phone' => $invoice->phone,
                     'shipping_address' => $invoice->address,
                 ]
@@ -100,6 +105,8 @@ class CheckoutController extends Controller
             $snapToken = Snap::getSnapToken($payload);
             $invoice->snap_token = $snapToken;
             $invoice->save();
+
+            Mail::to($user->email)->send(new InvoiceMail($invoice, $grandTotal, 'Waiting For Payment....'));
 
             Cart::where('customer_id', $user->id)->delete();
 

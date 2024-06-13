@@ -11,14 +11,20 @@ class InvoiceMail extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $invoice;
+    public $grandTotal;
+    public $title;
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($invoice, $grandTotal, $title = '')
     {
-        //
+        $this->invoice = $invoice;
+        $this->grandTotal = $grandTotal;
+        $this->title = $title;
     }
 
     /**
@@ -28,6 +34,6 @@ class InvoiceMail extends Mailable
      */
     public function build()
     {
-        return $this->view('view.name');
+        return $this->subject('Invoice ' . $this->invoice->invoice)->view('emails.invoice-detail');
     }
 }

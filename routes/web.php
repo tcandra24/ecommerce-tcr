@@ -1,7 +1,9 @@
 <?php
 
-use Illuminate\Support\Facades\Mail;
+// use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
+
+// use App\Models\Invoice;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,6 +54,9 @@ Route::prefix('admin')->group(function() {
 
         Route::get('/permissions', [ App\Http\Controllers\Admin\PermissionController::class, 'index', ['as' => 'admin'] ])
         ->middleware('permission:setting.permissions.index');
+
+        Route::get('/receipt/{invoice}', [App\Http\Controllers\Admin\ReceiptController::class, 'show', ['as' => 'admin']]);
+        Route::get('/print/{invoice}', [App\Http\Controllers\Admin\PrintController::class, 'show', ['as' => 'admin']]);
 
         Route::post('/upload/image', [App\Http\Controllers\Admin\DropzoneController::class, 'upload', ['as' => 'admin']]);
         Route::delete('/delete/image', [App\Http\Controllers\Admin\DropzoneController::class, 'remove', ['as' => 'admin']]);
@@ -109,4 +114,21 @@ Route::prefix('brands')->group(function() {
     Route::get('/', [App\Http\Controllers\Ecommerce\BrandController::class, 'index']);
     Route::get('/{slug}', [App\Http\Controllers\Ecommerce\BrandController::class, 'detail']);
 });
+
+Route::prefix('sandbox')->group(function() {
+    Route::get('/email/{invoice}', [App\Http\Controllers\Sandbox\EmailController::class, 'show']);
+});
+
+// Route::get('send-mail', function () {
+//     $invoice = Invoice::with('orders', 'orders.product', 'customer')->where('invoice', 'INV-TCR-28BX22APG3')->first();
+
+//     $grandTotal = 0;
+//     foreach($invoice->orders as $order){
+//         $grandTotal += $order->total;
+//     }
+
+//     Mail::to('your_receiver_email@gmail.com')->send(new \App\Mail\InvoiceMail($invoice, $grandTotal));
+//     dd("Email is Sent.");
+
+// });
 

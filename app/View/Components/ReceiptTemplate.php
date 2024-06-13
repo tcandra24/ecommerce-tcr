@@ -3,19 +3,20 @@
 namespace App\View\Components;
 
 use Illuminate\View\Component;
-use App\Models\Category;
 
-class CategoriesHeader extends Component
+class ReceiptTemplate extends Component
 {
-    public $categoriesHeader;
+    public $invoice;
+    public $grandTotal;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($invoice, $grandTotal)
     {
-        $this->categoriesHeader = Category::take(10)->get();
+        $this->invoice = $invoice;
+        $this->grandTotal = $grandTotal;
     }
 
     /**
@@ -25,6 +26,6 @@ class CategoriesHeader extends Component
      */
     public function render()
     {
-        return view('components.categories-header');
+        return view('components.receipt-template');
     }
 }

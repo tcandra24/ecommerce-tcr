@@ -27,7 +27,7 @@
         </ul>
 
         <div class="row">
-            <div class="col-lg-7">
+            <div class="col-lg-6">
                 <ul class="checkout-steps">
                     <li>
                         <h2 class="step-title">Shipping details</h2>
@@ -114,9 +114,8 @@
                     </li>
                 </ul>
             </div>
-            <!-- End .col-lg-8 -->
 
-            <div class="col-lg-5">
+            <div class="col-lg-6">
                 <div class="order-summary">
                     <h3>YOUR ORDER</h3>
 

@@ -4,7 +4,7 @@
             <div class="row">
                 <div class="col-lg-2 col-sm-6 pb-2 pb-sm-0 d-flex align-items-center">
                     <div class="widget m-b-3">
-                        <img src="{{ asset('assets/admin/img/logo-dark.png') }}" alt="Logo" width="202"
+                        <img src="{{ asset('assets/admin/img/logo-dark.png') }}" alt="Ecommerce TCR" width="202"
                             height="54" class="logo-footer">
                     </div>
                 </div>

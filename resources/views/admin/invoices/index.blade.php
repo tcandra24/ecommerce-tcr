@@ -53,11 +53,12 @@
                                 <tr>
                                     <th width="5%">No</th>
                                     <th width="20%">Invoice</th>
-                                    <th width="25%">Date</th>
+                                    <th width="15%">Date</th>
                                     <th width="20%">Name</th>
                                     <th width="10%">Grand Total</th>
                                     <th width="10%">Status Payment</th>
-                                    <th width="10%">Status Order</th>
+                                    <th width="15%">Status Order</th>
+                                    <th width="5%">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -72,7 +73,7 @@
                                             </a>
                                         </td>
                                         <td>
-                                            {{ \Carbon\Carbon::parse($invoice->created_at)->locale('id')->format('l, d F Y H:m:s') }}
+                                            {{ \Carbon\Carbon::parse($invoice->created_at)->locale('id')->format('d F Y H:m:s') }}
                                         </td>
                                         <td>
                                             {{ $invoice->name }}
@@ -87,6 +88,11 @@
                                         </td>
                                         <td>
                                             {{ ucwords(str_replace('_', ' ', $invoice->order_status)) }}
+                                        </td>
+                                        <td>
+                                            <a href="/admin/receipt/{{ $invoice->invoice }}">
+                                                <i class="far fa-file"></i>
+                                            </a>
                                         </td>
                                     </tr>
                                 @endforeach

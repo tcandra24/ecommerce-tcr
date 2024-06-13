@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
+use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Mail\InvoiceMail;
 
 use App\Models\Invoice;
 
@@ -26,7 +28,7 @@ class CheckoutController extends Controller
         $fraud        = $notification->fraud_status;
 
         //data tranaction
-        $data_transaction = Invoice::where('invoice', $orderId)->first();
+        $data_transaction = Invoice::with('customer')->where('invoice', $orderId)->first();
 
         if ($transaction == 'capture') {
 
@@ -52,6 +54,8 @@ class CheckoutController extends Controller
                     'order_status' => 'waiting_confirmation',
                 ]);
 
+                Mail::to($data_transaction->customer->email)->send(new InvoiceMail($data_transaction, $data_transaction->grand_total, 'Payment Success'));
+
               }
 
             }
@@ -65,6 +69,8 @@ class CheckoutController extends Controller
                 'payment_status' => 'success',
                 'order_status' => 'waiting_confirmation',
             ]);
+
+            Mail::to($data_transaction->customer->email)->send(new InvoiceMail($data_transaction, $data_transaction->grand_total, 'Payment Success'));
 
 
         } elseif($transaction == 'pending'){

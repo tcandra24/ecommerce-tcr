@@ -108,7 +108,7 @@
                         @can('transactions.invoices.index')
                             <li class="nav-parent">
                                 <a class="nav-link" href="#">
-                                    <i class="bx bx-store-alt" aria-hidden="true"></i>
+                                    <i class="bx bx-receipt" aria-hidden="true"></i>
                                     <span>Invoice</span>
                                 </a>
                                 <ul class="nav nav-children">
